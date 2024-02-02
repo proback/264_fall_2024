@@ -3,9 +3,8 @@ project:
   output-dir: docs
   render:
     - "*.qmd"
-    - "!activity_templates/"
   resources:
-    - "data/*.csv"
+    - "Data/*.csv"
 
 website:
   title: "MSCS 264: Data Science 2"
@@ -26,8 +25,7 @@ website:
     - id: activities
       title: "Activities"
       contents:
-        - 01-introductions.qmd
-        - 02-adv-ggplot.qmd
+        - 01_review164.qmd
 
     - id: projects
       title: "Projects"

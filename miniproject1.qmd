@@ -1,0 +1,12 @@
+---
+title: "Mini-Project 1: Maps"
+sidebar: false
+---
+  
+```{r}
+#| include: false
+
+library(tidyverse)
+```
+
+### Guidelines and Rubric TBA

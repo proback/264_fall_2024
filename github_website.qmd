@@ -52,7 +52,7 @@ In order to begin to get familiar with GitHub, we will use it to create a person
 7. We now want to "push" the changes made in "user_name.github.io" to your GitHub repo (the changes have only been made in your local RStudio for now).  
     + In the console, type `library(credentials)`
     + Then type `set_github_pat()`, hit Return, and copy in your personal access token.  We do this again because we are in a new project. (These first two steps might not be necessary, but it's good to make sure.)
-    + under the Git tab in the Environment panel, check the boxes in front of all modified files to "stage" your changes
+    + under the Git tab in the Environment panel, check the boxes in front of all modified files to "stage" your changes.  To select a large number of files, check the top box, scroll down to the bottom of the list, and then shift-click the final box
     + click the Commit tab to "commit" your changes (like saving a file locally) along with a message describing the changes you made.  GitHub guides you by by showing your old code (red) and new code (green), to make sure you approve of the changes.  This first time, all code should be green since we've only added new things rather than modifying previously saved files.
     + "push" your changes to GitHub (an external website) by clicking the green Up arrow.  Refresh your GitHub account to see new files in the user_name.github.io repo!
 
