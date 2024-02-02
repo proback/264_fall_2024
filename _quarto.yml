@@ -8,78 +8,42 @@ project:
     - "data/*.csv"
 
 website:
-  title: "STAT/COMP 212"
+  title: "MSCS 264: Data Science 2"
   navbar:
     background: primary
     search: true
     left:
       - file: index.qmd
         text: "Home"
-      - file: schedule.qmd
-        text: "Schedule"
-      - sidebar:syllabus
-      - sidebar:activities
-      - sidebar:homework
-      - file: project.qmd
-        text: "Project"
       - file: tech_setup.qmd
         text: "Tech Setup"
+      - file: github_website.qmd
+        text: "GitHub for DS2"
+      - sidebar:activities
+      - sidebar:projects
 
   sidebar:
-    - id: syllabus
-      title: "Syallbus"
-      style: "docked"
-      background: light
-      collapse-level: 2
-      contents:
-        - syllabus_final.qmd
-        - syllabus_prelim.qmd
-      
     - id: activities
       title: "Activities"
       contents:
         - 01-introductions.qmd
         - 02-adv-ggplot.qmd
-        - 03-adv-maps.qmd
-        - workflow_files_rstudio.qmd
-        - 04-interactive-viz.qmd
-        - 05-data-types-1.qmd
-        - 06-data-types-2.qmd
-        - 07-data-types-3.qmd
-        - 08-functions-control-structs.qmd
-        - 09-iteration.qmd
-        - 10-apis.qmd
-        - 11-scraping.qmd
-        - 12-practice-review.qmd
-        - 13-databases.qmd
-        - 14-missing-data-1.qmd
-        - 15-missing-data-2.qmd
 
-    - id: homework
-      title: "Homework"
+    - id: projects
+      title: "Projects"
       contents:
-        - homework0.qmd
-        - homework1.qmd
-        - homework2.qmd
-        - homework3.qmd
-        - homework4.qmd
-        - reflection1.qmd
-        - homework5.qmd
-        - homework6.qmd
-        - homework7.qmd
-        - reflection2.qmd
-        - reflection3.qmd
-  
+        - miniproject1.qmd
+
   page-footer:
     left: |
-      &copy; Leslie Myint, 2023<br>
+      &copy; Paul Roback, 2024<br>
       All content licensed under ![](https://static.thenounproject.com/png/70967-200.png){height=20px} ([CC BY-NC-SA 4.0](http://creativecommons.org/licenses/by-nc-sa/4.0/))
     right: |
       Site built with [Quarto](https://quarto.org/)
 
 format:
   html:
-    theme: minty
+    theme: sandstone
     css: styles.css
     toc: true
     code-overflow: wrap
