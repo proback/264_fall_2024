@@ -12,17 +12,6 @@ sidebar: false
 
 # Announcements
 
-## Feb 13
-
-- Before class on Tuesday, install the following packages:
-
-```{r eval=FALSE}
-install.packages(c("jsonlite", "urltools"))
-# install.packages("devtools") # Install devtools if you haven't already
-devtools::install_github("mkearney/nytimes")
-```
-
-
 ## Feb 8
 
 To do before class on Thursday:

@@ -1,6 +1,6 @@
 ---
-title: 'MSCS 264: Review of Data Science 1'
-author: 'YOUR_NAME'
+title: 'Review of Data Science 1'
+sidebar: false
 ---
 
 ### Determinants of COVID vaccination rates

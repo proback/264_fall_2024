@@ -1,0 +1,496 @@
+---
+title: "Ch 17 from Modern Data Science with R"
+subtitle: "Working with geospatial data"
+output:
+  pdf_document:
+    fig_height: 3
+    fig_width: 4.5
+  html_document: default
+  word_document: default
+editor_options: 
+  chunk_output_type: console
+---
+
+```{r, setup, include = FALSE}
+# Initial packages required (we'll be adding more)
+library(tidyverse)
+library(mdsr)      # package associated with our MDSR book
+library(sf)        # support for simple features, a standardized way to encode
+                   #   spatial vector data
+```
+
+Our goal in this first section of our course is to learn about how to work with shapefiles, which are an open data structure for encoding spatial information.  We will learn about projections (from three-dimensional space into two-dimensional space) and how to create informative, spatially-aware visualizations. 
+
+
+### Sections 17.1: Intro to spatial data - the famous John Snow case study
+
+The most famous early analysis of geospatial data was done by physician John Snow in 1854. In a certain London neighborhood, an outbreak of cholera killed 127 people in three days, resulting in a mass exodus of the local residents. At the time it was thought that cholera was an airborne disease caused by breathing foul air. Snow was critical of this theory, and set about discovering the true transmission mechanism.
+
+```{r}
+# the mdsr package contains data from the cholera outbreak in 1854
+
+# CholeraDeaths is in the sf class - a simple feature collection
+#   with 250 features (locations where people died) and 2 fields
+#   (number who died and location geometry)
+CholeraDeaths
+
+# There is no context in this original plot - we want to include the
+#   underlying London street map and the location of water pumps
+plot(CholeraDeaths["Count"])
+```
+
+### Section 17.2: Spatial data structures
+
+The most commonly used format for spatial data is called a shapefile. There are many other formats, and while we won't master all of the details in MSCS 264, there are some important basic notions that one must have in order to work with spatial data.
+
+Shapefiles evolved as the native file format of the ArcView program developed by the Environmental Systems Research Institute (Esri) and have since become an open specification. They can be downloaded from many different government websites and other locations that publish spatial data. Spatial data consists not of rows and columns, but of geometric objects like points, lines, and polygons. Shapefiles contain vector-based instructions for drawing the boundaries of countries, counties, and towns, etc. As such, shapefiles are richer - and more complicated - data containers than simple data frames. 
+
+First, the term “shapefile” is somewhat of a misnomer, as there are several files that you must have in order to read spatial data. These files have extensions like .shp, .shx, and .dbf, and they are typically stored in a common directory.
+
+There are many packages for R that specialize in working with spatial data, but we will focus on the most recent: sf. This package provides a tidyverse-friendly set of class definitions and functions for spatial objects in R. These will have the class sf. 
+
+```{r}
+# First, load shapefiles for London in 1854, along with information
+#   about deaths and pumps
+dsn <- fs::path("~/Mscs 264 S24/Prof/SnowGIS_SHP")  # set up path to shapefiles
+list.files(dsn)  # note 22 files
+st_layers(dsn)   # 1 layer for 8 pumps and 1 for 250 death locations
+
+# How to obtain the CholeraDeaths data we examined earlier
+CholeraDeaths <- st_read(dsn, layer = "Cholera_Deaths")
+class(CholeraDeaths)
+CholeraDeaths
+```
+
+### Section 17.3: Making maps
+
+```{r}
+# make basic map of deaths with correct lat/long information
+ggplot(CholeraDeaths) +
+  geom_sf()    
+# assumes (x,y) info stored in a column called "geometry", so we don't
+#   explicitly have to specify the x and y aesthetics
+
+# place deaths on layout of London streets using ggspatial
+library(ggspatial)
+ggplot(CholeraDeaths) + 
+  annotation_map_tile(type = "osm", zoomin = 0, progress = "none") + 
+  geom_sf(aes(size = Count), alpha = 0.7)   # aesthetics work like other geoms
+
+# Notice that points are off.  For example, there should be a cluster
+#   on Broadwick St, and deaths should be in homes and not streets
+
+st_bbox(CholeraDeaths)   # bounding box
+
+# Turns out the geospatial coordinates of CholeraDeaths and ggspatial
+#   are not the same - it comes down to projections
+```
+
+### Section 17.3.2: Projections
+
+The process of converting locations in a three-dimensional geographic coordinate system to a two-dimensional representation is called projection.  It is simply not possible to faithfully preserve all properties present in a three-dimensional space in a two-dimensional space. Thus there is no one best projection system - each has its own advantages and disadvantages.
+
+```{r}
+library(mapproj)
+library(maps)
+
+# The Mercator projection preserves angles but NOT area, so the size of
+#   features near the poles is greatly exaggerated
+map("world", projection = "mercator", wrap = TRUE)
+
+# The Gall–Peters projection does preserve area 
+map("world", projection = "cylequalarea", param = 45, wrap = TRUE)
+```
+
+Here's a clever map showing the Mercator projection with the true size and shape of each country overlaid: https://www.nature.com/nature-index/news/data-visualisation-animated-map-mercater-projection-true-size-countries
+
+Two common general-purpose map projections are the Lambert conformal conic projection and the Albers equal-area conic projection. In the former, angles are preserved, while in the latter neither scale nor shape are preserved, but gross distortions of both are minimized.
+
+```{r}
+# Scales specified to be true on the 20th and 50th parallels
+# Note that default resolution of 0 doesn't provide enough detail
+map(
+  "state", projection = "lambert", 
+  parameters = c(lat0 = 20, lat1 = 50), wrap = TRUE, resolution = -5,
+)
+map(
+  "state", projection = "albers", 
+  parameters = c(lat0 = 20, lat1 = 50), wrap = TRUE, resolution = -5,
+)
+```
+
+A coordinate reference system (CRS) is needed to keep track of geographic locations. There are three main components to a CRS: ellipsoid, datum, and a projection.  Every spatially-aware object in R can have a projection. Three formats that are common for storing information about the projection of a geospatial object are EPSG (an integer from the European Petroleum Survey Group), PROJ.4 (a cryptic string of text), and WKT (Well-Known Text, which can be retrieved or set using the st_crs() command).
+
+A few common CRSs are:
+
+- EPSG:4326 - Also known as WGS84, this is the standard for GPS systems and Google Earth.
+- EPSG:3857 - A Mercator projection used in maps tiles3 by Google Maps, Open Street Maps, etc.
+- EPSG:27700 - Also known as OSGB 1936, or the British National Grid: United Kingdom Ordnance Survey. It is commonly used in Britain.
+
+```{r}
+st_crs(CholeraDeaths)
+# Uses a transverse Mercator method and the datum (model of the Earth)
+#   is OSGB 1936 = British National Grid
+
+# The st_crs() function will translate from the shorthand EPSG code 
+#   to the full-text PROJ.4 strings and WKT.
+st_crs(4326)$epsg
+st_crs(3857)$Wkt
+st_crs(27700)$proj4string
+
+# To get Cholera Deaths to line up with Google Maps (Open Street Map tiles)
+#   we need to convert to the EPSG 4326 system
+cholera_4326 <- CholeraDeaths |>
+  st_transform(4326)
+st_bbox(cholera_4326)
+
+# Better but not perfect
+ggplot(cholera_4326) + 
+  annotation_map_tile(type = "osm", zoomin = 0) + 
+  geom_sf(aes(size = Count), alpha = 0.7)
+
+# The +datum and +towgs84 arguments were missing from our PROJ.4 string.
+st_crs(CholeraDeaths)$proj4string
+
+# If we first assert that the CholeraDeaths data is in epsg:27700. 
+#   Then, projecting to epsg:4326 works as intended.
+cholera_latlong <- CholeraDeaths |>
+  st_set_crs(27700) |>
+  st_transform(4326)
+snow <- ggplot(cholera_latlong) + 
+  annotation_map_tile(type = "osm", zoomin = 0) + 
+  geom_sf(aes(size = Count))
+
+# Add pumps in the same way, and we're done!
+pumps <- st_read(dsn, layer = "Pumps")
+pumps_latlong <- pumps |>
+  st_set_crs(27700) |>
+  st_transform(4326)
+snow +
+  geom_sf(data = pumps_latlong, size = 3, color = "red")
+```
+
+
+### Section 17.3.3: Dynamic maps with leaflet
+
+Leaflet is a powerful open-source JavaScript library for building interactive maps in HTML.  Although the commands are different, the architecture is very similar to ggplot2. However, instead of putting data-based layers on top of a static map, leaflet allows you to put data-based layers on top of an interactive map.  Because leaflet renders as HTML to allow interactivity, they are less effective as static pdfs.
+
+```{r}
+white_house <- tibble(
+  address = "The White House, Washington, DC"
+) |>
+  tidygeocoder::geocode(address, method = "osm")
+
+library(leaflet)
+white_house_map <- leaflet() |>
+  addTiles() |>
+  addMarkers(data = white_house)
+white_house_map
+
+white_house <- white_house |>
+  mutate(
+    title = "The White House", 
+    street_address = "1600 Pennsylvania Ave"
+  )
+white_house_map |>
+  addPopups(
+    data = white_house, 
+    popup = ~paste0("<b>", title, "</b></br>", street_address)
+  )
+```
+
+
+### Section 17.4: Extended example: NC Congressional Districts
+
+In North Carolina, there are about the same number of Democratic and Republican voters in the state. In the fall of 2020, 10 of North Carolina’s 13 congressional representatives were Republican (with one seat currently vacant). How can this be? In this case, geospatial data can help us understand.
+
+Note: the seats are currently 7 and 7 (they earned an additional seat for 2022 after the 2020 Census), but 3 are expected to flip back to Republicans again after yet another round of redistricting (https://en.wikipedia.org/wiki/North_Carolina%27s_congressional_districts)
+
+```{r}
+library(fec12)
+results_house |>
+  group_by(state, district_id) |>
+  summarize(N = n()) |>
+  nrow()
+
+results_house |>
+  left_join(candidates, by = "cand_id") |>
+  select(state, district_id, cand_name, party, general_votes) |>
+  arrange(desc(general_votes))
+
+# summary of the 13 congressional NC districts and the 2012 voting
+district_elections <- results_house |>
+  mutate(district = parse_number(district_id)) |>
+  group_by(state, district) |>
+  summarize(
+    N = n(), 
+    total_votes = sum(general_votes, na.rm = TRUE),
+    d_votes = sum(ifelse(party == "D", general_votes, 0), na.rm = TRUE),
+    r_votes = sum(ifelse(party == "R", general_votes, 0), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    other_votes = total_votes - d_votes - r_votes,
+    r_prop = r_votes / total_votes,  
+    winner = ifelse(r_votes > d_votes, "Republican", "Democrat")
+  )
+nc_results <- district_elections |>
+  filter(state == "NC")
+nc_results |>                  # is ungroup() needed after this line?
+  select(-state)
+
+# distribution of total number of votes is narrow by design
+nc_results |>
+  skim(total_votes) |>
+  select(-na)
+
+# compare total Dem and Rep votes across NC in 2012
+nc_results |>
+  summarize(
+    N = n(), 
+    state_votes = sum(total_votes), 
+    state_d = sum(d_votes), 
+    state_r = sum(r_votes)
+  ) |>
+  mutate(
+    d_prop = state_d / state_votes, 
+    r_prop = state_r / state_votes
+  )
+
+# Proportion of Rep votes by district
+nc_results |>
+  select(district, r_prop, winner) |>
+  arrange(desc(r_prop))
+
+# Download congressional district shapefiles for the 113th Congress
+src <- "http://cdmaps.polisci.ucla.edu/shp/districts113.zip"
+lcl_zip <- fs::path(tempdir(), "districts113.zip")
+download.file(src, destfile = lcl_zip)
+lcl_districts <- fs::path(tempdir(), "districts113")
+unzip(lcl_zip, exdir = lcl_districts)
+dsn_districts <- fs::path(lcl_districts, "districtShapes")
+
+# can also downloaded zip file and uploaded it into R
+# dsn_districts <- fs::path("~/R/DS2/districtShapes")
+
+# read shapefiles into R as an sf object
+library(sf)
+st_layers(dsn_districts)
+
+# be able to read as a data frame as well
+districts <- st_read(dsn_districts, layer = "districts113") |>
+  mutate(DISTRICT = parse_number(as.character(DISTRICT)))
+glimpse(districts)
+class(districts)
+
+# create basic plot with NC congressional districts
+nc_shp <- districts |>
+  filter(STATENAME == "North Carolina")
+nc_shp |>
+  st_geometry() |>
+  plot(col = gray.colors(nrow(nc_shp)))
+
+# Append election results to geospatial data
+nc_merged <- nc_shp |>
+  st_transform(4326) |>
+  inner_join(nc_results, by = c("DISTRICT" = "district"))
+glimpse(nc_merged)
+
+# Color based on winning party
+#   Note that geom_sf is part of ggplot2 package, while st_geometry is
+#   part of sf package
+nc <- ggplot(data = nc_merged, aes(fill = winner)) +
+  annotation_map_tile(zoom = 6, type = "osm", progress = "none") + 
+  geom_sf(alpha = 0.5) +
+  scale_fill_manual("Winner", values = c("blue", "red")) + 
+  geom_sf_label(aes(label = DISTRICT), fill = "white") + 
+  theme_void()
+nc
+
+# Color based on proportion Rep.  Be sure to let limits so centered at 0.5.
+# This is a choropleth map, where meaningful shading relates to some attribute
+nc +
+  aes(fill = r_prop) + 
+  scale_fill_distiller(
+    "Proportion\nRepublican", 
+    palette = "RdBu", 
+    limits = c(0.2, 0.8)
+  )
+
+# A leaflet map can allow us to zoom in and see where major cities fit, etc.
+library(leaflet)
+pal <- colorNumeric(palette = "RdBu", domain = c(0, 1))
+
+leaflet_nc <- leaflet(nc_merged) |>
+  addTiles() |>
+  addPolygons(
+    weight = 1, fillOpacity = 0.7, 
+    color = ~pal(1 - r_prop),   # so red association with Reps
+    popup = ~paste("District", DISTRICT, "</br>", round(r_prop, 4))
+  ) |>                          # popups show prop Republican
+  setView(lng = -80, lat = 35, zoom = 7)
+leaflet_nc
+```
+
+### Section 17.6: Projecting polygons (Optional)
+
+```{r}
+districts_full <- districts |>
+  left_join(
+    tibble(state.abb, state.name), 
+    by = c("STATENAME" = "state.name")
+  ) |>
+  left_join(
+    district_elections, 
+    by = c("state.abb" = "state", "DISTRICT" = "district")
+  )
+
+box <- st_bbox(districts_full)
+world <- map_data("world") |>
+  st_as_sf(coords = c("long", "lat")) |>
+  group_by(group) |>
+  summarize(region = first(region), do_union = FALSE) |>
+  st_cast("POLYGON") |>
+  st_set_crs(4269)
+
+map_4269 <- ggplot(data = districts_full) +
+  geom_sf(data = world, size = 0.1) +
+  geom_sf(aes(fill = r_prop), size = 0.1) +
+  scale_fill_distiller(palette = "RdBu", limits = c(0, 1)) +
+  theme_void() +
+  labs(fill = "Proportion\nRepublican") +
+  xlim(-180, -50) + ylim(box[c("ymin", "ymax")]) 
+map_4269
+
+districts_aea <- districts_full |>
+  st_transform(5070)
+box <- st_bbox(districts_aea)
+map_4269 %+% districts_aea +
+  xlim(box[c("xmin", "xmax")]) + ylim(box[c("ymin", "ymax")])
+
+```
+
+
+### On Your Own
+
+There has also been controversy about congressional districts and gerrymandering in Wisconsin (https://www.nytimes.com/2023/12/22/us/wisconsin-redistricting-maps-gerrymander.html).  Perform an analysis and generate maps similar to Northf Carolina, and describe what they tell you about potential gerrymandering in Wisconsin.  Use 2016 election results from the `fec16` package.
+
+After doing all the geospatial modeling above, you may have to clear you environment and start a new R session to have adequate space available.  You may also have to make sure that data from fec16 is being used rather than similarly named data from fec12.  Check each step carefully as you modify code!!
+
+```{r}
+detach("package:fec12")
+library(fec16)
+#results_house <- fec16::results_house
+results_house
+#candidates <- fec16::results_house
+candidates
+
+results_house |>
+  group_by(state, district_id) |>
+  summarize(N = n()) |>
+  nrow()
+
+results_house |>
+  left_join(candidates, by = "cand_id") |>
+  select(state, district_id, cand_name, party, general_votes) |>
+  arrange(desc(general_votes))
+
+district_elections <- results_house |>
+  mutate(district = parse_number(district_id)) |>
+  group_by(state, district) |>
+  summarize(
+    N = n(), 
+    total_votes = sum(general_votes, na.rm = TRUE),
+    d_votes = sum(ifelse(party == "DEM", general_votes, 0), na.rm = TRUE),
+    r_votes = sum(ifelse(party == "REP", general_votes, 0), na.rm = TRUE),
+    .groups = "drop"
+  ) |>
+  mutate(
+    other_votes = total_votes - d_votes - r_votes,
+    r_prop = r_votes / total_votes,  
+    winner = ifelse(r_votes > d_votes, "Republican", "Democrat")
+  )
+wi_results <- district_elections |>
+  filter(state == "WI")
+wi_results |>
+  select(-state)
+
+wi_results |>
+  skim(total_votes) |>
+  select(-na)
+
+wi_results |>
+  summarize(
+    N = n(), 
+    state_votes = sum(total_votes), 
+    state_d = sum(d_votes), 
+    state_r = sum(r_votes)
+  ) |>
+  mutate(
+    d_prop = state_d / state_votes, 
+    r_prop = state_r / state_votes
+  )
+
+wi_results |>
+  select(district, r_prop, winner) |>
+  arrange(desc(r_prop))
+
+# UCLA site only goes to 2012, so can't grab 115th Congress from there.
+#   Could try: https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.2016.html#list-tab-1556094155
+
+#src <- "http://cdmaps.polisci.ucla.edu/shp/districts113.zip"
+#lcl_zip <- fs::path(tempdir(), "districts113.zip")
+#download.file(src, destfile = lcl_zip)
+#lcl_districts <- fs::path(tempdir(), "districts113")
+#unzip(lcl_zip, exdir = lcl_districts)
+#dsn_districts <- fs::path(lcl_districts, "districtShapes")
+
+library(sf)
+st_layers(dsn_districts)
+
+districts <- st_read(dsn_districts, layer = "districts113") |>
+  mutate(DISTRICT = parse_number(as.character(DISTRICT)))
+glimpse(districts)
+
+wi_shp <- districts |>
+  filter(STATENAME == "Wisconsin")
+wi_shp |>
+  st_geometry() |>
+  plot(col = gray.colors(nrow(wi_shp)))
+
+wi_merged <- wi_shp |>
+  st_transform(4326) |>
+  inner_join(wi_results, by = c("DISTRICT" = "district"))
+glimpse(wi_merged)
+
+library(ggspatial)
+wi <- ggplot(data = wi_merged, aes(fill = winner)) +
+  annotation_map_tile(zoom = 6, type = "osm", progress = "none") + 
+  geom_sf(alpha = 0.5) +
+  scale_fill_manual("Winner", values = c("blue", "red")) + 
+  geom_sf_label(aes(label = DISTRICT), fill = "white") + 
+  theme_void()
+wi
+
+wi +
+  aes(fill = r_prop) + 
+  scale_fill_distiller(
+    "Proportion\nRepublican", 
+    palette = "RdBu", 
+    limits = c(0, 1)  # changed limits
+  )
+
+library(leaflet)
+pal <- colorNumeric(palette = "RdBu", domain = c(0, 1))
+
+leaflet_wi <- leaflet(wi_merged) |>
+  addTiles() |>
+  addPolygons(
+    weight = 1, fillOpacity = 0.7, 
+    color = ~pal(1 - r_prop),
+    popup = ~paste("District", DISTRICT, "</br>", round(r_prop, 4))
+  ) |>
+  setView(lng = -89, lat = 44.5, zoom = 7)    # new lat and long
+leaflet_wi
+```
+
