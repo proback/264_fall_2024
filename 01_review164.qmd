@@ -3,6 +3,9 @@ title: 'Review of Data Science 1'
 sidebar: false
 ---
 
+You can download this .qmd file [here](01_review164.qmd).
+
+
 ### Determinants of COVID vaccination rates
 
 ```{r}
