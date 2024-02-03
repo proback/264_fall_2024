@@ -5,6 +5,22 @@ sidebar: false
 
 You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd).  Just hit the Download Raw File button.
 
+**Hint**: after downloading and opening in your RStudio, change the YAML header to:
+
+```{r}
+#| eval: false
+
+---
+title: 'Review of Data Science 1'
+format:
+  pdf: default
+  html: default
+---
+    
+```
+
+in order to have the option of rendering in pdf or html formats.
+
 
 ### Determinants of COVID vaccination rates
 
