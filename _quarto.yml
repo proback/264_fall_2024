@@ -27,6 +27,7 @@ website:
       title: "Activities"
       contents:
         - 01_review164.qmd
+        - 02_maps_part1.qmd
 
     - id: projects
       title: "Projects"

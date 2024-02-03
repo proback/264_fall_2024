@@ -8,6 +8,7 @@ sidebar: false
 - [Course syllabus](https://drive.google.com/file/d/12Ha7BVV_NgxhinZ-gc4fpd_7ixhGUwHE/view?usp=sharing)
 - [RStudio server](https://r.stolaf.edu)
 - [moodle](https://mdl.stolaf.edu/login/index.php)
+- [GitHub source code for this website](https://github.com/proback/264_fall_2024)
 
 
 # Announcements
