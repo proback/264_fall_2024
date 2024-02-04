@@ -4,9 +4,9 @@ sidebar: false
 ---
 
 ::: {layout-ncol=2}
-![Qurato](images/quarto.png)
+![Qurato](images/quarto.png){width=200}
 
-![tidyverse](images/tidyverse.png)
+![tidyverse](images/tidyverse.png){width=200}
 :::
 
 
