@@ -1,5 +1,5 @@
 ---
-title: "Using GitHub to Create a Personal Website"
+title: "Using GitHub"
 sidebar: false
 ---
   

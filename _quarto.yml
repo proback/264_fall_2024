@@ -16,14 +16,18 @@ website:
     left:
       - file: index.qmd
         text: "Home"
-      - file: tech_setup.qmd
-        text: "Tech Setup"
-      - file: github_website.qmd
-        text: "GitHub for DS2"
+      - sidebar:tech_notes
       - sidebar:activities
       - sidebar:projects
 
   sidebar:
+    - id: tech_notes
+      title: "Tech Notes"
+      contents:
+        - tech_setup.qmd
+        - why_quarto.qmd
+        - github_website.qmd
+
     - id: activities
       title: "Activities"
       contents:

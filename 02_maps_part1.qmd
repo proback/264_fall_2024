@@ -1,8 +1,8 @@
 ---
 title: "Creating informative maps"
+sidebar: false
 format:
   html: default
-  pdf: default
 ---
 
 Based on Section 3.2.3 from Modern Data Science with R.

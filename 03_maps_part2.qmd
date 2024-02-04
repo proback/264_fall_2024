@@ -1,8 +1,8 @@
 ---
 title: "Working with geospatial data"
+sidebar: false
 format:
   html: default
-  pdf: default
 ---
 
 Based on Chapter 17 from Modern Data Science with R.
@@ -288,7 +288,7 @@ lcl_districts <- fs::path(tempdir(), "districts113")
 unzip(lcl_zip, exdir = lcl_districts)
 dsn_districts <- fs::path(lcl_districts, "districtShapes")
 
-# You can also downloaded zip file and uploaded it into R
+# You can also downloaded zip file and uploaded it into R, but this uses a ton of space!
 # dsn_districts <- fs::path("Data/districtShapes")
 
 # read shapefiles into R as an sf object

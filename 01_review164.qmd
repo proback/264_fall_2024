@@ -1,5 +1,6 @@
 ---
 title: 'Review of Data Science 1'
+sidebar: false
 format:
   html: default
   pdf: default

@@ -1,6 +1,7 @@
 ---
 title: "Mini-Project 1: Maps"
-sidebar: false
+format:
+  html: default
 ---
   
 ```{r}
@@ -9,4 +10,26 @@ sidebar: false
 library(tidyverse)
 ```
 
-### Guidelines and Rubric TBA
+### Overview
+
+You will produce a personal website using Quarto that contains, at a minimum, a Home/About page with a picture or image, some basic information about you, and a link to the GitHub repo that contains the R code for your website.  
+
+Then, in the Menu bar, you should have a selection called "Maps" with two sub-selections:
+
+1. "US States".  On this page, you should produce a choropleth map of the U.S. states (you can choose to exclude Alaska and Hawaii) like we did in the "Creating Informative Maps" activity.  Just as we found state-level data from both a vaccine data set and the `poliscidata` package, you should find *your own* state-level data.  Merge your data with the `us_states` dataframe, and then produce a choropleth map.  Your variable of interest can be either numeric or categorical.  Be sure you label your plot well *and* provide a description of what insights can be gained from your plot.
+
+2. "Wisconsin Districts".  On this page, you will emulate our analysis of potential gerrymandering in North Carolina by generating a similar plot of the state of Wisconsin.  For background about controversial congressional districts and gerrymandering in Wisconsin, see [this article](https://www.nytimes.com/2023/12/22/us/wisconsin-redistricting-maps-gerrymander.html).  
+
+A few detailed instructions and hints for Part 2:
+
+- use voting data from 2016 from the `fec16` package.  Make sure that data from `fec16` is being used rather than similarly named data from `fec12`, for instance by first running `detach("package:fec12")`. 
+- your final plot should have shaded reds and blues representing relative levels of support for Republican and Democrat candidates in a district.  You may use `ggplot2` or `leaflet`.
+- if you've been doing previous geospatial modeling in RStudio, you may have to clear your environment and start a new R session to have adequate space available.   
+- the UCLA site with district geographies only goes to 2012, so you can't grab 115th Congress in 2016 from there.  You could try to find that updated geospatial information, potentially at a site like [this:](https://www.census.gov/geographies/mapping-files/time-series/geo/carto-boundary-file.2016.html#list-tab-1556094155), but it's fine to just use the 2012 geospatial data like we did with North Carolina.
+
+Again, be sure you label your plot well *and* provide a description of what insights can be gained from your plot.
+
+
+### Timeline
+
+Mini-Project 1 must be submitted on moodle by **11:00 PM on Wed Feb 28**.  All you need to submit is a URL for your website!

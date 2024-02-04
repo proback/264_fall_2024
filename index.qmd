@@ -3,6 +3,13 @@ title: "MSCS 264: Data Science 2 (Spring 2024)"
 sidebar: false
 ---
 
+::: {layout-ncol=2}
+![Qurato](images/quarto.png)
+
+![tidyverse](images/tidyverse.png)
+:::
+
+
 # Key links for MSCS 264
 
 - [Course syllabus](https://drive.google.com/file/d/12Ha7BVV_NgxhinZ-gc4fpd_7ixhGUwHE/view?usp=sharing)
@@ -10,11 +17,3 @@ sidebar: false
 - [moodle](https://mdl.stolaf.edu/login/index.php)
 - [GitHub source code for this website](https://github.com/proback/264_fall_2024)
 
-
-# Announcements
-
-## Feb 8
-
-To do before class on Thursday:
-
-- Set up R and RStudio using [these instructions](tech_setup.qmd).
