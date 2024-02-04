@@ -6,6 +6,7 @@ project:
     - "!DS2_preview_work/"
   resources:
     - "Data/*.csv"
+    - "Data/"
 
 website:
   title: "MSCS 264: Data Science 2"
@@ -28,6 +29,7 @@ website:
       contents:
         - 01_review164.qmd
         - 02_maps_part1.qmd
+        - 03_maps_part2.qmd
 
     - id: projects
       title: "Projects"

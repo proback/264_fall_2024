@@ -5,7 +5,10 @@ format:
   pdf: default
 ---
 
-Based on Section 3.2.3 from Modern Data Science with R
+Based on Section 3.2.3 from Modern Data Science with R.
+
+You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/02_maps_part1.qmd).  Just hit the Download Raw File button.
+
 
 ```{r}
 #| message: false
@@ -247,7 +250,9 @@ library(leaflet)
 airbnb.df <- read_csv("Data/airbnbData_full.csv")
 ```
 
-With leaflet, you can have "pop-up" messages when you hover over points, and have a zoom-in and zoom-out option. Leaflet is not part of the tidyverse, but the structure of its code is pretty similar.
+Leaflet is a powerful open-source JavaScript library for building interactive maps in HTML.  Although the commands are different, the architecture is very similar to ggplot2. However, instead of putting data-based layers on top of a static map, leaflet allows you to put data-based layers on top of an interactive map.  Because leaflet renders as HTML to allow interactivity, they are less effective as static pdfs.
+
+With leaflet, you can have "pop-up" messages when you hover over points, and have a zoom-in and zoom-out option. 
 
 Two main features:
    `addTiles()` = Add background map
