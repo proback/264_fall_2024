@@ -19,6 +19,8 @@ website:
       - sidebar:tech_notes
       - sidebar:activities
       - sidebar:projects
+      - file: rtipoftheday.qmd
+        text: "R Tip of the Day"
 
   sidebar:
     - id: tech_notes
@@ -27,6 +29,7 @@ website:
         - tech_setup.qmd
         - why_quarto.qmd
         - github_website.qmd
+        - github_links.qmd
 
     - id: activities
       title: "Activities"
