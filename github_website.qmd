@@ -32,6 +32,8 @@ In order to begin to get familiar with GitHub, we will use it to create a person
     + In the console, type `library(credentials)`.  You might have to install the `credentials` package first.
     + Then type `set_github_pat()`, hit Return, choose the Token option, and copy in your personal access token
 
+**Alert!** If the steps in (3) don't work, you may have to install Git on your computer first.  [This chapter](https://happygitwithr.com/install-git) in "Happy Git with R" provides nice guidance for installing Git.  Installing [Git for Windows](https://gitforwindows.org/) seems to work well on most Windows machines, using [this site](https://git-scm.com/downloads) seems to work well for macOS, and a command like `sudo apt-get install git` can often work nicely in Linux.  Once Git is installed, restart RStudio, and it will usually magically find Git.  If not, there's some good advice in [this chapter](https://happygitwithr.com/rstudio-see-git) of "Happy Git with R".  If you ever get frustrated with Git, remember that [No one is giving out Git Nerd merit badges](https://happygitwithr.com/git-client#no-one-is-giving-out-git-nerd-merit-badges)!  Just muddle through until you figure out something that works for you!
+
 
 ### Creating an R project (local) that's connected to GitHub (cloud)
 
