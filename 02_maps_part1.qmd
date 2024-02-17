@@ -3,6 +3,8 @@ title: "Creating informative maps"
 sidebar: false
 format:
   html: default
+editor_options: 
+  chunk_output_type: console
 ---
 
 Based on Section 3.2.3 from Modern Data Science with R.
@@ -56,9 +58,9 @@ For example, let's consider state vaccination data from March 2021.
 #| message: false
 #| warning: false
 
-vaccine_data <- read_csv("Data/vacc_Mar21.csv") 
+vaccines <- read_csv("https://proback.github.io/264_fall_2024/Data/vacc_Mar21.csv") 
 
-vacc_mar13 <- vaccine_data |>
+vacc_mar13 <- vaccines |>
   filter(Date =="2021-03-13") |>
   select(State, Date, people_vaccinated_per100, share_doses_used, Governor)
 
@@ -191,7 +193,7 @@ vacc_mar13 |>
 #| warning: false
 
 library(lubridate)
-weekly_vacc <- vaccine_data |>
+weekly_vacc <- vaccines |>
   mutate(State = str_to_lower(State)) |>
   mutate(State = str_replace(State, " state", ""),
          week = week(Date)) |>
@@ -247,7 +249,7 @@ I used [this example](https://livefreeordichotomize.com/2021/04/07/nytimes-map-h
 #| include: false
 
 library(leaflet)
-airbnb.df <- read_csv("Data/airbnbData_full.csv")
+airbnb.df <- read_csv("https://proback.github.io/264_fall_2024/Data/airbnbData_full.csv") 
 ```
 
 Leaflet is a powerful open-source JavaScript library for building interactive maps in HTML.  Although the commands are different, the architecture is very similar to ggplot2. However, instead of putting data-based layers on top of a static map, leaflet allows you to put data-based layers on top of an interactive map.  Because leaflet renders as HTML to allow interactivity, they are less effective as static pdfs.

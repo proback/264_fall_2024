@@ -15,9 +15,27 @@ You can download this .qmd file from [here](https://github.com/proback/264_fall_
 #| include: false
 
 library(tidyverse)
+vaccine_data <- read_csv("https://proback.github.io/264_fall_2024/Data/vaccinations_2021.csv")
+```
 
+First, a little detour to describe several alternatives for reading in data:
+
+If you navigate to [my Github account](https://github.com/proback), and find the `264_fall_2024` repo, there is a Data folder inside.  You can then click on `vacc_Mar21.csv` to see the data we want to download.   [This link](https://github.com/proback/264_fall_2024/blob/main/Data/vacc_Mar21.csv) should also get you there, but it's good to be able to navigate there yourself.
+
+```{r}
+#| eval: false
+
+# Approach 1: create a Data folder in the same location where this .qmd file resides, and then store vaccinations_2021.csv in that Data folder
 vaccine_data <- read_csv("Data/vaccinations_2021.csv")
-#vaccine_data <- read_csv("https://proback.github.io/264_fall_2024/Data/vaccinations_2021.csv")
+
+# Approach 2: give R the complete path to the location of vaccinations_2021.csv, starting with Home (~)
+vaccine_data <- read_csv("~/264_fall_2024/Data/vaccinations_2021.csv")
+
+# Approach 3: link to our course webpage, and then know we have a Data folder containing all our csvs
+vaccine_data <- read_csv("https://proback.github.io/264_fall_2024/Data/vaccinations_2021.csv")
+
+# Approach 4: navigate to the data in GitHub, hit the Raw button, and copy that link
+vaccine_data <- read_csv("https://raw.githubusercontent.com/proback/264_fall_2024/main/Data/vaccinations_2021.csv")
 
 ```
 
