@@ -196,12 +196,44 @@ ul.task-list li input[type="checkbox"] {
 <p>In order to collaborate on an R project (or any coding project in general), data scientists typically use a version control system like GitHub. With GitHub, you never have to save files as Final.docx, Final2.docx, Newfinal.docx, RealFinal.docx, nothisisreallyit.docx, etc. You update code like .qmd and .Rmd and data files, recording descriptions of any changes. Then if you ever want to go back to an earlier version, GitHub can facilitate that. Or if you want to make your work public, others can see it and even suggest changes, but you are ultimately in control of any changes that get made.</p>
 <p>And, you can have multiple collaborators with access to the same set of files. While it can be dicey if multiple people have the file open and make changes at the same time, if you do this with GitHub, it is at least POSSIBLE to get it straightened out, and the second person who tries to save will get warned. If you are both just using a common folder on RStudio, you can easily write over and erase each other’s work. (If you use a common folder, be sure that one person is editing at a time to prevent this).</p>
 <p>In order to begin to get familiar with GitHub, we will use it to create a personal website.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center" data-bs-toggle="collapse" data-bs-target=".callout-1-contents" aria-controls="callout-1" aria-expanded="false" aria-label="Toggle callout">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+An alternative approach
+</div>
+<div class="callout-btn-toggle d-inline-block border-0 py-1 ps-1 pe-0 float-end"><i class="callout-toggle"></i></div>
+</div>
+<div id="callout-1" class="callout-1-contents callout-collapse collapse">
+<div class="callout-body-container callout-body">
+<p>You can also follow instructions at the excellent website <a href="https://ucsb-meds.github.io/creating-quarto-websites/">Creating Your Personal Website using Quarto</a> by Sam Csik (the underlying quarto code for creating this website can be found <a href="https://github.com/UCSB-MEDS/creating-quarto-websites/tree/main">here</a>).</p>
+<p><strong>Process Overview</strong></p>
+<ul>
+<li>The general plan is to create a local version (using RStudio on your own computer) of a quarto webpage, and then connect the files you build to an upstream cloud-based hosting service (GitHub).<br>
+</li>
+<li>After initializing a basic webpage, you will toggle between RStudio to improve the webpage and GitHub to save the results in a public repository.</li>
+<li>Finally, you will use GitHub Page to publish and host your webpage.</li>
+</ul>
+<p><strong>Clarifications</strong></p>
+<p>While Sam Csik’s instructions and insights are awesome, there are a few places where you should tread carefully or take a slightly different path:</p>
+<ul>
+<li>Be sure to heed the “Before getting started” box in <a href="https://ucsb-meds.github.io/creating-quarto-websites/#fa-seedling-titlesprouted-seedling-create-the-scaffolding-for-your-website">this section</a>! In particular, follow the MEDS Installation Guide and make sure you have the latest versions of both R and RStudio, a GitHub account, and Git installed on your machine.</li>
+<li>In that same section, be sure to choose the “Using the RStudio IDE” tab to access that set of instructions.</li>
+<li>Be careful with the first step in <a href="https://ucsb-meds.github.io/creating-quarto-websites/#fa-brands-github-titlegithub-octocat-build-publish-your-site-with-github-pages">this section</a>. I would recommend the second option, although you’ll actually need to select File &gt; New File &gt; Text file to open a blank text file, and then use Save As to save that blank file as “.nojekyll” (this file will be invisible in RStudio but not in GitHub). If you use the first option, her command is only for Macs; Windows users should use “copy NUL .nojekyll” in the Terminal.</li>
+<li>In Step 3, you can also type “quarto_render()” in the Console. You might have to run this twice if you needed to delete your _site folder as in the green box.</li>
+<li>In Step 5, you also have to return to the main page of your GitHub repository and hit the Settings button to the right of About. In the box that appears, you’ll enter a description of your project, and check “Use your GitHub Pages website”.</li>
+</ul>
+</div>
+</div>
+</div>
 </section>
 <section id="getting-started-on-github-and-connecting-to-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="getting-started-on-github-and-connecting-to-rstudio">Getting started on GitHub and connecting to RStudio</h3>
 <ol type="1">
 <li><p>Create a GitHub account at github.com. It’s usually okay to hit “Skip Personalization” at the bottom of the screen after entering an email, username, and password. There are a few bonuses you can get as a student that you might consider.</p></li>
-<li><p>Obtain a personal access token in GitHub using the following steps:</p>
+<li><p>Obtain a personal access token (PAT) in GitHub using the following steps:</p>
 <ul>
 <li>Click your profile picture/symbol in the upper right of your GitHub page. Then select Settings &gt; Developer settings &gt; Personal access tokens &gt; Tokens (classic).</li>
 <li>Click “Generate new token” and give a descriptive name like “My PAT for RStudio”. Note that the default expiration is 30 days; I did a Custom setting through the end of the semester.</li>
@@ -219,15 +251,16 @@ ul.task-list li input[type="checkbox"] {
 <section id="creating-an-r-project-local-thats-connected-to-github-cloud" class="level3">
 <h3 class="anchored" data-anchor-id="creating-an-r-project-local-thats-connected-to-github-cloud">Creating an R project (local) that’s connected to GitHub (cloud)</h3>
 <ol start="4" type="1">
-<li><p>In your GitHub account, click the <span class="math inline">\(+ \nabla\)</span> (+down arrow) button near the top right and select New Repository (repo). For a personal website, you might put something like “proback.github.io” for your repository (repo) name, where you should replace <code>proback</code> with your GitHub user name. For other repos, choose simple but descriptive names that should avoid spaces. Be sure Public is checked; often I create Private repositories and turn them Public if I want later, but we know a personal webpage should be Public. Check Add a ReadMe File. Finally hit Create Repository and copy the URL once your repo has been created; the URL should be something like <code>github.com/user_name/user_name.github.io</code>.</p></li>
-<li><p>Go into your RStudio and select File &gt; New Project &gt; Version Control &gt; Git. For the repository URL paste in the URL for the repository you just created. A project directory named “user_name.github.io” will be created in your specified folder (which you can navigate to).</p></li>
+<li><p>In your GitHub account, click the <span class="math inline">\(+ \nabla\)</span> (+down arrow) button near the top right and select New Repository (repo). For a personal website, you might put something like “proback.github.io” for your repository (repo) name, where you should replace <code>proback</code> with your GitHub user name. For other repos, choose simple but descriptive names that should avoid spaces. Be sure Public is checked; sometimes I create Private repositories and turn them Public if I want later, but we know a personal webpage should be Public. Check Add a ReadMe File. Finally hit Create Repository and copy the URL once your repo has been created; the URL should be something like <code>github.com/username/user_name.github.io</code>.</p></li>
+<li><p>Go into your RStudio and select File &gt; New Project &gt; Version Control &gt; Git. For the repository URL paste in the URL for the repository you just created. A project directory named “username.github.io” will be created in your specified folder (which you can navigate to).</p></li>
 </ol>
 <p><em>Notice that you are now starting with a blank slate! Nothing in the environment or history. Also note where it says your project name in the top right corner.</em></p>
+<p><strong>At this point your should have a GitHub repo called “user_name.github.io” connected to an R project named “username.github.io”. The basic framework is set!</strong></p>
 </section>
 <section id="creating-a-personal-website-in-rstudio-local" class="level3">
 <h3 class="anchored" data-anchor-id="creating-a-personal-website-in-rstudio-local">Creating a personal website in RStudio (local)</h3>
 <ol start="6" type="1">
-<li>Follow the instructions <a href="https://docs.google.com/document/d/1tOpixqQOJSJtBUfrX5xLPNfCTZVo3pea1J0038cX4oE/edit?usp=sharing">here</a>. These instructions use materials from Brianna Heggeseth at Macalester, Joyce Robbins at Columbia, and quarto documentation.</li>
+<li>Follow the instructions <a href="https://docs.google.com/document/d/1tOpixqQOJSJtBUfrX5xLPNfCTZVo3pea1J0038cX4oE/edit?usp=sharing">here</a> for constructing a personal website on your local machine. These instructions use materials from Brianna Heggeseth at Macalester, Joyce Robbins at Columbia, and quarto documentation.</li>
 </ol>
 </section>
 <section id="pushing-your-work-to-github-cloud" class="level3">

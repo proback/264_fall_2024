@@ -15,12 +15,34 @@ And, you can have multiple collaborators with access to the same set of files.  
 
 In order to begin to get familiar with GitHub, we will use it to create a personal website.
 
+::: {.callout-note collapse=true}
+## An alternative approach
+
+You can also follow instructions at the excellent website [Creating Your Personal Website using Quarto](https://ucsb-meds.github.io/creating-quarto-websites/) by Sam Csik (the underlying quarto code for creating this website can be found [here](https://github.com/UCSB-MEDS/creating-quarto-websites/tree/main)).
+
+**Process Overview**
+
+- The general plan is to create a local version (using RStudio on your own computer) of a quarto webpage, and then connect the files you build to an upstream cloud-based hosting service (GitHub).  
+- After initializing a basic webpage, you will toggle between RStudio to improve the webpage and GitHub to save the results in a public repository.
+- Finally, you will use GitHub Page to publish and host your webpage.
+
+**Clarifications**
+
+While Sam Csik’s instructions and insights are awesome, there are a few places where you should tread carefully or take a slightly different path:
+
+- Be sure to heed the “Before getting started” box in [this section](https://ucsb-meds.github.io/creating-quarto-websites/#fa-seedling-titlesprouted-seedling-create-the-scaffolding-for-your-website)!  In particular, follow the MEDS Installation Guide and make sure you have the latest versions of both R and RStudio, a GitHub account, and Git installed on your machine.
+- In that same section, be sure to choose the “Using the RStudio IDE” tab to access that set of instructions.
+- Be careful with the first step in [this section](https://ucsb-meds.github.io/creating-quarto-websites/#fa-brands-github-titlegithub-octocat-build-publish-your-site-with-github-pages).  I would recommend the second option, although you’ll actually need to select File > New File > Text file to open a blank text file, and then use Save As to save that blank file as “.nojekyll” (this file will be invisible in RStudio but not in GitHub).  If you use the first option, her command is only for Macs; Windows users should use “copy NUL .nojekyll” in the Terminal.
+- In Step 3, you can also type “quarto_render()” in the Console.  You might have to run this twice if you needed to delete your _site folder as in the green box.
+- In Step 5, you also have to return to the main page of your GitHub repository and hit the Settings button to the right of About.  In the box that appears, you’ll enter a description of your project, and check “Use your GitHub Pages website”.
+:::
+
 
 ### Getting started on GitHub and connecting to RStudio
 
 1. Create a GitHub account at github.com.  It's usually okay to hit "Skip Personalization" at the bottom of the screen after entering an email, username, and password.  There are a few bonuses you can get as a student that you might consider.
 
-2. Obtain a personal access token in GitHub using the following steps:
+2. Obtain a personal access token (PAT) in GitHub using the following steps:
 
     + Click your profile picture/symbol in the upper right of your GitHub page.  Then select Settings > Developer settings > Personal access tokens > Tokens (classic).
     + Click "Generate new token" and give a descriptive name like "My PAT for RStudio".  Note that the default expiration is 30 days; I did a Custom setting through the end of the semester.
@@ -37,16 +59,17 @@ In order to begin to get familiar with GitHub, we will use it to create a person
 
 ### Creating an R project (local) that's connected to GitHub (cloud)
 
-4. In your GitHub account, click the $+ \nabla$ (+down arrow) button near the top right and select New Repository (repo).  For a personal website, you might put something like "proback.github.io" for your repository (repo) name, where you should replace `proback` with your GitHub user name.  For other repos, choose simple but descriptive names that should avoid spaces.  Be sure Public is checked; often I create Private repositories and turn them Public if I want later, but we know a personal webpage should be Public.  Check Add a ReadMe File.  Finally hit Create Repository and copy the URL once your repo has been created;  the URL should be something like `github.com/user_name/user_name.github.io`.
+4. In your GitHub account, click the $+ \nabla$ (+down arrow) button near the top right and select New Repository (repo).  For a personal website, you might put something like "proback.github.io" for your repository (repo) name, where you should replace `proback` with your GitHub user name.  For other repos, choose simple but descriptive names that should avoid spaces.  Be sure Public is checked; sometimes I create Private repositories and turn them Public if I want later, but we know a personal webpage should be Public.  Check Add a ReadMe File.  Finally hit Create Repository and copy the URL once your repo has been created;  the URL should be something like `github.com/username/user_name.github.io`.
 
-5. Go into your RStudio and select File > New Project > Version Control > Git.  For the repository URL paste in the URL for the repository you just created.  A project directory named "user_name.github.io" will be created in your specified folder (which you can navigate to).
+5. Go into your RStudio and select File > New Project > Version Control > Git.  For the repository URL paste in the URL for the repository you just created.  A project directory named "username.github.io" will be created in your specified folder (which you can navigate to).
 
 *Notice that you are now starting with a blank slate! Nothing in the environment or history. Also note where it says your project name in the top right corner.*
 
+**At this point your should have a GitHub repo called "user_name.github.io" connected to an R project named "username.github.io".  The basic framework is set!**
 
 ### Creating a personal website in RStudio (local)
 
-6. Follow the instructions [here](https://docs.google.com/document/d/1tOpixqQOJSJtBUfrX5xLPNfCTZVo3pea1J0038cX4oE/edit?usp=sharing).  These instructions use materials from Brianna Heggeseth at Macalester, Joyce Robbins at Columbia, and quarto documentation.
+6. Follow the instructions [here](https://docs.google.com/document/d/1tOpixqQOJSJtBUfrX5xLPNfCTZVo3pea1J0038cX4oE/edit?usp=sharing) for constructing a personal website on your local machine.  These instructions use materials from Brianna Heggeseth at Macalester, Joyce Robbins at Columbia, and quarto documentation.
 
 
 ### Pushing your work to GitHub (cloud)
