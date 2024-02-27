@@ -37,6 +37,7 @@ website:
         - 01_review164.qmd
         - 02_maps_part1.qmd
         - 03_maps_part2.qmd
+        - 04_functions.qmd
 
     - id: projects
       title: "Projects"
