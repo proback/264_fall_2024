@@ -8,7 +8,7 @@ Based on Chapter 25 from *R for Data Science*
 
 You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/04_functions.qmd).  Just hit the Download Raw File button.
 
-### Introduction (from Ch 25 of MDSR)
+### Introduction (from Ch 25 of R4DS)
 
 One of the best ways to improve your reach as a data scientist is to write functions. Functions allow you to automate common tasks in a more powerful and general way than copy-and-pasting. Writing a function has four big advantages over using copy-and-paste:
 
@@ -543,7 +543,7 @@ histogram <- function(df, var, bins) {
   
   df |> 
     ggplot(aes(x = {{ var }})) + 
-    geom_histogram(bins = {bins}) + 
+    geom_histogram(bins = bins) + 
     labs(title = label)
 }
 
@@ -629,7 +629,10 @@ foo1 <- function(x) {
 13. Write a function called `summary_stats()` to produce a custom set of summary statistics (n, mean, median, sd, IQR, min, and max) for any variable that you input from a tibble.  Add an option to remove missing values, if any exist (and be sure the sample size `n` reflects the number of non-missing values).  Thus, your function should have 3 inputs: `data` (the tibble of interest), `x` (the variable of interest), and `na_option` (with a default value of FALSE).  Show that your function works for (a) the `hwy` variable in `mpg_tbl <- as_tibble(mpg)`, and (b) the `age` variable in `gss_cat`.
 
 
-14. Add an option to (4) to produce summary statistics by group for a second variable.  Show that your function works for (a) the `hwy` variable in `mpg_tbl <- as_tibble(mpg)` grouped by `drv`, and (b) the `age` variable in `gss_cat` grouped by `partyid`.
+14. Add an option to (13) to produce summary statistics by group for a second variable.  Show that your function works for (a) the `hwy` variable in `mpg_tbl <- as_tibble(mpg)` grouped by `drv`, and (b) the `age` variable in `gss_cat` grouped by `partyid`.
 
 
 15. Create a function that has a vector as the input and returns the last value. (Note: Be sure to use a name that does not write over an existing function!)
+
+
+16. Save your final table from (14) and write a function to draw a scatterplot of a measure of center (mean or median - user can choose) vs. a measure of spread (sd or IQR - user can choose), with points sized by sample size, to see if there is constant variance.  Each point should be labeled with partyid, and the plot title should reflect the variables chosen by the user.

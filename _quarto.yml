@@ -38,6 +38,8 @@ website:
         - 02_maps_part1.qmd
         - 03_maps_part2.qmd
         - 04_functions.qmd
+        - 05_data_types.qmd
+        - 06_iteration.qmd
 
     - id: projects
       title: "Projects"
