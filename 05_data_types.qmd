@@ -8,6 +8,8 @@ editor_options:
 
 You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/05_data_types.qmd).  Just hit the Download Raw File button.
 
+This leans on parts of R4DS Chapter 27: A field guide to base R, in addition to parts of the first edition of R4DS.
+
 ```{r}
 #| message: false
 #| warning: false

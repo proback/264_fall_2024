@@ -8,6 +8,8 @@ editor_options:
 
 You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/06_iteration.qmd).  Just hit the Download Raw File button.
 
+This leans on parts of R4DS Chapter 26: Iteration, in addition to parts of the first edition of R4DS.
+
 ```{r}
 #| message: false
 #| warning: false
@@ -93,6 +95,8 @@ output
 ```
 
 One advantage of `seq_along()`: works with unknown output length.  However, the second approach below is much more efficient, since each iteration doesn't copy all data from previous iterations.
+
+**[Pause to Ponder:]** What does the code below do?  Be prepared to explain both chunks line-by-line!
 
 ```{r}
 # for loop: unknown output length
@@ -271,6 +275,28 @@ x %>% map_dbl(2)
 
 
 3. Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:
+
+```{r}
+out <- ""
+for (x in letters) {
+  out <- stringr::str_c(out, x)
+}
+out
+
+stringr::str_c(letters, collapse = "")
+
+
+x <- runif(100)
+out <- vector("numeric", length(x))
+out[1] <- x[1]
+for (i in 2:length(x)) {
+  out[i] <- out[i - 1] + x[i]
+}
+out
+
+cumsum(x)
+x %>% accumulate(`+`)
+```
 
 
 4. Compute the number of unique values in each column of the `iris` data set using at least 2 of your favorite iteration methods.  Bonus points if you can use pivot_longer()!

@@ -1,0 +1,31 @@
+---
+title: "Mini-Project 2: Simulation"
+format:
+  html: default
+---
+  
+```{r}
+#| include: false
+
+library(tidyverse)
+```
+
+### Overview
+
+You will conduct a small simulation study which investigates either:
+
+a) the effects of a factor or two on the power of a statistical test, or
+
+b) the effects of condition violations on a statistical test, as measured by coverage rate, confidence interval width, type I error rate, etc.
+
+Your simulation study should contain the following elements:
+
+- at least 1 function you've written
+- at least 1 loop (it can be imperative or functional, or you can try it both ways)
+- at least 1 illustrative, well-labeled plot
+- a description of what insights can be gained from your plot(s)
+
+
+### Timeline
+
+Mini-Project 2 must be submitted on moodle by **11:00 PM on Fri Mar 22**.    Ideally, you'd add a tab to your quarto webpage with Mini-Project 2, then you can just submit your URL (as long as your code is linked to the page).  You can alternatively submit a knitted pdf showing your code and output.

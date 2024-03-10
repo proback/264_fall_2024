@@ -184,6 +184,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./miniproject1.html" rel="" target="">
  <span class="dropdown-text">Mini-Project 1: Maps</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./miniproject2.html" rel="" target="">
+ <span class="dropdown-text">Mini-Project 2: Simulation</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -289,6 +293,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 <p>You can download this .qmd file from <a href="https://github.com/proback/264_fall_2024/blob/main/06_iteration.qmd">here</a>. Just hit the Download Raw File button.</p>
+<p>This leans on parts of R4DS Chapter 26: Iteration, in addition to parts of the first edition of R4DS.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Initial packages required</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -318,25 +323,25 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 4
-        a       b      c       d
-    &lt;dbl&gt;   &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
- 1 -0.764 -0.293  -0.212 -2.09  
- 2 -0.548 -1.56   -0.768  1.34  
- 3 -1.01   1.81    0.632 -1.32  
- 4 -0.680 -0.739   0.337  0.755 
- 5 -0.544  0.547   0.632  1.87  
- 6  1.24  -0.221   0.647 -0.0153
- 7  1.15  -1.64    1.82   0.121 
- 8 -0.805  0.0866  1.14  -0.801 
- 9 -0.662 -1.44   -0.144  0.732 
-10  1.25  -0.690   0.407  0.570 </code></pre>
+         a      b      c       d
+     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;   &lt;dbl&gt;
+ 1 -1.55   -2.10  -1.21  -1.66  
+ 2  0.0518  0.550  0.694  1.11  
+ 3  0.605  -0.304 -1.18   1.01  
+ 4  2.72   -0.476  0.140 -0.0739
+ 5  1.30    1.02  -0.739 -0.610 
+ 6 -0.371   1.02  -0.532  0.959 
+ 7  2.42    2.75   0.398  0.126 
+ 8 -0.396   1.09  -1.65  -1.14  
+ 9  1.43   -0.208 -1.57   0.470 
+10  0.600  -0.644 -0.442  1.67  </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># want median of each column (w/o cutting and pasting)</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="co">#   Be careful using square brackets vs double square brackets when</span></span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co">#   selecting elements</span></span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df[[<span class="dv">1</span>]])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6047481</code></pre>
+<pre><code>[1] 0.6025842</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">median</span>(df[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-error">
@@ -345,23 +350,23 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>df[<span class="dv">1</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 10 × 1
-        a
-    &lt;dbl&gt;
- 1 -0.764
- 2 -0.548
- 3 -1.01 
- 4 -0.680
- 5 -0.544
- 6  1.24 
- 7  1.15 
- 8 -0.805
- 9 -0.662
-10  1.25 </code></pre>
+         a
+     &lt;dbl&gt;
+ 1 -1.55  
+ 2  0.0518
+ 3  0.605 
+ 4  2.72  
+ 5  1.30  
+ 6 -0.371 
+ 7  2.42  
+ 8 -0.396 
+ 9  1.43  
+10  0.600 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>df[[<span class="dv">1</span>]]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] -0.7642934 -0.5479938 -1.0057632 -0.6802824 -0.5439618  1.2372612
- [7]  1.1464794 -0.8045626 -0.6615024  1.2498781</code></pre>
+<pre><code> [1] -1.55316541  0.05184487  0.60496833  2.71788106  1.30345112 -0.37128798
+ [7]  2.42236453 -0.39594391  1.43183849  0.60020002</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">class</span>(df[<span class="dv">1</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -378,7 +383,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6047481 -0.4915191  0.5199256  0.3453332</code></pre>
+<pre><code>[1]  0.6025842  0.1708972 -0.6353095  0.2979181</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ?seq_along - a safer option if had zero length vectors</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>output <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"double"</span>, <span class="fu">ncol</span>(df))  <span class="co"># 1. output</span></span>
@@ -387,7 +392,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6047481 -0.4915191  0.5199256  0.3453332</code></pre>
+<pre><code>[1]  0.6025842  0.1708972 -0.6353095  0.2979181</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use [[.]] even if don't have to to signal working with single elements</span></span>
 <span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -398,7 +403,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6047481 -0.4915191  0.5199256  0.3453332</code></pre>
+<pre><code>[1]  0.6025842  0.1708972 -0.6353095  0.2979181</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># another approach - no double square brackets since df not a tibble</span></span>
 <span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">as.data.frame</span>(df)</span>
@@ -408,10 +413,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a>output</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -0.6047481 -0.4915191  0.5199256  0.3453332</code></pre>
+<pre><code>[1]  0.6025842  0.1708972 -0.6353095  0.2979181</code></pre>
 </div>
 </div>
 <p>One advantage of <code>seq_along()</code>: works with unknown output length. However, the second approach below is much more efficient, since each iteration doesn’t copy all data from previous iterations.</p>
+<p><strong>[Pause to Ponder:]</strong> What does the code below do? Be prepared to explain both chunks line-by-line!</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># for loop: unknown output length</span></span>
 <span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -423,7 +429,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb24-9"><a href="#cb24-9" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(output)        <span class="do">## inefficient</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> num [1:161] -0.3203 0.162 0.1886 0.0493 1.0284 ...</code></pre>
+<pre><code> num [1:60] 1.6385 -1.0433 0.0241 0.4623 -1.2269 ...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"list"</span>, <span class="fu">length</span>(means))</span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="fu">seq_along</span>(means)) {</span>
@@ -433,13 +439,13 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(out)           <span class="do">## more efficient</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>List of 3
- $ : num [1:69] -1.737 1.06 0.887 -0.416 -0.784 ...
- $ : num [1:41] 0.841 0.555 0.111 0.308 -0.078 ...
- $ : num [1:96] 3.414 0.589 2.442 1.988 1.934 ...</code></pre>
+ $ : num [1:70] -0.2819 1.4233 0.0706 0.1781 -0.2985 ...
+ $ : num [1:98] 0.54 1.325 0.444 2.7 0.334 ...
+ $ : num [1:63] 1.274 1.742 0.376 2.047 3.773 ...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str</span>(<span class="fu">unlist</span>(out))   <span class="do">## flatten list of vectors into single vector</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> num [1:206] -1.737 1.06 0.887 -0.416 -0.784 ...</code></pre>
+<pre><code> num [1:231] -0.2819 1.4233 0.0706 0.1781 -0.2985 ...</code></pre>
 </div>
 </div>
 <p>Finally, the <code>while()</code> loop can be used with unknown sequence length. This is used more in simulation than in data analysis.</p>
@@ -458,7 +464,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb30-11"><a href="#cb30-11" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb30-12"><a href="#cb30-12" aria-hidden="true" tabindex="-1"></a>flips</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 10</code></pre>
+<pre><code>[1] 4</code></pre>
 </div>
 </div>
 </section>
@@ -487,15 +493,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb32-16"><a href="#cb32-16" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb32-17"><a href="#cb32-17" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.63114579 -0.47019270  0.02433111  0.20722784</code></pre>
+<pre><code>[1]  0.50049743 -0.19148195  0.20274635 -0.05098001</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1]  0.42293541 -0.13949988  0.08340269  0.11304359</code></pre>
+<pre><code>[1]  0.52167991 -0.17694110 -0.03353278  0.04130509</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">col_summary</span>(df, IQR)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.9794118 0.9034354 1.5723577 1.2946529</code></pre>
+<pre><code>[1] 0.9630696 1.2961095 1.4205793 1.4487047</code></pre>
 </div>
 </div>
 <p>The <code>purrr</code> package provides <code>map</code> functions to eliminate need for for loops, plus it makes code easier to read!</p>
@@ -504,22 +510,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          a           b           c           d 
- 0.42293541 -0.13949988  0.08340269  0.11304359 </code></pre>
+ 0.52167991 -0.17694110 -0.03353278  0.04130509 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          a           b           c           d 
- 0.63114579 -0.47019270  0.02433111  0.20722784 </code></pre>
+ 0.50049743 -0.19148195  0.20274635 -0.05098001 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        a         b         c         d 
-0.9928727 1.3840133 0.9605186 0.9566710 </code></pre>
+0.8743487 1.0059778 1.0451931 1.2676980 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="fu">map_dbl</span>(df, mean, <span class="at">trim =</span> <span class="fl">0.5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          a           b           c           d 
- 0.63114579 -0.47019270  0.02433111  0.20722784 </code></pre>
+ 0.50049743 -0.19148195  0.20274635 -0.05098001 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># map_dbl means make a double vector</span></span>
 <span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="co"># can also do map() for list, map_lgl(), map_int(), and map_chr()</span></span>
@@ -528,17 +534,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(mean)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          a           b           c           d 
- 0.42293541 -0.13949988  0.08340269  0.11304359 </code></pre>
+ 0.52167991 -0.17694110 -0.03353278  0.04130509 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb48"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(median)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>          a           b           c           d 
- 0.63114579 -0.47019270  0.02433111  0.20722784 </code></pre>
+ 0.50049743 -0.19148195  0.20274635 -0.05098001 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb50"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a>df <span class="sc">%&gt;%</span> <span class="fu">map_dbl</span>(sd)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>        a         b         c         d 
-0.9928727 1.3840133 0.9605186 0.9566710 </code></pre>
+0.8743487 1.0059778 1.0451931 1.2676980 </code></pre>
 </div>
 </div>
 <p>The across() function from dplyr also works well:</p>
@@ -551,7 +557,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 5
       n median_a median_b median_c median_d
   &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
-1    10    0.631   -0.470   0.0243    0.207</code></pre>
+1    10    0.500   -0.191    0.203  -0.0510</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb54"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># And if we're worried about NAs</span></span>
 <span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a>df_miss <span class="ot">&lt;-</span> df</span>
@@ -573,7 +579,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 9
   median_a n_miss_a median_b n_miss_b median_c n_miss_c median_d n_miss_d     n
      &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt;    &lt;int&gt; &lt;int&gt;
-1    0.738        1   -0.185        2   0.0243        0    0.207        0    10</code></pre>
+1    0.428        1   -0.191        2    0.203        0  -0.0510        0    10</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb56"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="co"># where \ is shorthand for an anonymous function</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -591,10 +597,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 4 × 3
   name   median    mean
   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
-1 a      0.631   0.423 
-2 b     -0.470  -0.139 
-3 c      0.0243  0.0834
-4 d      0.207   0.113 </code></pre>
+1 a      0.500   0.522 
+2 b     -0.191  -0.177 
+3 c      0.203  -0.0335
+4 d     -0.0510  0.0413</code></pre>
 </div>
 </div>
 <p>Here are a couple of other nice features of <code>map</code> functions: - perform analyses (like fitting a line) by subgroup - extracting components from a model or elements by position</p>
@@ -721,7 +727,7 @@ Coefficients:
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f2b070&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af776b48&gt; 
   .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -738,7 +744,7 @@ Coefficients:
   .. .. .. ..- attr(*, "order")= int 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f2b070&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af776b48&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -778,7 +784,7 @@ Coefficients:
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f79c78&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af83bfc0&gt; 
   .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -795,7 +801,7 @@ Coefficients:
   .. .. .. ..- attr(*, "order")= int 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f79c78&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af83bfc0&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -835,7 +841,7 @@ Coefficients:
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e80509e8&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af87d9c8&gt; 
   .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -852,7 +858,7 @@ Coefficients:
   .. .. .. ..- attr(*, "order")= int 1
   .. .. .. ..- attr(*, "intercept")= int 1
   .. .. .. ..- attr(*, "response")= int 1
-  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e80509e8&gt; 
+  .. .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af87d9c8&gt; 
   .. .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -895,7 +901,7 @@ Coefficients:
   .. ..- attr(*, "order")= int 1
   .. ..- attr(*, "intercept")= int 1
   .. ..- attr(*, "response")= int 1
-  .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f2b070&gt; 
+  .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af776b48&gt; 
   .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -912,7 +918,7 @@ Coefficients:
   .. .. ..- attr(*, "order")= int 1
   .. .. ..- attr(*, "intercept")= int 1
   .. .. ..- attr(*, "response")= int 1
-  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f2b070&gt; 
+  .. .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af776b48&gt; 
   .. .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -932,7 +938,7 @@ Coefficients:
   .. ..- attr(*, "order")= int 1
   .. ..- attr(*, "intercept")= int 1
   .. ..- attr(*, "response")= int 1
-  .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f7e7f2b070&gt; 
+  .. ..- attr(*, ".Environment")=&lt;environment: 0x000001f6af776b48&gt; 
   .. ..- attr(*, "predvars")= language list(mpg, wt)
   .. ..- attr(*, "dataClasses")= Named chr [1:2] "numeric" "numeric"
   .. .. ..- attr(*, "names")= chr [1:2] "mpg" "wt"
@@ -978,7 +984,89 @@ Coefficients:
 <li><p>Compute the mean of every column of the <code>mtcars</code> data set using (a) a for loop, (b) a <code>map</code> function, (c) the across() function, and (d) pivot_longer().</p></li>
 <li><p>Write a function that prints the mean of each <em>numeric</em> column in a data frame. Try it on the <code>iris</code> data set. (Hint: <code>keep(is.numeric)</code>)</p></li>
 <li><p>Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:</p></li>
-<li><p>Compute the number of unique values in each column of the <code>iris</code> data set using at least 2 of your favorite iteration methods. Bonus points if you can use pivot_longer()!</p></li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb75"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb75-1"><a href="#cb75-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="st">""</span></span>
+<span id="cb75-2"><a href="#cb75-2" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (x <span class="cf">in</span> letters) {</span>
+<span id="cb75-3"><a href="#cb75-3" aria-hidden="true" tabindex="-1"></a>  out <span class="ot">&lt;-</span> stringr<span class="sc">::</span><span class="fu">str_c</span>(out, x)</span>
+<span id="cb75-4"><a href="#cb75-4" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb75-5"><a href="#cb75-5" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "abcdefghijklmnopqrstuvwxyz"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb77"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb77-1"><a href="#cb77-1" aria-hidden="true" tabindex="-1"></a>stringr<span class="sc">::</span><span class="fu">str_c</span>(letters, <span class="at">collapse =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] "abcdefghijklmnopqrstuvwxyz"</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb79"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb79-1"><a href="#cb79-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">100</span>)</span>
+<span id="cb79-2"><a href="#cb79-2" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">vector</span>(<span class="st">"numeric"</span>, <span class="fu">length</span>(x))</span>
+<span id="cb79-3"><a href="#cb79-3" aria-hidden="true" tabindex="-1"></a>out[<span class="dv">1</span>] <span class="ot">&lt;-</span> x[<span class="dv">1</span>]</span>
+<span id="cb79-4"><a href="#cb79-4" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="sc">:</span><span class="fu">length</span>(x)) {</span>
+<span id="cb79-5"><a href="#cb79-5" aria-hidden="true" tabindex="-1"></a>  out[i] <span class="ot">&lt;-</span> out[i <span class="sc">-</span> <span class="dv">1</span>] <span class="sc">+</span> x[i]</span>
+<span id="cb79-6"><a href="#cb79-6" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb79-7"><a href="#cb79-7" aria-hidden="true" tabindex="-1"></a>out</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0.4227196  1.0235145  1.6737094  2.6677744  3.5885166  4.2929311
+  [7]  4.8406160  5.5891575  6.3899370  7.3034581  8.0810124  9.0386379
+ [13]  9.5875029  9.6357204  9.9796389 10.5643811 11.3342382 11.7778725
+ [19] 11.9984920 12.8698756 13.5278877 13.7741702 14.4766314 15.3058815
+ [25] 16.0255821 16.6021283 17.0219821 17.4342215 18.2758230 18.7563667
+ [31] 19.3798635 19.6187022 20.2420111 20.4082193 20.8810925 21.5424599
+ [37] 21.9864677 22.2681546 22.7923903 23.0051233 23.6631780 24.1402818
+ [43] 24.6069839 25.1874662 25.7312684 26.2287963 26.5151919 26.6186105
+ [49] 27.3728194 27.6852790 28.4835011 29.3529591 30.0306371 30.6270130
+ [55] 30.8880629 31.0825567 31.6890705 31.9963139 32.7116668 33.0131421
+ [61] 33.6945948 34.5994121 35.4515506 35.9757383 36.9234769 37.8547433
+ [67] 38.2718418 38.5453152 39.3534790 40.3283110 40.9823470 41.8004028
+ [73] 42.7764315 43.5869288 44.1242882 44.1400387 44.8412834 45.7507160
+ [79] 46.2003008 46.5733445 46.7679525 47.6758479 47.8733410 48.7949685
+ [85] 49.1577746 50.0834982 50.2220115 50.6942155 50.9106671 51.1029159
+ [91] 51.6917832 52.4021243 53.3552403 53.8739439 54.3669493 55.3600955
+ [97] 56.3479090 56.6855483 57.2389805 58.1180265</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb81"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb81-1"><a href="#cb81-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cumsum</span>(x)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0.4227196  1.0235145  1.6737094  2.6677744  3.5885166  4.2929311
+  [7]  4.8406160  5.5891575  6.3899370  7.3034581  8.0810124  9.0386379
+ [13]  9.5875029  9.6357204  9.9796389 10.5643811 11.3342382 11.7778725
+ [19] 11.9984920 12.8698756 13.5278877 13.7741702 14.4766314 15.3058815
+ [25] 16.0255821 16.6021283 17.0219821 17.4342215 18.2758230 18.7563667
+ [31] 19.3798635 19.6187022 20.2420111 20.4082193 20.8810925 21.5424599
+ [37] 21.9864677 22.2681546 22.7923903 23.0051233 23.6631780 24.1402818
+ [43] 24.6069839 25.1874662 25.7312684 26.2287963 26.5151919 26.6186105
+ [49] 27.3728194 27.6852790 28.4835011 29.3529591 30.0306371 30.6270130
+ [55] 30.8880629 31.0825567 31.6890705 31.9963139 32.7116668 33.0131421
+ [61] 33.6945948 34.5994121 35.4515506 35.9757383 36.9234769 37.8547433
+ [67] 38.2718418 38.5453152 39.3534790 40.3283110 40.9823470 41.8004028
+ [73] 42.7764315 43.5869288 44.1242882 44.1400387 44.8412834 45.7507160
+ [79] 46.2003008 46.5733445 46.7679525 47.6758479 47.8733410 48.7949685
+ [85] 49.1577746 50.0834982 50.2220115 50.6942155 50.9106671 51.1029159
+ [91] 51.6917832 52.4021243 53.3552403 53.8739439 54.3669493 55.3600955
+ [97] 56.3479090 56.6855483 57.2389805 58.1180265</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb83"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb83-1"><a href="#cb83-1" aria-hidden="true" tabindex="-1"></a>x <span class="sc">%&gt;%</span> <span class="fu">accumulate</span>(<span class="st">`</span><span class="at">+</span><span class="st">`</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  [1]  0.4227196  1.0235145  1.6737094  2.6677744  3.5885166  4.2929311
+  [7]  4.8406160  5.5891575  6.3899370  7.3034581  8.0810124  9.0386379
+ [13]  9.5875029  9.6357204  9.9796389 10.5643811 11.3342382 11.7778725
+ [19] 11.9984920 12.8698756 13.5278877 13.7741702 14.4766314 15.3058815
+ [25] 16.0255821 16.6021283 17.0219821 17.4342215 18.2758230 18.7563667
+ [31] 19.3798635 19.6187022 20.2420111 20.4082193 20.8810925 21.5424599
+ [37] 21.9864677 22.2681546 22.7923903 23.0051233 23.6631780 24.1402818
+ [43] 24.6069839 25.1874662 25.7312684 26.2287963 26.5151919 26.6186105
+ [49] 27.3728194 27.6852790 28.4835011 29.3529591 30.0306371 30.6270130
+ [55] 30.8880629 31.0825567 31.6890705 31.9963139 32.7116668 33.0131421
+ [61] 33.6945948 34.5994121 35.4515506 35.9757383 36.9234769 37.8547433
+ [67] 38.2718418 38.5453152 39.3534790 40.3283110 40.9823470 41.8004028
+ [73] 42.7764315 43.5869288 44.1242882 44.1400387 44.8412834 45.7507160
+ [79] 46.2003008 46.5733445 46.7679525 47.6758479 47.8733410 48.7949685
+ [85] 49.1577746 50.0834982 50.2220115 50.6942155 50.9106671 51.1029159
+ [91] 51.6917832 52.4021243 53.3552403 53.8739439 54.3669493 55.3600955
+ [97] 56.3479090 56.6855483 57.2389805 58.1180265</code></pre>
+</div>
+</div>
+<ol start="4" type="1">
+<li>Compute the number of unique values in each column of the <code>iris</code> data set using at least 2 of your favorite iteration methods. Bonus points if you can use pivot_longer()!</li>
 </ol>
 
 
