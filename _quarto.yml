@@ -40,6 +40,7 @@ website:
         - 04_functions.qmd
         - 05_data_types.qmd
         - 06_iteration.qmd
+        - 07_simulation.qmd
 
     - id: projects
       title: "Projects"
