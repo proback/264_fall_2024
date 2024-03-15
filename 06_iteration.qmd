@@ -283,8 +283,6 @@ for (x in letters) {
 }
 out
 
-stringr::str_c(letters, collapse = "")
-
 
 x <- runif(100)
 out <- vector("numeric", length(x))
@@ -294,8 +292,6 @@ for (i in 2:length(x)) {
 }
 out
 
-cumsum(x)
-x %>% accumulate(`+`)
 ```
 
 

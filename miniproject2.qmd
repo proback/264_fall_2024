@@ -33,3 +33,8 @@ Your simulation study should contain the following elements:
 ### Timeline
 
 Mini-Project 2 must be submitted on moodle by **11:00 PM on Fri Mar 22**.    Ideally, you'd add a tab to your quarto webpage with Mini-Project 2, then you can just submit your URL (as long as your code is linked to the page).  You can alternatively submit a knitted pdf showing your code and output.
+
+
+### Additional Notes
+
+You may choose to work solo or with a partner.  If you choose to work with a partner, I ask each of you to hand in your final product (even though it's likely the same thing) and also to describe your role in the project - was the coding 50/50? who generated ideas at various stages? who designed the final product? etc.  If you work with someone else, ideally both of you would upload the final product to your own quarto webpages (with attribution to your co-author)
