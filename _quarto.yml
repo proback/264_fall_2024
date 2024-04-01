@@ -41,6 +41,10 @@ website:
         - 05_data_types.qmd
         - 06_iteration.qmd
         - 07_simulation.qmd
+        - MDSR_Ch13_simulation.qmd
+        - 08_strings_part1.qmd
+        - 09_strings_part2.qmd
+        - 10_strings_part3.qmd
 
     - id: projects
       title: "Projects"

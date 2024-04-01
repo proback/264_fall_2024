@@ -175,6 +175,22 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./07_simulation.html" rel="" target="">
  <span class="dropdown-text">Simulation</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./MDSR_Ch13_simulation.html" rel="" target="">
+ <span class="dropdown-text">MDSR Ch 13: Simulation</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./08_strings_part1.html" rel="" target="">
+ <span class="dropdown-text">Strings: Pre-class Video</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./09_strings_part2.html" rel="" target="">
+ <span class="dropdown-text">Strings: In-class Exercises</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./10_strings_part3.html" rel="" target="">
+ <span class="dropdown-text">Strings: Extra Practice</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -259,6 +275,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./07_simulation.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Simulation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./MDSR_Ch13_simulation.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MDSR Ch 13: Simulation</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./08_strings_part1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: Pre-class Video</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./09_strings_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: In-class Exercises</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_strings_part3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: Extra Practice</span></a>
   </div>
 </li>
     </ul>
@@ -378,11 +418,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(dolphin_data<span class="sc">$</span>treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Control" "Control" "Dolphin" "Dolphin" "Control" "Dolphin" "Control"
- [8] "Control" "Dolphin" "Dolphin" "Dolphin" "Control" "Dolphin" "Dolphin"
-[15] "Control" "Control" "Control" "Dolphin" "Control" "Dolphin" "Control"
-[22] "Control" "Dolphin" "Control" "Control" "Dolphin" "Dolphin" "Control"
-[29] "Dolphin" "Dolphin"</code></pre>
+<pre><code> [1] "Control" "Control" "Dolphin" "Control" "Dolphin" "Control" "Dolphin"
+ [8] "Dolphin" "Control" "Control" "Control" "Dolphin" "Control" "Dolphin"
+[15] "Control" "Control" "Dolphin" "Control" "Control" "Control" "Dolphin"
+[22] "Dolphin" "Dolphin" "Dolphin" "Dolphin" "Control" "Dolphin" "Dolphin"
+[29] "Control" "Dolphin"</code></pre>
 </div>
 </div>
 </section>
@@ -414,7 +454,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  99.5  20.2</code></pre>
+1  99.6  19.5</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(normal_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -430,7 +470,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  10.3  11.1</code></pre>
+1  10.1  9.90</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(exp_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -460,12 +500,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">1</span>]</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -10.43762</code></pre>
+<pre><code>[1] -7.149435</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">2</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 1.920551</code></pre>
+<pre><code>[1] 5.731104</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>contains_truediff <span class="ot">&lt;-</span> (lower <span class="sc">&lt;=</span> truediff <span class="sc">&amp;</span> upper <span class="sc">&gt;=</span> truediff)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>contains_truediff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -482,9 +522,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    group      min       Q1   median       Q3      max     mean       sd   n
-1 Group 1 23.17119 28.94818 36.12282 40.93326 52.11551 36.55862 9.672145  10
-2 Group 2 20.24275 34.50556 40.85482 46.89788 61.81355 40.81715 9.373879 100
+<pre><code>    group      min       Q1   median       Q3      max     mean        sd   n
+1 Group 1 29.68903 36.41437 39.17594 41.16119 47.31709 38.98956  5.597582  10
+2 Group 2 12.07454 32.76107 39.95482 45.84999 67.02935 39.69873 10.091842 100
   missing
 1       0
 2       0</code></pre>
@@ -507,7 +547,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">mean</span>(contains_truediff)</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>coverage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.954</code></pre>
+<pre><code>[1] 0.956</code></pre>
 </div>
 </div>
 <section id="on-your-own-1" class="level3">
