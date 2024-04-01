@@ -206,6 +206,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./miniproject2.html" rel="" target="">
  <span class="dropdown-text">Mini-Project 2: Simulation</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./miniproject3.html" rel="" target="">
+ <span class="dropdown-text">Mini-Project 3: Strings and Regular Expressions</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -355,7 +359,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># uniform random number generator (between 0 and 1)</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">runif</span>(<span class="dv">5</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.982994805 0.551539665 0.741601180 0.447671856 0.001572089</code></pre>
+<pre><code>[1] 0.0321635 0.8996660 0.3878828 0.3065596 0.8333298</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># select one value at random from a vector</span></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>select_one <span class="ot">&lt;-</span> <span class="cf">function</span>(vec) {</span>
@@ -365,11 +369,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>}</span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="fu">select_one</span>(letters) <span class="co"># letters are a, b, c, ..., z</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "f"</code></pre>
+<pre><code>[1] "s"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">select_one</span>(letters)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] "x"</code></pre>
+<pre><code>[1] "p"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># can also sample from other distributions (e.g. rnorm(1))</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
@@ -391,7 +395,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="cell-output cell-output-stdout">
 <pre><code>result
 They do not   They meet 
-     69.526      30.474 </code></pre>
+     69.614      30.386 </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> sim_meet, <span class="fu">aes</span>(<span class="at">x =</span> joan, <span class="at">y =</span> sally, <span class="at">color =</span> result)) <span class="sc">+</span> </span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">alpha =</span> <span class="fl">0.3</span>) <span class="sc">+</span> </span>
@@ -431,18 +435,18 @@ They do not   They meet
 <pre><code># A tibble: 12 × 3
    jobs_number month id      
          &lt;dbl&gt; &lt;fct&gt; &lt;chr&gt;   
- 1       230.  1     Sample 1
- 2       262.  2     Sample 1
- 3       225.  3     Sample 1
- 4        70.3 4     Sample 1
- 5       192.  5     Sample 1
- 6       187.  6     Sample 1
- 7       124.  7     Sample 1
- 8       189.  8     Sample 1
- 9       139.  9     Sample 1
-10       109.  10    Sample 1
-11       157.  11    Sample 1
-12       143.  12    Sample 1</code></pre>
+ 1       146.  1     Sample 1
+ 2        76.3 2     Sample 1
+ 3       113.  3     Sample 1
+ 4       211.  4     Sample 1
+ 5       198.  5     Sample 1
+ 6       182.  6     Sample 1
+ 7       164.  7     Sample 1
+ 8        91.4 8     Sample 1
+ 9        84.1 9     Sample 1
+10       163.  10    Sample 1
+11       119.  11    Sample 1
+12       266.  12    Sample 1</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># params contains info about 3 simulations we want to run</span></span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>n_sims <span class="ot">&lt;-</span> <span class="dv">3</span></span>
@@ -479,42 +483,42 @@ They do not   They meet
 10       150   10    Truth   
 11       150   11    Truth   
 12       150   12    Truth   
-13       251.  1     Sample 1
-14       170.  2     Sample 1
-15        12.2 3     Sample 1
-16       192.  4     Sample 1
-17       216.  5     Sample 1
-18       168.  6     Sample 1
-19       141.  7     Sample 1
-20       225.  8     Sample 1
-21       180.  9     Sample 1
-22        55.9 10    Sample 1
-23       204.  11    Sample 1
-24       244.  12    Sample 1
-25       234.  1     Sample 2
-26       125.  2     Sample 2
-27       129.  3     Sample 2
-28       199.  4     Sample 2
-29        80.4 5     Sample 2
-30        52.8 6     Sample 2
-31        52.8 7     Sample 2
-32       125.  8     Sample 2
-33        44.6 9     Sample 2
-34        58.7 10    Sample 2
-35        42.7 11    Sample 2
-36       108.  12    Sample 2
-37       152.  1     Sample 3
-38        92.2 2     Sample 3
-39       228.  3     Sample 3
-40       245.  4     Sample 3
-41        49.6 5     Sample 3
-42       176.  6     Sample 3
-43       114.  7     Sample 3
-44       141.  8     Sample 3
-45       180.  9     Sample 3
-46        71.6 10    Sample 3
-47       124.  11    Sample 3
-48       179.  12    Sample 3</code></pre>
+13        99.4 1     Sample 1
+14       218.  2     Sample 1
+15       169.  3     Sample 1
+16       220.  4     Sample 1
+17       119.  5     Sample 1
+18       217.  6     Sample 1
+19       263.  7     Sample 1
+20       139.  8     Sample 1
+21       225.  9     Sample 1
+22       120.  10    Sample 1
+23       177.  11    Sample 1
+24       101.  12    Sample 1
+25       165.  1     Sample 2
+26       135.  2     Sample 2
+27       190.  3     Sample 2
+28       139.  4     Sample 2
+29        86.0 5     Sample 2
+30       172.  6     Sample 2
+31       220.  7     Sample 2
+32       185.  8     Sample 2
+33       209.  9     Sample 2
+34        30.7 10    Sample 2
+35        85.8 11    Sample 2
+36       171.  12    Sample 2
+37       208.  1     Sample 3
+38       214.  2     Sample 3
+39        66.1 3     Sample 3
+40       197.  4     Sample 3
+41       125.  5     Sample 3
+42       192.  6     Sample 3
+43       112.  7     Sample 3
+44       102.  8     Sample 3
+45       135.  9     Sample 3
+46        58.5 10    Sample 3
+47       126.  11    Sample 3
+48       130.  12    Sample 3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> df, <span class="fu">aes</span>(<span class="at">x =</span> month, <span class="at">y =</span> jobs_number)) <span class="sc">+</span> </span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_hline</span>(<span class="at">yintercept =</span> jobs_true, <span class="at">linetype =</span> <span class="dv">2</span>) <span class="sc">+</span> </span>
@@ -568,9 +572,9 @@ They do not   They meet
 <pre><code># A tibble: 3 × 2
     sim heads
   &lt;int&gt; &lt;dbl&gt;
-1     1  5632
-2     2  5586
-3     3  5727</code></pre>
+1     1  5660
+2     2  5661
+3     3  5549</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare observed scores of 14 with expected number if 13 and 14 equally likely</span></span>
 <span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> random_flip, <span class="fu">aes</span>(<span class="at">x =</span> heads)) <span class="sc">+</span> </span>
@@ -651,18 +655,18 @@ They do not   They meet
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0.31</td>
 <td style="text-align: right;">0.05</td>
-<td style="text-align: right;">0.15</td>
-<td style="text-align: right;">0.27</td>
-<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.14</td>
+<td style="text-align: right;">0.28</td>
+<td style="text-align: right;">0.31</td>
 <td style="text-align: right;">0.34</td>
-<td style="text-align: right;">0.49</td>
+<td style="text-align: right;">0.54</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">meet_pct</td>
 <td style="text-align: right;">400</td>
 <td style="text-align: right;">5000</td>
 <td style="text-align: right;">0</td>
-<td style="text-align: right;">0.30</td>
+<td style="text-align: right;">0.31</td>
 <td style="text-align: right;">0.02</td>
 <td style="text-align: right;">0.23</td>
 <td style="text-align: right;">0.29</td>
@@ -677,7 +681,7 @@ They do not   They meet
 <td style="text-align: right;">0</td>
 <td style="text-align: right;">0.31</td>
 <td style="text-align: right;">0.01</td>
-<td style="text-align: right;">0.26</td>
+<td style="text-align: right;">0.27</td>
 <td style="text-align: right;">0.30</td>
 <td style="text-align: right;">0.31</td>
 <td style="text-align: right;">0.31</td>
