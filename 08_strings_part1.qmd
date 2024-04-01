@@ -15,8 +15,8 @@ This uses parts of MDSR Ch 14: Strings and Ch 15: Regular Expressions (both the 
 #| warning: false
 
 library(tidyverse)
-spotify <- read_csv("Data/spotify.csv") 
-#spotify <- read_csv("https://proback.github.io/264_fall_2024/Data/spotify.csv")
+#spotify <- read_csv("Data/spotify.csv") 
+spotify <- read_csv("https://proback.github.io/264_fall_2024/Data/spotify.csv")
 
 spot_smaller <- spotify |>
   select(title, artist, album_release_date, album_name, subgenre, playlist_name)
