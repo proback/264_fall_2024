@@ -29,8 +29,8 @@ str functions to know for manipulating strings:
 
 library(tidyverse)
 
-spotify <- read_csv("Data/spotify.csv") 
-#spotify <- read_csv("https://proback.github.io/264_fall_2024/Data/spotify.csv")
+#spotify <- read_csv("Data/spotify.csv") 
+spotify <- read_csv("https://proback.github.io/264_fall_2024/Data/spotify.csv")
 
 spot_smaller <- spotify |>
   select(title, artist, album_release_date, album_name, subgenre, playlist_name)
