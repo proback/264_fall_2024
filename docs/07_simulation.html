@@ -191,6 +191,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./10_strings_part3.html" rel="" target="">
  <span class="dropdown-text">Strings: Extra Practice</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./11_SQL.html" rel="" target="">
+ <span class="dropdown-text">MDSR Ch 15: Database querying using SQL</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -303,6 +307,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./10_strings_part3.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Strings: Extra Practice</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_SQL.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">MDSR Ch 15: Database querying using SQL</span></a>
   </div>
 </li>
     </ul>
@@ -422,11 +432,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(dolphin_data<span class="sc">$</span>treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Dolphin" "Dolphin" "Control" "Dolphin" "Dolphin" "Dolphin" "Control"
- [8] "Control" "Control" "Dolphin" "Dolphin" "Dolphin" "Dolphin" "Control"
-[15] "Control" "Dolphin" "Dolphin" "Control" "Control" "Dolphin" "Control"
-[22] "Control" "Control" "Dolphin" "Control" "Dolphin" "Control" "Control"
-[29] "Control" "Dolphin"</code></pre>
+<pre><code> [1] "Dolphin" "Dolphin" "Dolphin" "Dolphin" "Control" "Control" "Control"
+ [8] "Dolphin" "Dolphin" "Control" "Dolphin" "Control" "Dolphin" "Dolphin"
+[15] "Control" "Control" "Dolphin" "Control" "Dolphin" "Control" "Dolphin"
+[22] "Dolphin" "Control" "Dolphin" "Control" "Control" "Control" "Dolphin"
+[29] "Control" "Control"</code></pre>
 </div>
 </div>
 </section>
@@ -458,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  99.5  20.3</code></pre>
+1  99.8  19.3</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(normal_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -474,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  10.2  10.4</code></pre>
+1  10.3  10.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(exp_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -504,12 +514,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">1</span>]</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -6.517023</code></pre>
+<pre><code>[1] -13.91416</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">2</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 6.010679</code></pre>
+<pre><code>[1] 0.8681133</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>contains_truediff <span class="ot">&lt;-</span> (lower <span class="sc">&lt;=</span> truediff <span class="sc">&amp;</span> upper <span class="sc">&gt;=</span> truediff)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>contains_truediff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -526,9 +536,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    group      min       Q1   median       Q3      max     mean        sd   n
-1 Group 1 25.76585 32.57184 38.65537 42.29996 56.93133 38.81531 10.442902  10
-2 Group 2 11.72669 32.60498 39.42201 45.38985 57.31241 39.06848  9.440472 100
+<pre><code>    group       min       Q1   median       Q3      max     mean       sd   n
+1 Group 1 19.294223 27.78178 31.77082 37.70714 56.41447 33.80795 10.62746  10
+2 Group 2  7.570838 33.67481 40.12846 48.05887 74.19698 40.33097 11.29704 100
   missing
 1       0
 2       0</code></pre>
@@ -551,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">mean</span>(contains_truediff)</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>coverage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.959</code></pre>
+<pre><code>[1] 0.94</code></pre>
 </div>
 </div>
 <section id="on-your-own-1" class="level3">

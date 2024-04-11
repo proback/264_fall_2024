@@ -1,0 +1,10 @@
+---
+title: "MDSR Ch 15: Database querying using SQL"
+format:
+  html: default
+editor_options: 
+  chunk_output_type: console
+---
+  
+You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/SQL_code/MDSR_Ch15_SQL.qmd).  Just hit the Download Raw File button.
+

@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "!DS2_preview_work/"
+    - "!SQL_code/"
   resources:
     - "Data/*.csv"
     - "Data/"
@@ -45,6 +46,7 @@ website:
         - 08_strings_part1.qmd
         - 09_strings_part2.qmd
         - 10_strings_part3.qmd
+        - 11_SQL.qmd
 
     - id: projects
       title: "Projects"

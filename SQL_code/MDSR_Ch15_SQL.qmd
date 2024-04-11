@@ -1,0 +1,736 @@
+---
+title: "MDSR Ch 15: Database querying using SQL"
+format:
+  html: default
+execute:
+  echo: true
+  warning: false
+  message: false
+editor_options:
+  chunk_output_type: inline
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+#| no longer needed:
+#| knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+```
+
+You can download this .qmd file from [here](https://github.com/proback/264_fall_2024/blob/main/MDSR_Ch15_SQL.qmd).  Just hit the Download Raw File button.
+
+
+```{r}
+library(tidyverse)
+library(mdsr)
+library(dbplyr)
+library(DBI)
+
+#| connect to the scidb server on Amazon Web Services - the airlines 
+#| database lives on a remote server
+db <- dbConnect_scidb("airlines")
+flights <- tbl(db, "flights")
+carriers <- tbl(db, "carriers")
+
+#| You can treat flights like a df or tbl, but it is not, in fact, a data frame.
+#| Note that dim(flights) is reported as NA x 21; there are actually 69 million flights that would take up 20 GB as a csv file!
+
+#| Section 15.1: From dplyr to SQL
+
+q <- flights |>
+  filter(
+    year == 2015 & month == 9, 
+    dest == "JFK"
+  ) %>%
+  inner_join(carriers, by = c("carrier" = "carrier")) %>%
+  group_by(name) %>%
+  summarize(
+    N = n(), 
+    pct_ontime = sum(arr_delay <= 15) / n()
+  ) %>%
+  filter(N >= 100) %>%
+  arrange(desc(pct_ontime))
+head(q, 4)
+
+class(flights)
+
+#| for a MySQL database, dplyr translates pipeline to SQL
+show_query(q)
+```
+
+If we were to write the query, it'd be a bit more readable.
+
+However, there is no chunk preview option with SQL code, so you have to (a) knit the document to check that it works, or (b) select "chunk output inline" under the settings button to get "run chunk" button in the sql chunk.  The code below will show sql results if you leave off output.var, otherwise you need to actually print mydataframe in an R chunk.  
+
+This post is helpful:  https://irene.rbind.io/post/using-sql-in-rstudio/
+
+```{sql, connection = db, output.var = "mydataframe"}
+SELECT 
+  c.name,
+  SUM(1) AS N, 
+  SUM(arr_delay <= 15) / SUM(1) AS pct_ontime
+FROM flights AS f
+JOIN carriers AS c ON f.carrier = c.carrier
+WHERE year = 2015 AND month = 9
+  AND dest = 'JFK'
+GROUP BY name 
+HAVING N >= 100
+ORDER BY pct_ontime DESC
+LIMIT 0,4;
+```
+
+```{r}
+mydataframe
+```
+
+```{r}
+ggplot(mydataframe, aes(x = N, y = pct_ontime)) +
+  geom_point() +
+  xlab("Total flights") +
+  ylab("Percent ontime flights") +
+  ggtitle("Top 4 airlines")
+```
+
+Can also insert SQL code inside dbGetQuery():
+
+```{r}
+test2 <- dbGetQuery(db,'
+SELECT 
+  c.name,
+  SUM(1) AS N, 
+  SUM(arr_delay <= 15) / SUM(1) AS pct_ontime
+FROM flights AS f
+JOIN carriers AS c ON f.carrier = c.carrier
+WHERE year = 2015 AND month = 9
+  AND dest = \'JFK\'
+GROUP BY name 
+HAVING N >= 100
+ORDER BY pct_ontime DESC
+LIMIT 0,4;
+')
+
+test2
+```
+
+
+```{r, error = FALSE}
+# how basic mathematical ideas are translated:
+translate_sql(mean(arr_delay, na.rm = TRUE),
+              con = db)
+
+# translation does not always work, but can pass unknown functions through
+my_paste <- paste0
+translate_sql(my_paste("this", "is", "a", "string"),
+              con = db)
+
+# will throw an error even though a valid R expression
+carriers %>%
+  mutate(name_code = my_paste(name, "(", carrier, ")"))
+
+# how to make it work - use CONCAT, the MySQL equivalent to paste0, or
+# use collect to break the MySQL connection and return a tbl_df
+class(carriers)
+
+carriers %>%
+  mutate(name_code = CONCAT(name, "(", carrier, ")"))
+
+carriers %>%
+  collect() %>%
+  mutate(name_code = my_paste(name, "(", carrier, ")"))
+
+
+# Section 15.2: Flat-file databases
+
+carriers %>%
+  object.size() %>%
+  print(units = "Kb") 
+
+carriers %>%
+  collect() %>%
+  object.size() %>%
+  print(units = "Kb")
+
+# data sets get big quickly - already 3/4 Gb
+n <- 100 * 1e6
+x <- matrix(runif(n), ncol = 100)
+dim(x)
+print(object.size(x), units = "Mb")
+
+
+# Section 15.4.1: The SQL data manipulation language
+
+# We are actually focusing on RMariaDB, which is replacing RMySQL
+```
+
+```{sql, connection = db}
+SHOW TABLES;
+```
+
+```{sql, connection = db}
+DESCRIBE airports;
+```
+
+Every query needs SELECT and FROM...
+
+```{sql, connection = db}
+SELECT * FROM flights LIMIT 0,10;
+```
+
+```{sql, connection = db}
+SELECT year, month, day, dep_time, sched_dep_time, dep_delay, origin
+FROM flights 
+LIMIT 0, 10;
+```
+
+### Section 15.4.1: SELECT...FROM
+
+```{sql, connection = db}
+SELECT faa, name FROM airports;
+```
+
+Combine latitude and longitude columns
+
+```{sql, connection = db}
+SELECT 
+  name, 
+  CONCAT('(', lat, ', ', lon, ')') 
+FROM airports
+LIMIT 0, 6;
+```
+
+Make (lat, long) column name less unwieldy
+
+```{sql, connection = db}
+SELECT 
+  name, 
+  CONCAT('(', lat, ', ', lon, ')') AS coords
+FROM airports
+LIMIT 0, 6;
+```
+
+Change name of airport column - but only in result set
+
+```{sql, connection = db}
+SELECT 
+  name AS airport_name, 
+  CONCAT('(', lat, ', ', lon, ')') AS coords
+FROM airports
+LIMIT 0, 6;
+```
+
+### Section 15.4.2: WHERE
+
+First 6 flights that left Bradley Intl Airport on June 26, 2013
+
+```{sql, connection = db}
+SELECT 
+  year, month, day, origin, dest,
+  flight, carrier
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Create date variable from year, month, day
+
+Would produce an error if tried to use:  WHERE theDate = '2013-06-26' since WHERE only operates on the original table
+
+Could try to use:  WHERE STR_TO_DATE(CONCAT(year, '-', month, '-', day), '%Y-%m-%d') = '2013-06-26', but this is extremely slow (and might crash R) since it doesn't take advantages of pre-existing indices on year, month, and day
+
+```{sql, connection = db}
+SELECT 
+  STR_TO_DATE(CONCAT(year, '-', month, '-', day), '%Y-%m-%d') AS theDate,
+  origin,
+  flight, carrier
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Introduce BETWEEN and DISTINCT
+
+```{sql, connection = db}
+SELECT
+  DISTINCT STR_TO_DATE(CONCAT(year, '-', month, '-', day), '%Y-%m-%d') 
+    AS theDate
+FROM flights
+WHERE year = 2013 AND month = 6 AND day BETWEEN 26 and 30
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Substitute IN for BETWEEN
+
+```{sql, connection = db}
+SELECT 
+  DISTINCT STR_TO_DATE(CONCAT(year, '-', month, '-', day), '%Y-%m-%d') 
+    AS theDate
+FROM flights
+WHERE year = 2013 AND month = 6 AND day IN (26, 30)
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Be careful with parentheses.  If run the code below without parentheses, you'll probably crash R, as it tries to return 557,874 records
+
+```{sql, connection = db}
+/* returns 2,542 records  */
+SELECT 
+  COUNT(*) AS N
+FROM flights
+WHERE year = 2013 AND (month = 6 OR day = 26)
+  AND origin = 'BDL';
+```
+
+### Section 15.4.3: GROUP BY
+
+The GROUP BY clause allows one to aggregate multiple rows according to some criteria. The challenge when using GROUP BY is specifying how multiple rows of data should be reduced into a single value. Aggregate functions (e.g., COUNT(), SUM(), MAX(), and AVG()) are necessary.
+
+```{sql, connection = db}
+SELECT 
+  carrier, 
+  COUNT(*) AS numFlights,
+  SUM(1) AS numFlightsAlso
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+GROUP BY carrier;
+```
+
+Add MIN as an aggregate function
+
+```{sql, connection = db}
+SELECT 
+  carrier, 
+  COUNT(*) AS numFlights,
+  MIN(dep_time)
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+GROUP BY carrier;
+```
+
+Turn departure time variable into an actual time
+
+```{sql, connection = db}
+SELECT 
+  carrier, 
+  COUNT(*) AS numFlights,
+  MAKETIME(
+    IF(LENGTH(MIN(dep_time)) = 3, 
+      LEFT(MIN(dep_time), 1), 
+      LEFT(MIN(dep_time), 2)
+    ), 
+    RIGHT(MIN(dep_time), 2), 
+    0
+    ) AS firstDepartureTime
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+GROUP BY carrier
+LIMIT 0, 6;
+```
+
+Can use multiple grouping variables, but must make sure we get single value of dep_time for each carrier/dest combo
+
+```{sql, connection = db}
+SELECT 
+  carrier, dest,
+  COUNT(*) AS numFlights,
+  MAKETIME(
+    IF(LENGTH(MIN(dep_time)) = 3, 
+      LEFT(MIN(dep_time), 1), 
+      LEFT(MIN(dep_time), 2)
+    ), 
+    RIGHT(MIN(dep_time), 2), 
+    0
+    ) AS firstDepartureTime
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+GROUP BY carrier, dest
+LIMIT 0, 6;
+```
+
+### Section 15.4.4: ORDER BY
+
+Order by does not execute until all data are retrieved, thus it operates on the result set.
+
+```{sql, connection = db}
+SELECT 
+  dest, SUM(1) AS numFlights
+FROM flights
+WHERE year = 2013
+  AND origin = 'BDL'
+GROUP BY dest
+ORDER BY numFlights DESC
+LIMIT 0, 6;
+```
+
+Add in average arrival delay and sort by that new variable
+
+```{sql, connection = db}
+SELECT 
+  dest, SUM(1) AS numFlights,
+  AVG(arr_delay) AS avg_arr_delay
+FROM flights
+WHERE year = 2013
+  AND origin = 'BDL'
+GROUP BY dest
+ORDER BY avg_arr_delay ASC
+LIMIT 0, 6;
+```
+
+### Section 15.4.5: HAVING
+
+Add requirement that destinations have at least 2 flights per day.  Note that you can use derived columns in HAVING, but if you tried to move numFlights > 365*2 into WHERE, you'd get an error because WHERE operates on the original data.
+
+Still, put clauses into WHERE instead of HAVING wherever possible to maximize efficiency (so don't have to search entire database)
+
+```{sql, connection = db}
+SELECT 
+  dest, SUM(1) AS numFlights,
+  AVG(arr_delay) AS avg_arr_delay
+FROM flights
+WHERE year = 2013
+  AND origin = 'BDL'
+GROUP BY dest
+HAVING numFlights > 365 * 2
+ORDER BY avg_arr_delay ASC
+LIMIT 0, 6;
+```
+
+### Section 15.4.6: LIMIT
+
+We've been using LIMIT often to reduce what is returned/printed.  The code below returns the 4th through 7th airports in our list
+
+```{sql, connection = db}
+SELECT 
+  dest, SUM(1) AS numFlights,
+  AVG(arr_delay) AS avg_arr_delay
+FROM flights
+WHERE year = 2013
+  AND origin = 'BDL'
+GROUP BY dest
+HAVING numFlights > 365*2
+ORDER BY avg_arr_delay ASC
+LIMIT 3,4;
+```
+
+### Section 15.4.7: JOIN
+
+Note that SELECT contains variables from both datasets
+
+```{sql, connection = db}
+SELECT 
+  origin, dest, 
+  airports.name AS dest_name,
+  flight, carrier
+FROM flights
+JOIN airports ON flights.dest = airports.faa
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Use table aliases to reduce typing and improve readability
+
+```{sql, connection = db}
+SELECT 
+  origin, dest, 
+  a.name AS dest_name,
+  flight, carrier
+FROM flights AS o
+JOIN airports AS a ON o.dest = a.faa
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Join in carrier info as well
+
+```{sql, connection = db}
+SELECT 
+  dest, a.name AS dest_name,
+  o.carrier, c.name AS carrier_name
+FROM flights AS o
+JOIN airports AS a ON o.dest = a.faa
+JOIN carriers AS c ON o.carrier = c.carrier
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+Join onto same table more than once to get both airports.  
+
+See book for nice discussion about why it's much more efficient to store things in multiple data sets connected by keys
+
+```{sql, connection = db}
+SELECT 
+  flight,
+  a2.name AS orig_name,
+  a1.name AS dest_name,
+  c.name AS carrier_name
+FROM flights AS o
+JOIN airports AS a1 ON o.dest = a1.faa
+JOIN airports AS a2 ON o.origin = a2.faa
+JOIN carriers AS c ON o.carrier = c.carrier
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+The result from a LEFT JOIN is always a superset of the result of a (inner, regular, natural) JOIN - every row in the first data set is returned.  Here we find which flights have airports without info in the airports dataset.
+
+```{sql, connection = db}
+SELECT 
+  year, month, day, origin, dest, 
+  a.name AS dest_name,
+  flight, carrier
+FROM flights AS o
+LEFT JOIN airports AS a ON o.dest = a.faa
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND a.name is null
+LIMIT 0, 6;
+```
+
+### Section 15.4.8: UNION
+
+Use UNION to combine two separate queries, just like bind_rows()
+
+```{sql, connection = db}
+(SELECT 
+  year, month, day, origin, dest, 
+  flight, carrier
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+  AND origin = 'BDL' AND dest = 'MSP')
+UNION 
+(SELECT 
+  year, month, day, origin, dest, 
+  flight, carrier
+FROM flights
+WHERE year = 2013 AND month = 6 AND day = 26
+AND origin = 'JFK' AND dest = 'ORD')
+LIMIT 0,10;
+```
+
+### Section 15.4.9: Subqueries
+
+Treat the table from an initial query as a database for the next query (note that these are often inefficient in their use of indices)
+
+```{sql, connection = db}
+SELECT faa, name, tz, city
+FROM airports AS a
+WHERE tz < -7
+LIMIT 0, 6;
+```
+
+Use the query from above (airports in Pacific time zone or further west) as subquery below in determining how many carriers go from Bradley to those airports
+
+```{sql, connection = db}
+SELECT 
+  dest, a.name AS dest_name, 
+  SUM(1) AS N, COUNT(distinct carrier) AS numCarriers
+FROM flights AS o
+LEFT JOIN airports AS a ON o.origin = a.faa
+WHERE year = 2013 
+  AND dest = 'BDL' 
+  AND origin IN 
+  (SELECT faa
+    FROM airports
+    WHERE tz < -7)
+GROUP BY origin;
+```
+
+Below are two more ways to have done the same query
+
+```{sql, connection = db}
+SELECT 
+  dest, a.name AS dest_name, 
+  SUM(1) AS N, COUNT(distinct carrier) AS numCarriers
+FROM flights AS o
+LEFT JOIN airports AS a ON o.origin = a.faa
+WHERE year = 2013 
+  AND dest = 'BDL' 
+  AND origin IN 
+  (SELECT faa
+    FROM airports
+    WHERE tz < -7)
+GROUP BY origin;
+```
+
+```{sql, connection = db}
+SELECT 
+  dest, a.name AS dest_name, 
+  SUM(1) AS N, COUNT(distinct carrier) AS numCarriers
+FROM flights AS o
+LEFT JOIN airports AS a ON o.origin = a.faa
+WHERE year = 2013 
+  AND dest = 'BDL' 
+  AND tz < -7
+GROUP BY origin;
+```
+
+
+### Section 15.5: Extended example - FiveThirtyEight flights
+
+Verify basic claims in the article
+
+```{sql, connection = db}
+SELECT
+  SUM(1) AS numFlights,
+  SUM(IF(arr_delay < 15, 1, 0)) / SUM(1) AS ontimePct,
+  SUM(IF(arr_delay < 0, 1, 0)) / SUM(1) AS earlyPct,
+  SUM(arr_delay) / 1e6 AS netMinLate,
+  SUM(IF(arr_delay > 0, arr_delay, 0)) / 1e6 AS minLate,
+  SUM(IF(arr_delay < 0, arr_delay, 0)) / 1e6 AS minEarly
+FROM flights AS o
+WHERE year = 2014
+LIMIT 0, 6;
+```
+
+Get better estimate of total number of delay hours by making assumptions about cost of cancelled flights
+
+```{sql, connection = db}
+SELECT
+  SUM(1) AS numFlights,
+  SUM(IF(arr_delay < 15, 1, 0)) / SUM(1) AS ontimePct,
+  SUM(IF(arr_delay < 0, 1, 0)) / SUM(1) AS earlyPct,
+  SUM(IF(cancelled = 1, 270, arr_delay)) / 1e6 AS netMinLate,
+  SUM(
+    IF(cancelled = 1, 270, IF(arr_delay > 0, arr_delay, 0))
+  ) / 1e6 AS minLate,
+  SUM(IF(arr_delay < 0, arr_delay, 0)) / 1e6 AS minEarly
+FROM flights AS o
+WHERE year = 2014
+LIMIT 0, 6;
+```
+
+Recreate data for first bar plot in the article
+
+```{sql, connection = db}
+SELECT o.carrier, c.name, 
+  SUM(1) AS numFlights,
+  SUM(IF(arr_delay > 15 AND arr_delay <= 119, 1, 0)) AS shortDelay,
+  SUM(
+    IF(arr_delay >= 120 OR cancelled = 1 OR diverted = 1, 1, 0)
+  ) AS longDelay
+FROM
+  flights AS o
+LEFT JOIN 
+  carriers c ON o.carrier = c.carrier
+WHERE year = 2014
+GROUP BY carrier
+ORDER BY shortDelay DESC
+```
+
+Use results from query above in R to reproduce 538 plot
+
+```{r}
+res <- dbGetQuery(db, '
+SELECT o.carrier, c.name, 
+  SUM(1) AS numFlights,
+  SUM(IF(arr_delay > 15 AND arr_delay <= 119, 1, 0)) AS shortDelay,
+  SUM(
+    IF(arr_delay >= 120 OR cancelled = 1 OR diverted = 1, 1, 0)
+  ) AS longDelay
+FROM
+  flights AS o
+LEFT JOIN 
+  carriers c ON o.carrier = c.carrier
+WHERE year = 2014
+GROUP BY carrier
+ORDER BY shortDelay DESC
+')
+
+#| Remove extra junk from carrier names
+res <- res %>%
+  as_tibble() %>%
+  mutate(
+    name = str_remove_all(name, "Air(lines|ways| Lines)"),
+    name = str_remove_all(name, "(Inc\\.|Co\\.|Corporation)"),
+    name = str_remove_all(name, "\\(.*\\)"),
+    name = str_remove_all(name, " *$")
+  )
+res %>%
+  pull(name)
+
+# Handle carrier name changes then calculate proportions for plot
+carriers_2014 <- res %>%
+  mutate(
+    groupName = case_when(
+      name %in% c("Envoy Air", "American Eagle") ~ "American",
+      name == "AirTran" ~ "Southwest", 
+      TRUE ~ name
+    )
+  ) %>%
+  group_by(groupName) %>%
+  summarize(
+    numFlights = sum(numFlights), 
+    wShortDelay = sum(shortDelay), 
+    wLongDelay = sum(longDelay)
+  ) %>%
+  mutate(
+    wShortDelayPct = wShortDelay / numFlights,
+    wLongDelayPct = wLongDelay / numFlights,
+    delayed = wShortDelayPct + wLongDelayPct,
+    ontime = 1 - delayed
+  )
+carriers_2014
+
+# tidy using pivot_longer before plotting
+# carriers_2014 is 12x8 (one row per carrier) while carriers_tidy is 24x4
+# (one row per carrier and delay type)
+carriers_tidy <- carriers_2014 %>%
+  select(groupName, wShortDelayPct, wLongDelayPct, delayed) %>%
+  pivot_longer(
+    -c(groupName, delayed), 
+    names_to = "delay_type", 
+    values_to = "pct"
+  )
+delay_chart <- ggplot(
+  data = carriers_tidy, 
+  aes(x = reorder(groupName, pct, max), y = pct)
+) + 
+  geom_col(aes(fill = delay_type)) +
+  scale_fill_manual(
+    name = NULL, 
+    values = c("red", "gold"), 
+    labels = c(
+      "Flights Delayed 120+ Minutes\ncancelled or Diverted", 
+      "Flights Delayed 15-119 Minutes"
+    )
+  ) + 
+  scale_y_continuous(limits = c(0, 1)) + 
+  coord_flip() + 
+  labs(
+    title = "Southwest's Delays Are Short; United's Are Long", 
+    subtitle = "As share of scheduled flights, 2014"
+  ) + 
+  ylab(NULL) + 
+  xlab(NULL) + 
+  ggthemes::theme_fivethirtyeight() + 
+  theme(
+    plot.title = element_text(hjust = 1),
+    plot.subtitle = element_text(hjust = -0.2)
+  )
+
+delay_chart +
+  geom_text(
+    data = filter(carriers_tidy, delay_type == "wShortDelayPct"), 
+    aes(label = paste0(round(pct * 100, 1), "% ")), 
+    hjust = "right",
+    size = 2
+  ) + 
+  geom_text(
+    data = filter(carriers_tidy, delay_type == "wLongDelayPct"), 
+    aes(y = delayed - pct, label = paste0(round(pct * 100, 1), "% ")),
+    hjust = "left", 
+    nudge_y = 0.01,
+    size = 2
+  )
+```
