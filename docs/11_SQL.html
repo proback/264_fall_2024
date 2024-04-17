@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -287,7 +321,14 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#on-your-own---extended-example-from-mdsr" id="toc-on-your-own---extended-example-from-mdsr" class="nav-link active" data-scroll-target="#on-your-own---extended-example-from-mdsr">On Your Own - Extended Example from MDSR</a></li>
+  <li><a href="#on-your-own---practice-with-sql" id="toc-on-your-own---practice-with-sql" class="nav-link" data-scroll-target="#on-your-own---practice-with-sql">On Your Own - Practice with SQL</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -310,8 +351,137 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 <p>You can download this .qmd file from <a href="https://github.com/proback/264_fall_2024/blob/main/SQL_code/MDSR_Ch15_SQL.qmd">here</a>. Just hit the Download Raw File button.</p>
+<p>The .qmd file above walks us through many of the examples in MDSR Chapter 15, but that code and output is not replicated below. Instead, we present here a set of practice exercises in converting from the tidyverse to SQL.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdsr)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dbplyr)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># be sure to remove eval: FALSE before running!</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to the scidb server on Amazon Web Services - the airlines </span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># database lives on a remote server</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> <span class="fu">dbConnect_scidb</span>(<span class="st">"airlines"</span>)</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"flights"</span>)</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>planes <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"planes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<section id="on-your-own---extended-example-from-mdsr" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own---extended-example-from-mdsr">On Your Own - Extended Example from MDSR</h2>
+<p>Refer to <a href="https://mdsr-book.github.io/mdsr2e/ch-sql.html#sec:ft8-flights">Section 15.5</a> in MDSR, where they attempt to replicate FiveThirtyEight’s plot of slowest and fastest airports in the section below Figure 15.1. Instead of using <em>target time</em>, which has a complex definition, we will use <em>arrival time</em>, which oversimplifies the situation but gets us in the ballpark.</p>
+<p>The MDSR authors provide a mix of SQL and R code to perform their analysis, but the code will not work if you simply cut-and-paste as-is into R. Your task is to convert the book code into something that actually runs. [Hint: use <code>dbGetQuery()</code>]</p>
+</section>
+<section id="on-your-own---practice-with-sql" class="level2">
+<h2 class="anchored" data-anchor-id="on-your-own---practice-with-sql">On Your Own - Practice with SQL</h2>
+<p>These problems are based on class exercises from MSCS 164 in Fall 2023, so you’ve already solved them in R! Now we’re going to try to duplicate those solutions in SQL.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Read in 2013 NYC flights data</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(nycflights13)</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>flights_nyc13 <span class="ot">&lt;-</span> nycflights13<span class="sc">::</span>flights</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>planes_nyc13 <span class="ot">&lt;-</span> nycflights13<span class="sc">::</span>planes</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="1">
+<li>Summarize carriers flying to MSP by number of flights and proportion that are cancelled (assuming that a missing arrival time indicates a cancelled flight). [This was #4 in 17_longer_pipelines.Rmd.]</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original solution from MSCS 164</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>flights_nyc13 <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">carrier =</span> <span class="fu">fct_collapse</span>(carrier, <span class="st">"Delta +"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"DL"</span>, <span class="st">"9E"</span>), </span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>                                      <span class="st">"American +"</span><span class="ot">=</span> <span class="fu">c</span>(<span class="st">"AA"</span>, <span class="st">"MQ"</span>), </span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>                                     <span class="st">"United +"</span> <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"EV"</span>, <span class="st">"OO"</span>, <span class="st">"UA"</span>))) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(dest <span class="sc">==</span> <span class="st">"MSP"</span>) <span class="sc">|&gt;</span>   </span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, carrier) <span class="sc">|&gt;</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n_flights =</span> <span class="fu">n</span>(), </span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a>            <span class="at">num_cancelled =</span> <span class="fu">sum</span>(<span class="fu">is.na</span>(arr_time)),</span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a>            <span class="at">prop_cancelled =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(arr_time)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 5 × 5
+# Groups:   origin [3]
+  origin carrier    n_flights num_cancelled prop_cancelled
+  &lt;chr&gt;  &lt;fct&gt;          &lt;int&gt;         &lt;int&gt;          &lt;dbl&gt;
+1 EWR    Delta +          598            10         0.0167
+2 EWR    United +        1779           105         0.0590
+3 JFK    Delta +         1095            41         0.0374
+4 LGA    Delta +         2420            25         0.0103
+5 LGA    American +      1293            62         0.0480</code></pre>
+</div>
+</div>
+<p>First duplicate the output above, then check trends across all years and origins. Here are a few hints:</p>
+<ul>
+<li>use flights instead of flights_nyc13</li>
+<li>remember that flights_nyc13 only contained 2013 and 3 NYC origin airports (EWR, JFK, LGA)</li>
+<li>is.na can be replaced with CASE WHEN arr_time = ‘NA’ THEN 1 ELSE 0 END</li>
+<li>CASE WHEN can also be used replace fct_collapse</li>
+</ul>
+<ol start="2" type="1">
+<li>Plot number of flights vs.&nbsp;proportion cancelled for every origin-destination pair (assuming that a missing arrival time indicates a cancelled flight). [This was #7 in 17_longer_pipelines.Rmd.]</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original solution from MSCS 164</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>flights_nyc13 <span class="sc">|&gt;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(origin, dest) <span class="sc">|&gt;</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>            <span class="at">prop_cancelled =</span> <span class="fu">mean</span>(<span class="fu">is.na</span>(arr_time))) <span class="sc">|&gt;</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(prop_cancelled <span class="sc">&lt;</span> <span class="dv">1</span>) <span class="sc">|&gt;</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(n, prop_cancelled)) <span class="sc">+</span> </span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><img src="11_SQL_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid" width="672"></p>
+</div>
+</div>
+<p>First duplicate the plot above, then check trends across all years and origins. Do all of the data wrangling in SQL. Here are a few hints:</p>
+<ul>
+<li>use flights instead of flights_nyc13</li>
+<li>remember that flights_nyc13 only contained 2013 and 3 NYC origin airports (EWR, JFK, LGA)</li>
+<li>use an <code>sql</code> chunk and an <code>r</code> chunk</li>
+<li>include <code>connection =</code> and <code>output.var =</code> in your sql chunk header (this doesn’t seem to work with dbGetQuery()…)</li>
+</ul>
+<ol start="3" type="1">
+<li>Produce a table of weighted plane age by carrier, where weights are based on number of flights per plane. [This was #6 in 26_more_joins.Rmd.]</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original solution from MSCS 164</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>flights_nyc13 <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(planes_nyc13, <span class="fu">join_by</span>(tailnum)) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">plane_age =</span> <span class="dv">2013</span> <span class="sc">-</span> year.y) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(carrier) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">unique_planes =</span> <span class="fu">n_distinct</span>(tailnum),</span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_weighted_age =</span> <span class="fu">mean</span>(plane_age, <span class="at">na.rm =</span><span class="cn">TRUE</span>),</span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">sd_weighted_age =</span> <span class="fu">sd</span>(plane_age, <span class="at">na.rm =</span><span class="cn">TRUE</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(mean_weighted_age)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 16 × 4
+   carrier unique_planes mean_weighted_age sd_weighted_age
+   &lt;chr&gt;           &lt;int&gt;             &lt;dbl&gt;           &lt;dbl&gt;
+ 1 HA                 14              1.55            1.14
+ 2 AS                 84              3.34            3.07
+ 3 VX                 53              4.47            2.14
+ 4 F9                 26              4.88            3.67
+ 5 B6                193              6.69            3.29
+ 6 OO                 28              6.84            2.41
+ 7 9E                204              7.10            2.67
+ 8 US                290              9.10            4.88
+ 9 WN                583              9.15            4.63
+10 YV                 58              9.31            1.93
+11 EV                316             11.3             2.29
+12 FL                129             11.4             2.16
+13 UA                621             13.2             5.83
+14 DL                629             16.4             5.49
+15 AA                601             25.9             5.42
+16 MQ                238             35.3             3.13</code></pre>
+</div>
+</div>
+<p>First duplicate the output above, then check trends across all years and origins. Do all of the data wrangling in SQL. Here are a few hints:</p>
+<ul>
+<li>use flights instead of flights_nyc13</li>
+<li>remember that flights_nyc13 only contained 2013 and 3 NYC origin airports (EWR, JFK, LGA)</li>
+<li>you’ll have to merge the flights dataset with the planes dataset</li>
+<li>you can use DISTINCT inside a COUNT()</li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
