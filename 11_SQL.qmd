@@ -12,7 +12,7 @@ editor_options:
   
 We will begin by walking through many of the examples in MDSR Chapter 15, using a .qmd file that can be downloaded [here](https://github.com/proback/264_fall_2024/blob/main/SQL_code/MDSR_Ch15_SQL.qmd).  Just hit the Download Raw File button.  That code and output will not be replicated below.
 
-In the code and output below, we present a set of practice exercises in converting from the tidyverse to SQL.  This code can be downloaded [here](https://github.com/proback/264_fall_2024/11_SQL.qmd).
+In the code and output below, we present a set of practice exercises in converting from the tidyverse to SQL.  This code can be downloaded [here](https://github.com/proback/264_fall_2024/blob/main/11_SQL.qmd).
 
 ```{r}
 #| message: false
@@ -25,7 +25,8 @@ library(DBI)
 ```
 
 ```{r}
-#| echo: FALSE
+#| message: false
+#| warning: false
 
 # connect to the scidb server on Amazon Web Services - the airlines 
 # database lives on a remote server

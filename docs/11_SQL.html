@@ -350,8 +350,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </header>
 
-<p>You can download this .qmd file from <a href="https://github.com/proback/264_fall_2024/blob/main/SQL_code/MDSR_Ch15_SQL.qmd">here</a>. Just hit the Download Raw File button.</p>
-<p>The .qmd file above walks us through many of the examples in MDSR Chapter 15, but that code and output is not replicated below. Instead, we present here a set of practice exercises in converting from the tidyverse to SQL.</p>
+<p>We will begin by walking through many of the examples in MDSR Chapter 15, using a .qmd file that can be downloaded <a href="https://github.com/proback/264_fall_2024/blob/main/SQL_code/MDSR_Ch15_SQL.qmd">here</a>. Just hit the Download Raw File button. That code and output will not be replicated below.</p>
+<p>In the code and output below, we present a set of practice exercises in converting from the tidyverse to SQL. This code can be downloaded <a href="https://github.com/proback/264_fall_2024/blob/main/11_SQL.qmd">here</a>.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdsr)</span>
@@ -359,13 +359,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(DBI)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># be sure to remove eval: FALSE before running!</span></span>
-<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to the scidb server on Amazon Web Services - the airlines </span></span>
-<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="co"># database lives on a remote server</span></span>
-<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> <span class="fu">dbConnect_scidb</span>(<span class="st">"airlines"</span>)</span>
-<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"flights"</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>planes <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"planes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># connect to the scidb server on Amazon Web Services - the airlines </span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># database lives on a remote server</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>db <span class="ot">&lt;-</span> <span class="fu">dbConnect_scidb</span>(<span class="st">"airlines"</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>flights <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"flights"</span>)</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>planes <span class="ot">&lt;-</span> <span class="fu">tbl</span>(db, <span class="st">"planes"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <section id="on-your-own---extended-example-from-mdsr" class="level2">
 <h2 class="anchored" data-anchor-id="on-your-own---extended-example-from-mdsr">On Your Own - Extended Example from MDSR</h2>

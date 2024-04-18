@@ -432,11 +432,11 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">sample</span>(dolphin_data<span class="sc">$</span>treatment)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Dolphin" "Control" "Control" "Control" "Control" "Dolphin" "Control"
- [8] "Control" "Dolphin" "Control" "Dolphin" "Dolphin" "Dolphin" "Dolphin"
-[15] "Control" "Dolphin" "Control" "Dolphin" "Dolphin" "Dolphin" "Dolphin"
-[22] "Control" "Control" "Control" "Control" "Dolphin" "Dolphin" "Dolphin"
-[29] "Control" "Control"</code></pre>
+<pre><code> [1] "Dolphin" "Dolphin" "Dolphin" "Control" "Control" "Control" "Control"
+ [8] "Dolphin" "Control" "Dolphin" "Dolphin" "Control" "Control" "Dolphin"
+[15] "Dolphin" "Control" "Dolphin" "Dolphin" "Control" "Control" "Dolphin"
+[22] "Control" "Control" "Control" "Dolphin" "Dolphin" "Control" "Dolphin"
+[29] "Control" "Dolphin"</code></pre>
 </div>
 </div>
 </section>
@@ -468,7 +468,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  99.7  19.1</code></pre>
+1  100.  19.6</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(normal_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -484,7 +484,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 1 × 2
    mean    sd
   &lt;dbl&gt; &lt;dbl&gt;
-1  10.5  10.5</code></pre>
+1  10.0  9.93</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(exp_data, <span class="fu">aes</span>(<span class="at">x =</span> x)) <span class="sc">+</span></span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -514,12 +514,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>lower <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">1</span>]</span>
 <span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a>lower</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] -7.121038</code></pre>
+<pre><code>[1] -6.436296</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>upper <span class="ot">&lt;-</span> result<span class="sc">$</span>conf.int[<span class="dv">2</span>]</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>upper</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 4.430688</code></pre>
+<pre><code>[1] 7.567128</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>contains_truediff <span class="ot">&lt;-</span> (lower <span class="sc">&lt;=</span> truediff <span class="sc">&amp;</span> upper <span class="sc">&gt;=</span> truediff)</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>contains_truediff</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -536,9 +536,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   fortify.SpatialPolygonsDataFrame ggplot2</code></pre>
 </div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    group      min       Q1   median       Q3      max     mean        sd   n
-1 Group 1 21.66677 33.09965 39.33095 41.67674 60.72176 38.64291 10.731461  10
-2 Group 2 20.96296 34.50854 40.53226 45.46898 63.56624 39.98809  8.587034 100
+<pre><code>    group      min       Q1  median       Q3      max     mean       sd   n
+1 Group 1 22.66588 28.08726 41.2724 55.55213 64.46678 41.77592 15.46277  10
+2 Group 2 19.72618 34.23836 40.6164 48.51832 71.34921 41.21050 10.09985 100
   missing
 1       0
 2       0</code></pre>
@@ -561,7 +561,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>coverage <span class="ot">&lt;-</span> <span class="fu">mean</span>(contains_truediff)</span>
 <span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a>coverage</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>[1] 0.944</code></pre>
+<pre><code>[1] 0.964</code></pre>
 </div>
 </div>
 <section id="on-your-own-1" class="level3">
