@@ -27,16 +27,16 @@ library(mdsr)
 library(dbplyr)
 library(DBI)
 
-#| connect to the scidb server on Amazon Web Services - the airlines 
-#| database lives on a remote server
+# connect to the scidb server on Amazon Web Services - the airlines 
+# database lives on a remote server
 db <- dbConnect_scidb("airlines")
 flights <- tbl(db, "flights")
 carriers <- tbl(db, "carriers")
 
-#| You can treat flights like a df or tbl, but it is not, in fact, a data frame.
-#| Note that dim(flights) is reported as NA x 21; there are actually 69 million flights that would take up 20 GB as a csv file!
+# You can treat flights like a df or tbl, but it is not, in fact, a data frame.
+# Note that dim(flights) is reported as NA x 21; there are actually 69 million flights that would take up 20 GB as a csv file!
 
-#| Section 15.1: From dplyr to SQL
+# Section 15.1: From dplyr to SQL
 
 q <- flights |>
   filter(
@@ -55,7 +55,7 @@ head(q, 4)
 
 class(flights)
 
-#| for a MySQL database, dplyr translates pipeline to SQL
+# for a MySQL database, dplyr translates pipeline to SQL
 show_query(q)
 ```
 
