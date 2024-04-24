@@ -198,6 +198,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./11_SQL.html" rel="" target="">
  <span class="dropdown-text">MDSR Ch 15: Database querying using SQL</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./12_webscraping.html" rel="" target="">
+ <span class="dropdown-text">Web scraping in R</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -216,6 +220,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
         <li>
     <a class="dropdown-item" href="./miniproject3.html" rel="" target="">
  <span class="dropdown-text">Mini-Project 3: Strings and Regular Expressions</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./miniproject4.html" rel="" target="">
+ <span class="dropdown-text">Mini-Project 4: SQL</span></a>
   </li>  
     </ul>
   </li>
@@ -316,6 +324,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./11_SQL.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">MDSR Ch 15: Database querying using SQL</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_webscraping.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Web scraping in R</span></a>
   </div>
 </li>
     </ul>
@@ -471,8 +485,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(spot_smaller<span class="sc">$</span>subgenre, <span class="st">"pop"</span>, <span class="at">html =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="str_view html-widget html-fill-item" id="htmlwidget-3cbba0b593e8f204074e" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-3cbba0b593e8f204074e">{"x":{"html":"<ul>\n  <li><pre>indie <span class='match'>pop<\/span>timism<\/pre><\/li>\n  <li><pre>post-teen <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>latin <span class='match'>pop<\/span><\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item" id="htmlwidget-da084db6f30d28bdb564" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-da084db6f30d28bdb564">{"x":{"html":"<ul>\n  <li><pre>indie <span class='match'>pop<\/span>timism<\/pre><\/li>\n  <li><pre>post-teen <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>latin <span class='match'>pop<\/span><\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(spot_smaller<span class="sc">$</span>subgenre, <span class="st">"pop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">

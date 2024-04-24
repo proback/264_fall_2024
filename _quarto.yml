@@ -47,6 +47,7 @@ website:
         - 09_strings_part2.qmd
         - 10_strings_part3.qmd
         - 11_SQL.qmd
+        - 12_webscraping.qmd
 
     - id: projects
       title: "Projects"
@@ -54,6 +55,7 @@ website:
         - miniproject1.qmd
         - miniproject2.qmd
         - miniproject3.qmd
+        - miniproject4.qmd
 
   page-footer:
     left: |
