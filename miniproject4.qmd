@@ -22,9 +22,20 @@ You should be using JOINs in both (1) and (2).
 Mini-project 4 is NOT required in Spring 2024.  But feel free to give it a shot if it looks fun!
 
 
+## Hints
+
+- Parse the caption from Figure 1 carefully to determine what how mean absorbances are calculated: "Mean absorbances for the 12 studies within the WAI database as of July 1, 2019. Noted in the legend are the peer-reviewed publications associated with the datasets, the number of individual ears, and the equipment used in the study. When multiple measurements were made on the same ear, the average from those measurements was used in the calculation across subjects for a given study. Some subjects have measurements on both a right and a left ear, and some subjects have measurements from only one ear; this figure includes every ear in the database and does not control for the effect of number of ears from each subject."
+- filter for only the 12 studies shown in Figure 1 (and also for frequencies shown in Figure 1)
+- study the patterns of frequencies.  It seems that most researchers used the same set of frequencies for each subject, ear, and session.
+- note the scale of the x-axis
+- the key labels contains AuthorsShortList, Year, and Instrument, in addition to the number of unique ears (I think Werner's N may be incorrect?)
+
+
 ## Starter Code
 
 ```{r}
+#| include: FALSE
+
 library(tidyverse)
 library(mdsr)
 library(dbplyr)
@@ -54,14 +65,5 @@ DESCRIBE Measurements;
 ```
 
 ```{sql, connection = con}
-SELECT * FROM PI_Info LIMIT 0,10;
+SELECT * FROM PI_Info LIMIT 0,1;
 ```
-
-
-## Hints
-
-- Parse the caption from Figure 1 carefully to determine what how mean absorbances are calculated: "Mean absorbances for the 12 studies within the WAI database as of July 1, 2019. Noted in the legend are the peer-reviewed publications associated with the datasets, the number of individual ears, and the equipment used in the study. When multiple measurements were made on the same ear, the average from those measurements was used in the calculation across subjects for a given study. Some subjects have measurements on both a right and a left ear, and some subjects have measurements from only one ear; this figure includes every ear in the database and does not control for the effect of number of ears from each subject."
-- filter for only the 12 studies shown in Figure 1 (and also for frequencies shown in Figure 1)
-- study the patterns of frequencies.  It seems that most researchers used the same set of frequencies for each subject, ear, and session.
-- note the scale of the x-axis
-- the key labels contains AuthorsShortList, Year, and Instrument, in addition to the number of unique ears (I think Werner's N may be incorrect?)
