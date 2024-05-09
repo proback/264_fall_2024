@@ -68,7 +68,8 @@ Remember to hit the Download Raw File button in each case.
 
 - [15_first_Shiny_flexdash.Rmd](https://github.com/proback/264_fall_2024/blob/main/15_first_Shiny_flexdash.Rmd)
 
-We will also use these folders as well:
+
+We will also use these folders as well.  You can copy the URL for the folder into the textbox at [download-directory.github.io](download-directory.github.io), hit Enter, and you'll have a zipped version of the folder.
 
 - [AER_app](https://github.com/proback/264_fall_2024/blob/main/AER_app)
 

@@ -1,0 +1,11 @@
+---
+title: "Shiny app link"
+format:
+  html: default
+editor_options: 
+  chunk_output_type: console
+---
+  
+#### Check out my Shiny app on Ames Housing:
+
+- [Click here](https://proback.shinyapps.io/ProfR_Shiny_flexdashboard/)

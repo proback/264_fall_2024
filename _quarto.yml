@@ -49,6 +49,7 @@ website:
         - 11_SQL.qmd
         - 12_webscraping.qmd
         - 13_first_shiny_instructions.qmd
+        - 14_shiny_app_link.qmd
 
     - id: projects
       title: "Projects"
