@@ -4,8 +4,8 @@ project:
   render:
     - "*.qmd"
     - "!DS2_preview_work/"
-    - "!SQL_code/"
-    - "!spring_2024/"
+    - "!SQLcode/"
+    - "!spring2024/"
   resources:
     - "Data/*.csv"
     - "Data/"
