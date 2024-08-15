@@ -5,13 +5,12 @@ project:
     - "*.qmd"
     - "!DS2_preview_work/"
     - "!SQL_code/"
-    - "!spring_2024/"
   resources:
     - "Data/*.csv"
     - "Data/"
 
 website:
-  title: "SDS 264: Data Science 2"
+  title: "MSCS 264: Data Science 2"
   navbar:
     background: primary
     search: true
@@ -30,17 +29,35 @@ website:
       contents:
         - tech_setup.qmd
         - why_quarto.qmd
-        - github_intro.qmd
+        - github_website.qmd
         - github_links.qmd
 
     - id: activities
       title: "Activities"
       contents:
         - 01_review164.qmd
+        - 02_maps_part1.qmd
+        - 03_maps_part2.qmd
+        - 04_functions.qmd
+        - 05_data_types.qmd
+        - 06_iteration.qmd
+        - 07_simulation.qmd
+        - MDSR_Ch13_simulation.qmd
+        - 08_strings_part1.qmd
+        - 09_strings_part2.qmd
+        - 10_strings_part3.qmd
+        - 11_SQL.qmd
+        - 12_webscraping.qmd
+        - 13_first_shiny_instructions.qmd
+        - 14_shiny_app_link.qmd
 
     - id: projects
       title: "Projects"
       contents:
+        - miniproject1.qmd
+        - miniproject2.qmd
+        - miniproject3.qmd
+        - miniproject4.qmd
         - finalproject.qmd
 
   page-footer:

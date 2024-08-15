@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.3.450">
+<meta name="generator" content="quarto-1.4.555">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>MSCS 264: Data Science 2 - Tech Setup</title>
+<title>SDS 264: Data Science 2 - Tech Setup</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -45,7 +45,13 @@ ul.task-list li input[type="checkbox"] {
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -54,6 +60,7 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
     "search-submit-button-title": "Submit",
     "search-label": "Search"
@@ -68,11 +75,11 @@ ul.task-list li input[type="checkbox"] {
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
-    <span class="navbar-title">MSCS 264: Data Science 2</span>
+    <span class="navbar-title">SDS 264: Data Science 2</span>
     </a>
   </div>
             <div id="quarto-search" class="" title="Search"></div>
@@ -82,134 +89,62 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html" rel="" target="">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tech-notes" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-tech-notes" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Tech Notes</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-tech-notes">    
         <li>
-    <a class="dropdown-item" href="./tech_setup.html" rel="" target="">
+    <a class="dropdown-item" href="./tech_setup.html">
  <span class="dropdown-text">Tech Setup</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./why_quarto.html" rel="" target="">
+    <a class="dropdown-item" href="./why_quarto.html">
  <span class="dropdown-text">Why Quarto?</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./github_website.html" rel="" target="">
- <span class="dropdown-text">Using GitHub</span></a>
+    <a class="dropdown-item" href="./github_intro.html">
+ <span class="dropdown-text">Intro to GitHub</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./github_links.html" rel="" target="">
+    <a class="dropdown-item" href="./github_links.html">
  <span class="dropdown-text">GitHub Links</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-activities" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Activities</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-activities">    
         <li>
-    <a class="dropdown-item" href="./01_review164.html" rel="" target="">
+    <a class="dropdown-item" href="./01_review164.html">
  <span class="dropdown-text">Review of Data Science 1</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./02_maps_part1.html" rel="" target="">
- <span class="dropdown-text">Creating informative maps</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./03_maps_part2.html" rel="" target="">
- <span class="dropdown-text">Working with geospatial data</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./04_functions.html" rel="" target="">
- <span class="dropdown-text">Functions and tidy evaluation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./05_data_types.html" rel="" target="">
- <span class="dropdown-text">Data types</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./06_iteration.html" rel="" target="">
- <span class="dropdown-text">Iteration</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./07_simulation.html" rel="" target="">
- <span class="dropdown-text">Simulation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./MDSR_Ch13_simulation.html" rel="" target="">
- <span class="dropdown-text">MDSR Ch 13: Simulation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./08_strings_part1.html" rel="" target="">
- <span class="dropdown-text">Strings: Pre-class Video</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./09_strings_part2.html" rel="" target="">
- <span class="dropdown-text">Strings: In-class Exercises</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./10_strings_part3.html" rel="" target="">
- <span class="dropdown-text">Strings: Extra Practice</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./11_SQL.html" rel="" target="">
- <span class="dropdown-text">MDSR Ch 15: Database querying using SQL</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./12_webscraping.html" rel="" target="">
- <span class="dropdown-text">Web scraping in R</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./13_first_shiny_instructions.html" rel="" target="">
- <span class="dropdown-text">First Shiny instructions</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./14_shiny_app_link.html" rel="" target="">
- <span class="dropdown-text">Shiny app link</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false" rel="" target="">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-projects" role="button" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Projects</span>
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./miniproject1.html" rel="" target="">
- <span class="dropdown-text">Mini-Project 1: Maps</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./miniproject2.html" rel="" target="">
- <span class="dropdown-text">Mini-Project 2: Simulation</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./miniproject3.html" rel="" target="">
- <span class="dropdown-text">Mini-Project 3: Strings and Regular Expressions</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./miniproject4.html" rel="" target="">
- <span class="dropdown-text">Mini-Project 4: SQL</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="./finalproject.html" rel="" target="">
+    <a class="dropdown-item" href="./finalproject.html">
  <span class="dropdown-text">Final Project: Shiny App</span></a>
   </li>  
     </ul>
   </li>
   <li class="nav-item">
-    <a class="nav-link" href="./rtipoftheday.html" rel="" target="">
- <span class="menu-text">R Tip of the Day</span></a>
+    <a class="nav-link" href="./rtipoftheday.html"> 
+<span class="menu-text">R Tip of the Day</span></a>
   </li>  
 </ul>
-            <div class="quarto-navbar-tools ms-auto">
-</div>
           </div> <!-- /navcollapse -->
+          <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -238,9 +173,11 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
 
-<p>Ideally before class on Thurs Feb 8, and definitely before class on Tues Feb 13, you should follow these instructions to set up the software that we’ll be using throughout the semester. <strong>Even if you’ve already downloaded both R and RStudio, you’ll want to re-download to make sure that you have the most current versions.</strong></p>
+
+<p>Ideally before class on Thurs Sep 5, and definitely before class on Tues Sep 10, you should follow these instructions to set up the software that we’ll be using throughout the semester. <strong>Even if you’ve already downloaded both R and RStudio, you’ll want to re-download to make sure that you have the most current versions.</strong></p>
 <p><br></p>
 <p><strong>Required:</strong> Download R and RStudio</p>
 <ul>
@@ -248,12 +185,12 @@ ul.task-list li input[type="checkbox"] {
 <ul>
 <li>In the top section, you will see three links “Download R for …”</li>
 <li>Choose the link that corresponds to your computer.</li>
-<li>As of Feb 1, 2024, the latest version of R is 4.3.2 (“Eye Holes”).</li>
+<li>As of July 24, 2024, the latest version of R is 4.4.1 (“Race for Your Life”).</li>
 </ul></li>
 <li><strong>SECOND:</strong> Download RStudio <a href="https://posit.co/download/rstudio-desktop/#download">here</a>.
 <ul>
 <li>Click the button under step 2 to install the version of RStudio recommended for your computer.</li>
-<li>As of Feb 1, 2024, the latest version of RStudio is 2023.12.1 (Build 402).</li>
+<li>As of July 24, 2024, the latest version of RStudio is 2024.04.2 (Build 764).</li>
 </ul></li>
 <li><strong>THIRD:</strong> Check that when you go to File &gt; New Project &gt; New Directory, you see “Quarto Website” as an option.</li>
 </ul>
@@ -269,7 +206,7 @@ ul.task-list li input[type="checkbox"] {
 <p><strong>Required:</strong> Install required <strong>packages</strong>.</p>
 <ul>
 <li>An R <strong>package</strong> is an extra bit of functionality that will help us in our data analysis efforts in a variety of ways. Many contributors create open source packages that can be added to base R to perform certain tasks in new and better ways.</li>
-<li>For now, we’ll just make sure the <code>tidyverse</code> package is installed. Open RStudio and click on the Packages tab in the bottom right pane. inside the Console pane (by default, the bottom left pane). Click the Install button and type “tidyverse” (without quotes) in the pop-up box. Click the Install button at the bottom of the pop-up box.</li>
+<li>For now, we’ll just make sure the <code>tidyverse</code> package is installed. Open RStudio and click on the Packages tab in the bottom right pane. Click the Install button and type “tidyverse” (without quotes) in the pop-up box. Click the Install button at the bottom of the pop-up box.</li>
 <li>You will see a lot of text from status messages appearing in the Console as the packages are being installed. Wait until you see the <code>&gt;</code> again.</li>
 <li>Enter the command <code>library(tidyverse)</code> in the Console and hit Enter.<br>
 </li>
@@ -360,10 +297,27 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     // clear code selection
     e.clearSelection();
   });
-  function tippyHover(el, contentFn) {
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp('/' + window.location.host + '/');
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -373,8 +327,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -386,7 +349,130 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      // TODO in 1.5, we should make sure this works without a callout special case
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
     });
   }
       let selectedAnnoteEl;
@@ -430,6 +516,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
             }
             div.style.top = top - 2 + "px";
             div.style.height = height + 4 + "px";
+            div.style.left = 0;
             let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
             if (gutterDiv === null) {
               gutterDiv = window.document.createElement("div");
@@ -455,6 +542,32 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
         });
         selectedAnnoteEl = undefined;
       };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
       // Attach click handler to the DT
       const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
       for (const annoteDlNode of annoteDls) {
@@ -517,13 +630,18 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-left">© Paul Roback, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</div>   
+    <div class="nav-footer-left">
+<p>© Paul Roback, 2024<br> All content licensed under <img src="https://static.thenounproject.com/png/70967-200.png" height="20"> (<a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>)</p>
+</div>   
     <div class="nav-footer-center">
       &nbsp;
     </div>
-    <div class="nav-footer-right">Site built with <a href="https://quarto.org/">Quarto</a></div>
+    <div class="nav-footer-right">
+<p>Site built with <a href="https://quarto.org/">Quarto</a></p>
+</div>
   </div>
 </footer>
+
 
 
 

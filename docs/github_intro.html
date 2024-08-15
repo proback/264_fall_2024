@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SDS 264: Data Science 2 - MSCS 264: Data Science 2 (Fall 2024)</title>
+<title>SDS 264: Data Science 2 - Intro to GitHub</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -67,6 +67,35 @@ ul.task-list li input[type="checkbox"] {
   }
 }</script>
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
@@ -89,7 +118,7 @@ ul.task-list li input[type="checkbox"] {
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item dropdown ">
@@ -157,7 +186,14 @@ ul.task-list li input[type="checkbox"] {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#key-links-for-sds-264" id="toc-key-links-for-sds-264" class="nav-link active" data-scroll-target="#key-links-for-sds-264">Key links for SDS 264</a></li>
+  <li><a href="#version-control-github" id="toc-version-control-github" class="nav-link active" data-scroll-target="#version-control-github">Version Control (GitHub)</a></li>
+  <li><a href="#getting-started-on-github-and-connecting-to-rstudio" id="toc-getting-started-on-github-and-connecting-to-rstudio" class="nav-link" data-scroll-target="#getting-started-on-github-and-connecting-to-rstudio">Getting started on GitHub and connecting to RStudio</a></li>
+  <li><a href="#creating-an-r-project-local-thats-connected-to-github-cloud" id="toc-creating-an-r-project-local-thats-connected-to-github-cloud" class="nav-link" data-scroll-target="#creating-an-r-project-local-thats-connected-to-github-cloud">Creating an R project (local) that’s connected to GitHub (cloud)</a></li>
+  <li><a href="#creating-a-personal-website-in-rstudio-local" id="toc-creating-a-personal-website-in-rstudio-local" class="nav-link" data-scroll-target="#creating-a-personal-website-in-rstudio-local">Creating a personal website in RStudio (local)</a></li>
+  <li><a href="#pushing-your-work-to-github-cloud" id="toc-pushing-your-work-to-github-cloud" class="nav-link" data-scroll-target="#pushing-your-work-to-github-cloud">Pushing your work to GitHub (cloud)</a></li>
+  <li><a href="#modifying-files-that-have-already-been-pushed-to-github" id="toc-modifying-files-that-have-already-been-pushed-to-github" class="nav-link" data-scroll-target="#modifying-files-that-have-already-been-pushed-to-github">Modifying files that have already been pushed to GitHub</a></li>
+  <li><a href="#pulling-work-from-github" id="toc-pulling-work-from-github" class="nav-link" data-scroll-target="#pulling-work-from-github">Pulling work from GitHub</a></li>
+  <li><a href="#a-bit-more-about-r-projects" id="toc-a-bit-more-about-r-projects" class="nav-link" data-scroll-target="#a-bit-more-about-r-projects">A bit more about R projects</a></li>
   </ul>
 </nav>
     </div>
@@ -166,7 +202,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">MSCS 264: Data Science 2 (Fall 2024)</h1>
+<h1 class="title">Intro to GitHub</h1>
 </div>
 
 
@@ -183,37 +219,77 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<div>
-
-</div>
-<div class="quarto-layout-panel" data-layout-ncol="2">
-<div class="quarto-layout-row">
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/quarto.png" class="img-fluid figure-img" width="200"></p>
-<figcaption>Qurato</figcaption>
-</figure>
-</div>
-</div>
-<div class="quarto-layout-cell" style="flex-basis: 50.0%;justify-content: flex-start;">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/tidyverse.png" class="img-fluid figure-img" width="200"></p>
-<figcaption>tidyverse</figcaption>
-</figure>
-</div>
-</div>
-</div>
-</div>
-<section id="key-links-for-sds-264" class="level1">
-<h1>Key links for SDS 264</h1>
+<section id="version-control-github" class="level3">
+<h3 class="anchored" data-anchor-id="version-control-github">Version Control (GitHub)</h3>
+<p>In order to collaborate on an R project (or any coding project in general), data scientists typically use a version control system like GitHub. With GitHub, you never have to save files as Final.docx, Final2.docx, Newfinal.docx, RealFinal.docx, nothisisreallyit.docx, etc. You update code like .qmd and .Rmd and data files, recording descriptions of any changes. Then if you ever want to go back to an earlier version, GitHub can facilitate that. Or if you want to make your work public, others can see it and even suggest changes, but you are ultimately in control of any changes that get made.</p>
+<p>And, you can have multiple collaborators with access to the same set of files. While it can be dicey if multiple people have the file open and make changes at the same time; if you do this with GitHub, it is at least POSSIBLE to get it straightened out, and the second person who tries to save will get warned. If you are both just using a common folder on RStudio, you can easily write over and erase each other’s work. (If you use a common folder, be sure that one person is editing at a time to prevent this).</p>
+<p>In order to begin to get familiar with GitHub, we will use it to create a course folder for you.</p>
+</section>
+<section id="getting-started-on-github-and-connecting-to-rstudio" class="level3">
+<h3 class="anchored" data-anchor-id="getting-started-on-github-and-connecting-to-rstudio">Getting started on GitHub and connecting to RStudio</h3>
+<ol type="1">
+<li><p>Create a GitHub account at github.com. It’s usually okay to hit “Skip Personalization” at the bottom of the screen after entering an email, username, and password (you might have to enable 2-factor authentication as well). There are a few bonuses you can get as a student that you might consider.</p></li>
+<li><p>Obtain a personal access token (PAT) in GitHub using the following steps:</p>
 <ul>
-<li><a href="https://drive.google.com/file/d/1xHpi_pmQL0bAkfE0cVgtM2vWd8AxeFPR/view?usp=sharing">Course syllabus</a></li>
-<li><a href="https://r.stolaf.edu">RStudio server</a></li>
-<li><a href="https://mdl.stolaf.edu/login/index.php">moodle</a></li>
-<li><a href="https://github.com/proback/264_fall_2024">GitHub source code for this website</a></li>
-</ul>
+<li>Click your profile picture/symbol in the upper right of your GitHub page. Then select Settings &gt; Developer settings &gt; Personal access tokens &gt; Tokens (classic).</li>
+<li>Click “Generate new token (classic)” and give a descriptive name like “My PAT for RStudio”. Note that the default expiration is 30 days; I did a Custom setting through the end of the semester.</li>
+<li>Select scopes and permissions; I often select: repo, workflow, gist, and user.</li>
+<li>Click “Generate token”. Copy your personal access token and store it somewhere.</li>
+</ul></li>
+<li><p>Store your credentials in RStudio using the following steps:</p>
+<ul>
+<li>In the console, type <code>library(credentials)</code>. You might have to install the <code>credentials</code> package first.</li>
+<li>Then type <code>set_github_pat()</code> and hit Return. You can sign in with the browser, or you can choose the Token option, where you can copy in your personal access token</li>
+</ul></li>
+</ol>
+<p><strong>Alert!</strong> If the steps in (3) don’t work, you may have to install Git on your computer first. <a href="https://happygitwithr.com/install-git">This chapter</a> in “Happy Git with R” provides nice guidance for installing Git. Installing <a href="https://gitforwindows.org/">Git for Windows</a> seems to work well on most Windows machines, using <a href="https://git-scm.com/downloads">this site</a> seems to work well for macOS, and a command like <code>sudo apt-get install git</code> can often work nicely in Linux. Once Git is installed, restart RStudio, and it will usually magically find Git. If not, there’s some good advice in <a href="https://happygitwithr.com/rstudio-see-git">this chapter</a> of “Happy Git with R”. If you ever get frustrated with Git, remember that <a href="https://happygitwithr.com/git-client#no-one-is-giving-out-git-nerd-merit-badges">No one is giving out Git Nerd merit badges</a>! Just muddle through until you figure out something that works for you!</p>
+</section>
+<section id="creating-an-r-project-local-thats-connected-to-github-cloud" class="level3">
+<h3 class="anchored" data-anchor-id="creating-an-r-project-local-thats-connected-to-github-cloud">Creating an R project (local) that’s connected to GitHub (cloud)</h3>
+<ol start="4" type="1">
+<li><p>In your GitHub account, click the <span class="math inline">\(+ \nabla\)</span> (+down arrow) button near the top right and select New Repository (repo). Put something like “SDS264_F24” for your repository (repo) name; use simple but descriptive names that avoid spaces. Check Private for now; you can turn a repository Public if you want later. Check Add a ReadMe File. Finally hit Create Repository and copy the URL once your repo has been created; the URL should be something like <code>github.com/username/SDS264_F24</code>.</p></li>
+<li><p>Go into your RStudio and select File &gt; New Project &gt; Version Control &gt; Git. For the repository URL paste in the URL for the repository you just created. A project directory named “SDS264_F24” will be created in your specified folder (which you can navigate to).</p></li>
+</ol>
+<p><em>Notice that you are now starting with a blank slate! Nothing in the environment or history. Also note where it says your project name in the top right corner.</em></p>
+<p><strong>At this point your should have a GitHub repo called “SDS264_F24” connected to an R project named “SDS264_F24”. The basic framework is set!</strong></p>
+</section>
+<section id="creating-a-personal-website-in-rstudio-local" class="level3">
+<h3 class="anchored" data-anchor-id="creating-a-personal-website-in-rstudio-local">Creating a personal website in RStudio (local)</h3>
+<ol start="6" type="1">
+<li>You can download our first file with in-class exercises <a href="https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd">here</a>. Just hit the Download Raw File button and note where the file is saved on your computer. Use File &gt; Open File in RStudio to open up 01_review164.qmd. Then, use File &gt; Save As to navigate to the SDS264_F24 folder on your computer and save a copy there. (Stay tuned for more on what exactly a “qmd” file is!)</li>
+</ol>
+</section>
+<section id="pushing-your-work-to-github-cloud" class="level3">
+<h3 class="anchored" data-anchor-id="pushing-your-work-to-github-cloud">Pushing your work to GitHub (cloud)</h3>
+<ol start="7" type="1">
+<li>We now want to “push” the changes made in “user_name.github.io” to your GitHub repo (the changes have only been made in your local RStudio for now).
+<ul>
+<li>In the console, type <code>library(credentials)</code></li>
+<li>Then type <code>set_github_pat()</code>, hit Return, and copy in your personal access token. We do this again because we are in a new project. (These first two steps might not be necessary, but it’s good to make sure.)</li>
+<li>under the Git tab in the Environment panel, check the boxes in front of all modified files to “stage” your changes. To select a large number of files, check the top box, scroll down to the bottom of the list, and then shift-click the final box</li>
+<li>click the Commit tab to “commit” your changes (like saving a file locally) along with a message describing the changes you made. GitHub guides you by by showing your old code (red) and new code (green), to make sure you approve of the changes. This first time, all code should be green since we’ve only added new things rather than modifying previously saved files.</li>
+<li>“push” your changes to GitHub (an external website) by clicking the green Up arrow. Refresh your GitHub account to see new files in the user_name.github.io repo!</li>
+</ul></li>
+</ol>
+</section>
+<section id="modifying-files-that-have-already-been-pushed-to-github" class="level3">
+<h3 class="anchored" data-anchor-id="modifying-files-that-have-already-been-pushed-to-github">Modifying files that have already been pushed to GitHub</h3>
+<ol start="8" type="1">
+<li>Make and save a change (anything) to your file <code>01_review164.qmd</code> in RStudio. Now go back under the Git tab and “push” these new changes to GitHub. You’ll have to go through the same process of Stage, Commit, and Push, although this time you’ll see only your newest changes in green when you Commit. Confirm that your changes appear in GitHub.</li>
+</ol>
+</section>
+<section id="pulling-work-from-github" class="level3">
+<h3 class="anchored" data-anchor-id="pulling-work-from-github">Pulling work from GitHub</h3>
+<p>Before you start a new session of working on a project in RStudio, you should always Pull changes from GitHub first. Most of the time there will be nothing new, but if a collaborator made changes since the last time you worked on a file, you want to make sure you’re working with the latest and greatest version. If not, you’ll end up trying to Push changes made to an old version, and GitHub will balk and produce Merge Conflict messages. We’ll see how to handle Merge Conflicts later, but it’s a bit of a pain and best avoided!</p>
+<ol start="9" type="1">
+<li>Go into <code>01_review164.qmd</code> on GitHub and hit the Edit icon. Add a line anywhere, and then scroll down to hit Commit Changes. <strong>(This is not recommended and for illustrative purposes only! You will likely never edit directly in GitHub, but we’re emulating what might happen if a collaborator makes changes since the last time you worked on a document.)</strong> Now go back to RStudio and, under the Git tab, “Pull” the changes from GitHub into your R project folder. (Use the blue Down arrow). Confirm that your changes now appear in RStudio. Before you start working on the R server, you should always Pull any changes that might have been made on GitHub (especially if you’re working on a team!), since things can get dicey if you try to merge new changes from RStudio with new changes on GitHub.</li>
+</ol>
+</section>
+<section id="a-bit-more-about-r-projects" class="level3">
+<h3 class="anchored" data-anchor-id="a-bit-more-about-r-projects">A bit more about R projects</h3>
+<ol start="10" type="1">
+<li>To see the power of projects, select File &gt; Close Project and Don’t Save the workspace image. Then, select File &gt; Recent Projects &gt; SDS264_F24; you will get a clean Environment and Console once again, but History shows the commands you ran by hand, active Rmd and qmd files appear in the Source panel, and Files contains the Rmd, qmd, html, and csv files produced by your last session. And you can stage, commit and push the changes and the new file to GitHub!</li>
+</ol>
 
 
 </section>

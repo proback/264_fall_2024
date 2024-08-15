@@ -3,4 +3,4 @@ title: "R Tip of the Day"
 sidebar: false
 ---
   
-[Signup Sheet](https://docs.google.com/spreadsheets/d/1-qosuVp8gbgCux2LWzEOuNZzXrlr1_NXbhhWcDUJVaw/edit?usp=sharing)
+[Signup Sheet](https://docs.google.com/spreadsheets/d/1oENsYJXmCZQkwzvagSiJItajHgUSPuckSdrn_3CaBYI/edit?usp=sharing)
