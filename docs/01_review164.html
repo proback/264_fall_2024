@@ -20,6 +20,40 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
 </style>
 
 
@@ -124,6 +158,10 @@ ul.task-list li input[type="checkbox"] {
     <a class="dropdown-item" href="./01_review164.html">
  <span class="dropdown-text">Review of Data Science 1</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./02_maps.html">
+ <span class="dropdown-text">Creating informative maps</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -170,13 +208,25 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Review of Data Science 1</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./02_maps.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Creating informative maps</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#determinants-of-covid-vaccination-rates" id="toc-determinants-of-covid-vaccination-rates" class="nav-link active" data-scroll-target="#determinants-of-covid-vaccination-rates">Determinants of COVID vaccination rates</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -200,9 +250,242 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Content coming soon!</p>
+<p>You can download this .qmd file from <a href="https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd">here</a>. Just hit the Download Raw File button.</p>
+<section id="determinants-of-covid-vaccination-rates" class="level3">
+<h3 class="anchored" data-anchor-id="determinants-of-covid-vaccination-rates">Determinants of COVID vaccination rates</h3>
+<p>First, a little detour to describe several alternatives for reading in data:</p>
+<p>If you navigate to <a href="https://github.com/proback">my Github account</a>, and find the <code>264_fall_2024</code> repo, there is a Data folder inside. You can then click on <code>vacc_Mar21.csv</code> to see the data we want to download. <a href="https://github.com/proback/264_fall_2024/blob/main/Data/vacc_Mar21.csv">This link</a> should also get you there, but it’s good to be able to navigate there yourself.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="annotated-cell-1"><pre class="sourceCode r code-annotation-code code-with-copy code-annotated"><code class="sourceCode r"><span id="annotated-cell-1-1"><a href="#annotated-cell-1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 1</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="1" onclick="event.preventDefault();">1</a><span id="annotated-cell-1-2" class="code-annotation-target"><a href="#annotated-cell-1-2" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"Data/vaccinations_2021.csv"</span>)</span>
+<span id="annotated-cell-1-3"><a href="#annotated-cell-1-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-4"><a href="#annotated-cell-1-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 2</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="2" onclick="event.preventDefault();">2</a><span id="annotated-cell-1-5" class="code-annotation-target"><a href="#annotated-cell-1-5" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"~/264_fall_2024/Data/vaccinations_2021.csv"</span>)</span>
+<span id="annotated-cell-1-6"><a href="#annotated-cell-1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-7"><a href="#annotated-cell-1-7" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 3</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="3" onclick="event.preventDefault();">3</a><span id="annotated-cell-1-8" class="code-annotation-target"><a href="#annotated-cell-1-8" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://proback.github.io/264_fall_2024/Data/vaccinations_2021.csv"</span>)</span>
+<span id="annotated-cell-1-9"><a href="#annotated-cell-1-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="annotated-cell-1-10"><a href="#annotated-cell-1-10" aria-hidden="true" tabindex="-1"></a><span class="co"># Approach 4</span></span>
+<a class="code-annotation-anchor" data-target-cell="annotated-cell-1" data-target-annotation="4" onclick="event.preventDefault();">4</a><span id="annotated-cell-1-11" class="code-annotation-target"><a href="#annotated-cell-1-11" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"https://raw.githubusercontent.com/proback/264_fall_2024/main/Data/vaccinations_2021.csv"</span>)</span><div class="code-annotation-gutter-bg"></div><div class="code-annotation-gutter"></div></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-annotation">
+<dl class="code-annotation-container-grid">
+<dt data-target-cell="annotated-cell-1" data-target-annotation="1">1</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="2" data-code-annotation="1">Approach 1: create a Data folder in the same location where this .qmd file resides, and then store vaccinations_2021.csv in that Data folder</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="2">2</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="5" data-code-annotation="2">Approach 2: give R the complete path to the location of vaccinations_2021.csv, starting with Home (~)</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="3">3</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="8" data-code-annotation="3">Approach 3: link to our course webpage, and then know we have a Data folder containing all our csvs</span>
+</dd>
+<dt data-target-cell="annotated-cell-1" data-target-annotation="4">4</dt>
+<dd>
+<span data-code-cell="annotated-cell-1" data-code-lines="11" data-code-annotation="4">Approach 4: navigate to the data in GitHub, hit the Raw button, and copy that link</span>
+</dd>
+</dl>
+</div>
+</div>
+<p>A recent Stat 272 project examined determinants of covid vaccination rates at the county level. Our data set contains 3053 rows (1 for each county in the US) and 14 columns; here is a quick description of the variables we’ll be using:</p>
+<ul>
+<li><code>state</code> = state the county is located in</li>
+<li><code>county</code> = name of the county</li>
+<li><code>region</code> = region the state is located in</li>
+<li><code>metro_status</code> = Is the county considered “Metro” or “Non-metro”?</li>
+<li><code>rural_urban_code</code> = from 1 (most urban) to 9 (most rural)</li>
+<li><code>perc_complete_vac</code> = percent of county completely vaccinated as of 11/9/21</li>
+<li><code>tot_pop</code> = total population in the county</li>
+<li><code>votes_Trump</code> = number of votes for Trump in the county in 2020</li>
+<li><code>votes_Biden</code> = number of votes for Biden in the county in 2020</li>
+<li><code>perc_Biden</code> = percent of votes for Biden in the county in 2020</li>
+<li><code>ed_somecol_perc</code> = percent with some education beyond high school (but not a Bachelor’s degree)</li>
+<li><code>ed_bachormore_perc</code> = percent with a Bachelor’s degree or more</li>
+<li><code>unemployment_rate_2020</code> = county unemployment rate in 2020</li>
+<li><code>median_HHincome_2019</code> = county’s median household income in 2019</li>
+</ul>
+<ol type="1">
+<li>Consider only Minnesota and its surrounding states (Iowa, Wisconsin, North Dakota, and South Dakota). We want to examine the relationship between the percentage who voted for Biden and the percentage of complete vaccinations by state. Generate two plots to examine this relationship:</li>
+</ol>
+<ol type="a">
+<li><p>A scatterplot with points and smoothers colored by state. Make sure the legend is ordered in a meaningful way, and include good labels on your axes and your legend. Also leave off the error bars from your smoothers.</p></li>
+<li><p>One plot per state containing a scatterplot and a smoother.</p></li>
+</ol>
+<p>Describe which plot you prefer and why. What can you learn from your preferred plot?</p>
+<ol start="2" type="1">
+<li>We wish to compare the proportions of counties in each region with median household income above the national median ($69,560).</li>
+</ol>
+<ol type="a">
+<li><p>Fill in the blanks below to produce a segmented bar plot with regions ordered from highest proportion above the median to lowest.</p></li>
+<li><p>Create a table of proportions by region to illustrate that your bar plot in (a) is in the correct order (you should find two regions that are <em>really</em> close when you just try to eyeball differences).</p></li>
+<li><p>Explain why we can replace <code>fct_relevel(region, FILL IN CODE)</code> with</p></li>
+</ol>
+<p><code>mutate(region_sort = fct_reorder(region, median_HHincome_2019 &lt; 69560, .fun = mean))</code></p>
+<p>but not</p>
+<p><code>mutate(region_sort = fct_reorder(region, median_HHincome_2019 &lt; 69560))</code></p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">HHincome_vs_national =</span> <span class="fu">ifelse</span>(median_HHincome_2019 <span class="sc">&lt;</span> <span class="dv">69560</span>, FILL IN CODE)) <span class="sc">|&gt;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">region_sort =</span> <span class="fu">fct_relevel</span>(region, FILL IN CODE)) <span class="sc">|&gt;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> region_sort, <span class="at">fill =</span> HHincome_vs_national)) <span class="sc">+</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_bar</span>(<span class="at">position =</span> <span class="st">"fill"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol start="3" type="1">
+<li>We want to examine the distribution of total county populations and then see how it’s related to vaccination rates.</li>
+</ol>
+<ol type="a">
+<li><em>Carefully and thoroughly</em> explain why the two histograms below provide different plots.</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot_pop_millions =</span> tot_pop <span class="sc">/</span> <span class="dv">1000000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> tot_pop_millions)) <span class="sc">+</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Total population in millions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_review164_files/figure-html/unnamed-chunk-4-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">tot_pop_millions =</span> tot_pop <span class="sc">%/%</span> <span class="dv">1000000</span>) <span class="sc">|&gt;</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> tot_pop_millions)) <span class="sc">+</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_histogram</span>(<span class="at">bins =</span> <span class="dv">40</span>) <span class="sc">+</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">"Total population in millions"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_review164_files/figure-html/unnamed-chunk-4-2.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="2" type="a">
+<li><p>Find the top 5 counties in terms of total population.</p></li>
+<li><p>Plot a histogram of logged population and describe this distribution.</p></li>
+<li><p>Plot the relationship between log population and percent vaccinated using separate colors for Metro and Non-metro counties (be sure there’s no 3rd color used for NAs). Reduce the size and transparency of each point to make the plot more readable. Describe what you can learn from this plot.</p></li>
+</ol>
+<ol start="4" type="1">
+<li>Produce 3 different plots for illustrating the relationship between the rural_urban_code and percent vaccinated. Hint: you can sometimes turn numeric variables into categorical variables for plotting purposes (e.g.&nbsp;<code>as.factor()</code>, <code>ifelse()</code>).</li>
+</ol>
+<p>State your favorite plot, why you like it better than the other two, and what you can learn from your favorite plot.</p>
+<ol start="5" type="1">
+<li>BEFORE running the code below, sketch the plot that will be produced by R. AFTER running the code, describe what conclusion(s) can we draw from this plot?</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(perc_Biden)) <span class="sc">|&gt;</span></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">big_states =</span> <span class="fu">fct_lump</span>(state, <span class="at">n =</span> <span class="dv">10</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(big_states) <span class="sc">|&gt;</span></span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">IQR_Biden =</span> <span class="fu">IQR</span>(perc_Biden)) <span class="sc">|&gt;</span></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">big_states =</span> <span class="fu">fct_reorder</span>(big_states, IQR_Biden)) <span class="sc">|&gt;</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>() <span class="sc">+</span> </span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_point</span>(<span class="fu">aes</span>(<span class="at">x =</span> IQR_Biden, <span class="at">y =</span> big_states))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_review164_files/figure-html/unnamed-chunk-5-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<ol start="6" type="1">
+<li>In this question we will focus only on the 12 states in the Midwest (i.e.&nbsp;where region == “Midwest”).</li>
+</ol>
+<ol type="a">
+<li>Create a tibble with the following information for each state. Order states from least to greatest state population.</li>
+</ol>
+<ul>
+<li>number of different <code>rural_urban_code</code>s represented among the state’s counties (there are 9 possible)</li>
+<li>total state population</li>
+<li>proportion of Metro counties</li>
+<li>median unemployment rate</li>
+</ul>
+<ol start="2" type="a">
+<li>Use your tibble in (a) to produce a plot of the relationship between proportion of Metro counties and median unemployment rate. Points should be colored by the number of different <code>rural_urban_code</code>s in a state, but a single linear trend should be fit to all points. What can you conclude from the plot?</li>
+</ol>
+<ol start="7" type="1">
+<li>Generate an appropriate plot to compare vaccination rates between two subregions of the US: New England (which contains the states Maine, Vermont, New Hampshire, Massachusetts, Connecticut, Rhode Island) and the Upper Midwest (which, according to the USGS, contains the states Minnesota, Wisconsin, Michigan, Illinois, Indiana, and Iowa). What can you conclude from your plot?</li>
+</ol>
+<p>In this next section, we consider a few variables that could have been included in our data set, but were NOT. Thus, you won’t be able to write and test code, but you nevertheless should be able to use your knowledge of the tidyverse to answer these questions.</p>
+<p>Here are the hypothetical variables:</p>
+<ul>
+<li>HR_party = party of that county’s US Representative (Republican, Democrat, Independent, Green, or Libertarian)</li>
+<li>people_per_MD = number of residents per doctor (higher values = fewer doctors)</li>
+<li>perc_over_65 = percent of residents over 65 years old</li>
+<li>perc_white = percent of residents who identify as white</li>
+</ul>
+<ol start="8" type="1">
+<li>Hypothetical R chunk #1:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothetical R chunk 1</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">new_perc_vac =</span> <span class="fu">ifelse</span>(perc_complete_vac <span class="sc">&gt;</span> <span class="dv">95</span>, <span class="cn">NA</span>, perc_complete_vac),</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>         <span class="at">MD_group =</span> <span class="fu">cut_number</span>(people_per_MD, <span class="dv">3</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(MD_group) <span class="sc">|&gt;</span></span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">n =</span> <span class="fu">n</span>(),</span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_perc_vac =</span> <span class="fu">mean</span>(new_perc_vac, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a>            <span class="at">mean_white =</span> <span class="fu">mean</span>(perc_white, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><p>Describe the tibble <code>temp</code> created above. What would be the dimensions? What do rows and columns represent?</p></li>
+<li><p>What would happen if we replaced <code>new_perc_vac = ifelse(perc_complete_vac &gt; 95, NA, perc_complete_vac)</code> with <code>new_perc_vac = ifelse(perc_complete_vac &gt; 95, perc_complete_vac, NA)</code>?</p></li>
+<li><p>What would happen if we replaced <code>mean_white = mean(perc_white, na.rm = TRUE)</code> with <code>mean_white = mean(perc_white)</code>?</p></li>
+<li><p>What would happen if we removed <code>group_by(MD_group)</code>?</p></li>
+</ol>
+<ol start="9" type="1">
+<li>Hypothetical R chunk #2:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothetical R chunk 2</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(<span class="at">data =</span> vaccine_data) <span class="sc">+</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> perc_over_65, <span class="at">y =</span> perc_complete_vac, </span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>                           <span class="at">color =</span> HR_party)) <span class="sc">+</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>()</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>temp <span class="ot">&lt;-</span> vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(HR_party) <span class="sc">|&gt;</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">var1 =</span> <span class="fu">n</span>()) <span class="sc">|&gt;</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>  <span class="fu">arrange</span>(<span class="fu">desc</span>(var1)) <span class="sc">|&gt;</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>  <span class="fu">slice_head</span>(<span class="at">n =</span> <span class="dv">3</span>)</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> <span class="fu">fct_reorder</span>(HR_party, perc_over_65, <span class="at">.fun =</span> median), </span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>                       <span class="at">y =</span> perc_over_65)) <span class="sc">+</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_boxplot</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><p>Why would the first plot produce an error?</p></li>
+<li><p>Describe the tibble <code>temp</code> created above. What would be the dimensions? What do rows and columns represent?</p></li>
+<li><p>What would happen if we replaced <code>fct_reorder(HR_party, perc_over_65, .fun = median)</code> with <code>HR_party</code>?</p></li>
+</ol>
+<ol start="10" type="1">
+<li>Hypothetical R chunk #3:</li>
+</ol>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hypothetical R chunk 3</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>vaccine_data <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(people_per_MD)) <span class="sc">|&gt;</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">state_lump =</span> <span class="fu">fct_lump</span>(state, <span class="at">n =</span> <span class="dv">4</span>)) <span class="sc">|&gt;</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(state_lump, rural_urban_code) <span class="sc">|&gt;</span></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarise</span>(<span class="at">mean_people_per_MD =</span> <span class="fu">mean</span>(people_per_MD)) <span class="sc">|&gt;</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="at">mapping =</span> <span class="fu">aes</span>(<span class="at">x =</span> rural_urban_code, <span class="at">y =</span> mean_people_per_MD, </span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a>      <span class="at">colour =</span> <span class="fu">fct_reorder2</span>(state_lump, rural_urban_code, mean_people_per_MD))) <span class="sc">+</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_line</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ol type="a">
+<li><p>Describe the tibble piped into the ggplot above. What would be the dimensions? What do rows and columns represent?</p></li>
+<li><p>Carefully describe the plot created above.</p></li>
+<li><p>What would happen if we removed <code>filter(!is.na(people_per_MD))</code>?</p></li>
+<li><p>What would happen if we replaced <code>fct_reorder2(state_lump, rural_urban_code, mean_people_per_MD)</code> with <code>state_lump</code>?</p></li>
+</ol>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
