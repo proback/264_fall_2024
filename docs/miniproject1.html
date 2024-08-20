@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SDS 264: Data Science 2 - Final Project: Shiny App</title>
+<title>SDS 264: Data Science 2 - Mini-Project 1: Maps</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -136,8 +136,8 @@ ul.task-list li input[type="checkbox"] {
     </a>
     <ul class="dropdown-menu" aria-labelledby="nav-menu-projects">    
         <li>
-    <a class="dropdown-item" href="./finalproject.html">
- <span class="dropdown-text">Final Project: Shiny App</span></a>
+    <a class="dropdown-item" href="./miniproject1.html">
+ <span class="dropdown-text">Mini-Project 1: Maps</span></a>
   </li>  
     </ul>
   </li>
@@ -156,7 +156,7 @@ ul.task-list li input[type="checkbox"] {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./finalproject.html">Final Project: Shiny App</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./miniproject1.html">Mini-Project 1: Maps</a></li></ol></nav>
         <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
     </div>
@@ -170,8 +170,8 @@ ul.task-list li input[type="checkbox"] {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./finalproject.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Final Project: Shiny App</span></a>
+  <a href="./miniproject1.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mini-Project 1: Maps</span></a>
   </div>
 </li>
     </ul>
@@ -185,15 +185,7 @@ ul.task-list li input[type="checkbox"] {
    
   <ul>
   <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#groups" id="toc-groups" class="nav-link" data-scroll-target="#groups">Groups</a></li>
-  <li><a href="#timeline" id="toc-timeline" class="nav-link" data-scroll-target="#timeline">Timeline</a></li>
-  <li><a href="#key-definitions" id="toc-key-definitions" class="nav-link" data-scroll-target="#key-definitions">Key definitions</a></li>
-  <li><a href="#examples-of-good-past-projects" id="toc-examples-of-good-past-projects" class="nav-link" data-scroll-target="#examples-of-good-past-projects">Examples of good past projects</a></li>
-  <li><a href="#stage-i-proposal" id="toc-stage-i-proposal" class="nav-link" data-scroll-target="#stage-i-proposal">Stage I: Proposal</a></li>
-  <li><a href="#stage-ii-progress-report" id="toc-stage-ii-progress-report" class="nav-link" data-scroll-target="#stage-ii-progress-report">Stage II: Progress Report</a></li>
-  <li><a href="#stage-iii-peer-review" id="toc-stage-iii-peer-review" class="nav-link" data-scroll-target="#stage-iii-peer-review">Stage III: Peer Review</a></li>
-  <li><a href="#stage-iv-project-submission" id="toc-stage-iv-project-submission" class="nav-link" data-scroll-target="#stage-iv-project-submission">Stage IV: Project Submission</a></li>
-  <li><a href="#stage-v-project-presentation" id="toc-stage-v-project-presentation" class="nav-link" data-scroll-target="#stage-v-project-presentation">Stage V: Project Presentation</a></li>
+  <li><a href="#submission-and-timeline" id="toc-submission-and-timeline" class="nav-link" data-scroll-target="#submission-and-timeline">Submission and Timeline</a></li>
   </ul>
 </nav>
     </div>
@@ -202,7 +194,7 @@ ul.task-list li input[type="checkbox"] {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Final Project: Shiny App</h1>
+<h1 class="title">Mini-Project 1: Maps</h1>
 </div>
 
 
@@ -219,117 +211,20 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>In this project, you will find data on the web, scrape it, tidy it, visualize it, and then publish it to tell an interactive, data-driven story.</p>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>You will produce choropleth maps illustrating two different characteristics – one numeric and one categorical – that have been measured for each US state (you can choose to exclude Alaska and Hawaii), like we did in the “Creating Informative Maps” activity. Just as we found state-level data from both a vaccine data set and the <code>poliscidata</code> package, you should find <em>your own</em> state-level data that is interesting to you.</p>
+<p>A few additional details for this mini-project:</p>
+<ol type="1">
+<li><p>You should create <em>two</em> versions of each plot – one that is static and one that is interactive.</p></li>
+<li><p>Be sure to include a note on your plots with your data source.</p></li>
+<li><p>You should be able to merge your state-level data with the state mapping data sets we used in class.</p></li>
+<li><p>Be sure you label your plot well <em>and</em> provide a description of what insights can be gained from each <em>static</em> plot. For one of your static plots, this should be in the form of alt-text, using the “Four Ingredient Model” in the article from class.</p></li>
+</ol>
 </section>
-<section id="groups" class="level2">
-<h2 class="anchored" data-anchor-id="groups">Groups</h2>
-<p>TBD – I will assign pairs with input from you</p>
-</section>
-<section id="timeline" class="level2">
-<h2 class="anchored" data-anchor-id="timeline">Timeline</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 52%">
-<col style="width: 35%">
-<col style="width: 11%">
-</colgroup>
-<thead>
-<tr class="header">
-<th></th>
-<th>Tentative Due Date</th>
-<th style="text-align: right;">Points</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>Stage 0: Partner Preferences</td>
-<td>Tues Nov 12</td>
-<td style="text-align: right;">1</td>
-</tr>
-<tr class="even">
-<td>Stage I: Proposal</td>
-<td>Wed Nov 20</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="odd">
-<td>Stage II: Progress Report</td>
-<td>Wed Dec 4</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="even">
-<td>Stage III: Peer Review</td>
-<td>Tues Dec 10</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="odd">
-<td>Stage IV: Project Submission</td>
-<td>Sat Dec 14</td>
-<td style="text-align: right;">75</td>
-</tr>
-<tr class="even">
-<td>Stage V: Project Presentation</td>
-<td>Sat Dec 14</td>
-<td style="text-align: right;">6</td>
-</tr>
-<tr class="odd">
-<td>——————————-</td>
-<td>———————</td>
-<td style="text-align: right;">——-</td>
-</tr>
-<tr class="even">
-<td>Total</td>
-<td></td>
-<td style="text-align: right;">100</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="key-definitions" class="level2">
-<h2 class="anchored" data-anchor-id="key-definitions">Key definitions</h2>
-<ul>
-<li>“<em>Scrape it</em>”. You can find a site with an API and acquire data with httr2; you can find data on a website, in table form or scattered, and acquire it with rvest; or, you can find multiple files in a format like .csv and merge them together with tidyr. You cannot start with a single, nicely-formatted file.</li>
-<li>“<em>Tidy it</em>”. Create a tidy tibble that will allow you to perform desired analyses. This might involve stringr, mutate, filter, spread, parse_, etc.</li>
-<li>“<em>Visualize it</em>”. Create plots using ggplot() that effectively tell a story about what insights can be gained from your data.</li>
-<li>“<em>Publish it</em>”. This should take the form of a Shiny app published with GitHub Pages (or possibly somewhere like shinyapps.io or rconnect.stolaf.edu).</li>
-</ul>
-</section>
-<section id="examples-of-good-past-projects" class="level2">
-<h2 class="anchored" data-anchor-id="examples-of-good-past-projects">Examples of good past projects</h2>
-<p>See Project folder on the RStudio server.</p>
-</section>
-<section id="stage-i-proposal" class="level2">
-<h2 class="anchored" data-anchor-id="stage-i-proposal">Stage I: Proposal</h2>
-<p>A max two-page document describing:</p>
-<ul>
-<li>Website(s) you plan to scrape or data sets you plan to merge</li>
-<li>Variables you plan to acquire, including variables you plan to generate from your raw data</li>
-<li>Questions you plan to address</li>
-<li>Visualizations you envision (include photos of plot sketches)</li>
-</ul>
-</section>
-<section id="stage-ii-progress-report" class="level2">
-<h2 class="anchored" data-anchor-id="stage-ii-progress-report">Stage II: Progress Report</h2>
-<p>A one-page document (not including sketches) describing:</p>
-<ul>
-<li>An update on how your data scraping / acquisition is coming; you should have already put together your primary data set(s)</li>
-<li>Updates to your proposal – what has changed in terms of websites scraped, variables acquired and generated, questions addressed, sketches of planned visualizations, and format of your final product</li>
-<li>Names of files and links where I can find your R code. At a minimum, you should create 2 qmd files – one for scraping and/or creating a tidy data set (that gets written using write_csv) and one doing plots and analyses (after reading tidy data in with read_csv).</li>
-</ul>
-</section>
-<section id="stage-iii-peer-review" class="level2">
-<h2 class="anchored" data-anchor-id="stage-iii-peer-review">Stage III: Peer Review</h2>
-<p>Come prepared to share a draft version of your final product with another team during class. As a reviewer, come prepared to offer comments on how the plots you see could be improved to more effectively convey messages in the data. You might also be called on to share R code or hints on how to modify R code to achieve certain goals.</p>
-</section>
-<section id="stage-iv-project-submission" class="level2">
-<h2 class="anchored" data-anchor-id="stage-iv-project-submission">Stage IV: Project Submission</h2>
-<p>Your submission (one per group) will be simply a link to a Shiny app or website containing your final product, along with directions for accessing your source code in a public GitHub repo. In addition, each individual must complete a short reflection with the following components: (a) an evaluation of the contributions of each team member (including yourself), (b) a description of the biggest challenges and most satisfying triumphs in your project, and (c) a response to your peer review feedback, including changes made in your final project (and why!).</p>
-<p>Your project score will be based on the quality of your team’s Final Product, and your individual contribution to your team, as assessed by all team members (and me). A high quality Final Product will show your abilities to scrape, tidy, and visualize data; illustrate creativity and strong effort; and tell a compelling story with excellent written descriptions and graphics. See rubric for more detail.</p>
-</section>
-<section id="stage-v-project-presentation" class="level2">
-<h2 class="anchored" data-anchor-id="stage-v-project-presentation">Stage V: Project Presentation</h2>
-<p>During our final exam period, each group will present their final shiny app. The presentation should be well planned and rehearsed; it should take no more than 8 minutes, with each team member speaking approximately an equal amount. Your goal is to entice your audience to explore your app in greater detail. You should describe your motivation and main questions your app was designed to explore, walk through key features, and navigate your app to illustrate a few key findings. If you discovered a cool new R trick that enhances your project, feel free to share that as well.</p>
+<section id="submission-and-timeline" class="level3">
+<h3 class="anchored" data-anchor-id="submission-and-timeline">Submission and Timeline</h3>
+<p>Mini-Project 1 must be submitted on moodle by <strong>11:00 PM on Fri Sep 20</strong>. You should submit your two static plots, along with descriptions and alt-text, in a pdf document. For your interactive plots, just submit a GitHub link where I can see your code that would produce a nice html document. Then, in Mini-Project 2, I will ask you to build a webpage where you will link to these interactive html pages.</p>
 
 
 </section>

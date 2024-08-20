@@ -271,8 +271,8 @@ Let's try pop-up messages with a data set containing Airbnb listings in the Bost
 #| message: false
 #| include: false
 
-airbnb.df <- read_csv("https://raw.githubusercontent.com/proback/264_fall_2024/main/Data/airbnbData.csv") 
-#airbnb.df <- read_csv("https://proback.github.io/264_fall_2024/Data/airbnbDa#ta.csv") 
+#airbnb.df <- read_csv("https://raw.githubusercontent.com/proback/264_fall_2024/main/Data/airbnbData.csv") 
+airbnb.df <- read_csv("https://proback.github.io/264_fall_2024/Data/airbnbData.csv") 
 ```
 
 ```{r}

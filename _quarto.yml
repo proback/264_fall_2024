@@ -42,7 +42,7 @@ website:
     - id: projects
       title: "Projects"
       contents:
-        - finalproject.qmd
+        - miniproject1.qmd
 
   page-footer:
     left: |
