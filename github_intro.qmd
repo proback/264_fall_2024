@@ -20,6 +20,8 @@ In order to begin to get familiar with GitHub, we will use it to create a course
 
 1. Create a GitHub account at github.com.  It's usually okay to hit "Skip Personalization" at the bottom of the screen after entering an email, username, and password (you might have to enable 2-factor authentication as well).  There are a few bonuses you can get as a student that you might consider.
 
+    + You may choose to use a non-St. Olaf email address to ensure you'll have access to your GitHub account after you graduate.
+
 2. Obtain a personal access token (PAT) in GitHub using the following steps:
 
     + Click your profile picture/symbol in the upper right of your GitHub page.  Then select Settings > Developer settings > Personal access tokens > Tokens (classic).
@@ -45,16 +47,26 @@ In order to begin to get familiar with GitHub, we will use it to create a course
 
 **At this point your should have a GitHub repo called "SDS264_F24" connected to an R project named "SDS264_F24".  The basic framework is set!**
 
-### Creating a personal website in RStudio (local)
 
-6. You can download our first file with in-class exercises [here](https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd).  Just hit the Download Raw File button and note where the file is saved on your computer.  Use File > Open File in RStudio to open up 01_review164.qmd.  Then, use File > Save As to navigate to the SDS264_F24 folder on your computer and save a copy there.  (Stay tuned for more on what exactly a "qmd" file is!)
+### Creating new files in RStudio (local)
+
+6. You can download our first file with in-class exercises [here](https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd).  Just hit the Download Raw File button and note where the file is saved on your computer.  Use File > Open File in RStudio to open up `01_review164.qmd`.  Then, use File > Save As to navigate to the SDS264_F24 folder on your computer and save a copy there.  You can even add your name or a few answers and re-save your file.
+
+
+### Making sure the connection to GitHub is ready
+
+7. [If necessary] You may need one of these two steps when using GitHub for the first name in a new R Project, even though you likely did them while installing GitHub.
+    + In the console, type `library(credentials)`.  Then type `set_github_pat()`, hit Return, and copy in your personal access token.
+    + In the Terminal window (this should be the tab next to Console), type the following two lines (be precise with the dashes and spaces!!):
+
+> `git config --global user.name "YOUR USER NAME"`
+
+> `git config --global user.email "YOUR EMAIL ASSOCIATED WITH GITHUB"`
 
 
 ### Pushing your work to GitHub (cloud)
 
-7. We now want to "push" the changes made in "user_name.github.io" to your GitHub repo (the changes have only been made in your local RStudio for now).  
-    + In the console, type `library(credentials)`
-    + Then type `set_github_pat()`, hit Return, and copy in your personal access token.  We do this again because we are in a new project. (These first two steps might not be necessary, but it's good to make sure.)
+8. We now want to "push" the changes made in `01_review164.qmd` to your GitHub repo (the changes have only been made in your local RStudio for now).  
     + under the Git tab in the Environment panel, check the boxes in front of all modified files to "stage" your changes.  To select a large number of files, check the top box, scroll down to the bottom of the list, and then shift-click the final box
     + click the Commit tab to "commit" your changes (like saving a file locally) along with a message describing the changes you made.  GitHub guides you by by showing your old code (red) and new code (green), to make sure you approve of the changes.  This first time, all code should be green since we've only added new things rather than modifying previously saved files.
     + "push" your changes to GitHub (an external website) by clicking the green Up arrow.  Refresh your GitHub account to see new files in the user_name.github.io repo!
@@ -62,16 +74,16 @@ In order to begin to get familiar with GitHub, we will use it to create a course
 
 ### Modifying files that have already been pushed to GitHub
 
-8. Make and save a change (anything) to your file `01_review164.qmd` in RStudio.  Now go back under the Git tab and "push" these new changes to GitHub.  You'll have to go through the same process of Stage, Commit, and Push, although this time you'll see only your newest changes in green when you Commit.  Confirm that your changes appear in GitHub.
+9. Make and save a change (anything) to your file `01_review164.qmd` in RStudio.  Now go back under the Git tab and "push" these new changes to GitHub.  You'll have to go through the same process of Stage, Commit, and Push, although this time you'll see only your newest changes in green when you Commit.  Confirm that your changes appear in GitHub.
 
 
 ### Pulling work from GitHub
 
 Before you start a new session of working on a project in RStudio, you should always Pull changes from GitHub first.  Most of the time there will be nothing new, but if a collaborator made changes since the last time you worked on a file, you want to make sure you're working with the latest and greatest version.  If not, you'll end up trying to Push changes made to an old version, and GitHub will balk and produce Merge Conflict messages.  We'll see how to handle Merge Conflicts later, but it's a bit of a pain and best avoided!
 
-9. Go into `01_review164.qmd` on GitHub and hit the Edit icon.  Add a line anywhere, and then scroll down to hit Commit Changes.  **(This is not recommended and for illustrative purposes only!  You will likely never edit directly in GitHub, but we're emulating what might happen if a collaborator makes changes since the last time you worked on a document.)**  Now go back to RStudio and, under the Git tab, "Pull" the changes from GitHub into your R project folder. (Use the blue Down arrow).  Confirm that your changes now appear in RStudio.  Before you start working on the R server, you should always Pull any changes that might have been made on GitHub (especially if you're working on a team!), since things can get dicey if you try to merge new changes from RStudio with new changes on GitHub.
+10. Go into `01_review164.qmd` on GitHub and hit the Edit icon.  Add a line anywhere, and then scroll down to hit Commit Changes.  **(This is not recommended and for illustrative purposes only!  You will likely never edit directly in GitHub, but we're emulating what might happen if a collaborator makes changes since the last time you worked on a document.)**  Now go back to RStudio and, under the Git tab, "Pull" the changes from GitHub into your R project folder. (Use the blue Down arrow).  Confirm that your changes now appear in RStudio.  Before you start working on the R server, you should always Pull any changes that might have been made on GitHub (especially if you're working on a team!), since things can get dicey if you try to merge new changes from RStudio with new changes on GitHub.
 
 
 ### A bit more about R projects
 
-10. To see the power of projects, select File > Close Project and Don't Save the workspace image.  Then, select File > Recent Projects > SDS264_F24; you will get a clean Environment and Console once again, but History shows the commands you ran by hand, active Rmd and qmd files appear in the Source panel, and Files contains the Rmd, qmd, html, and csv files produced by your last session.  And you can stage, commit and push the changes and the new file to GitHub!
+11. To see the power of projects, select File > Close Project and Don't Save the workspace image.  Then, select File > Recent Projects > SDS264_F24; you will get a clean Environment and Console once again, but History shows the commands you ran by hand, active Rmd and qmd files appear in the Source panel, and Files contains the Rmd, qmd, html, and csv files produced by your last session.  And you can stage, commit and push the changes and the new file to GitHub!

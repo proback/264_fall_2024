@@ -193,7 +193,8 @@ window.Quarto = {
   <li><a href="#version-control-github" id="toc-version-control-github" class="nav-link active" data-scroll-target="#version-control-github">Version Control (GitHub)</a></li>
   <li><a href="#getting-started-on-github-and-connecting-to-rstudio" id="toc-getting-started-on-github-and-connecting-to-rstudio" class="nav-link" data-scroll-target="#getting-started-on-github-and-connecting-to-rstudio">Getting started on GitHub and connecting to RStudio</a></li>
   <li><a href="#creating-an-r-project-local-thats-connected-to-github-cloud" id="toc-creating-an-r-project-local-thats-connected-to-github-cloud" class="nav-link" data-scroll-target="#creating-an-r-project-local-thats-connected-to-github-cloud">Creating an R project (local) that’s connected to GitHub (cloud)</a></li>
-  <li><a href="#creating-a-personal-website-in-rstudio-local" id="toc-creating-a-personal-website-in-rstudio-local" class="nav-link" data-scroll-target="#creating-a-personal-website-in-rstudio-local">Creating a personal website in RStudio (local)</a></li>
+  <li><a href="#creating-new-files-in-rstudio-local" id="toc-creating-new-files-in-rstudio-local" class="nav-link" data-scroll-target="#creating-new-files-in-rstudio-local">Creating new files in RStudio (local)</a></li>
+  <li><a href="#making-sure-the-connection-to-github-is-ready" id="toc-making-sure-the-connection-to-github-is-ready" class="nav-link" data-scroll-target="#making-sure-the-connection-to-github-is-ready">Making sure the connection to GitHub is ready</a></li>
   <li><a href="#pushing-your-work-to-github-cloud" id="toc-pushing-your-work-to-github-cloud" class="nav-link" data-scroll-target="#pushing-your-work-to-github-cloud">Pushing your work to GitHub (cloud)</a></li>
   <li><a href="#modifying-files-that-have-already-been-pushed-to-github" id="toc-modifying-files-that-have-already-been-pushed-to-github" class="nav-link" data-scroll-target="#modifying-files-that-have-already-been-pushed-to-github">Modifying files that have already been pushed to GitHub</a></li>
   <li><a href="#pulling-work-from-github" id="toc-pulling-work-from-github" class="nav-link" data-scroll-target="#pulling-work-from-github">Pulling work from GitHub</a></li>
@@ -232,7 +233,10 @@ window.Quarto = {
 <section id="getting-started-on-github-and-connecting-to-rstudio" class="level3">
 <h3 class="anchored" data-anchor-id="getting-started-on-github-and-connecting-to-rstudio">Getting started on GitHub and connecting to RStudio</h3>
 <ol type="1">
-<li><p>Create a GitHub account at github.com. It’s usually okay to hit “Skip Personalization” at the bottom of the screen after entering an email, username, and password (you might have to enable 2-factor authentication as well). There are a few bonuses you can get as a student that you might consider.</p></li>
+<li><p>Create a GitHub account at github.com. It’s usually okay to hit “Skip Personalization” at the bottom of the screen after entering an email, username, and password (you might have to enable 2-factor authentication as well). There are a few bonuses you can get as a student that you might consider.</p>
+<ul>
+<li>You may choose to use a non-St.&nbsp;Olaf email address to ensure you’ll have access to your GitHub account after you graduate.</li>
+</ul></li>
 <li><p>Obtain a personal access token (PAT) in GitHub using the following steps:</p>
 <ul>
 <li>Click your profile picture/symbol in the upper right of your GitHub page. Then select Settings &gt; Developer settings &gt; Personal access tokens &gt; Tokens (classic).</li>
@@ -257,19 +261,33 @@ window.Quarto = {
 <p><em>Notice that you are now starting with a blank slate! Nothing in the environment or history. Also note where it says your project name in the top right corner.</em></p>
 <p><strong>At this point your should have a GitHub repo called “SDS264_F24” connected to an R project named “SDS264_F24”. The basic framework is set!</strong></p>
 </section>
-<section id="creating-a-personal-website-in-rstudio-local" class="level3">
-<h3 class="anchored" data-anchor-id="creating-a-personal-website-in-rstudio-local">Creating a personal website in RStudio (local)</h3>
+<section id="creating-new-files-in-rstudio-local" class="level3">
+<h3 class="anchored" data-anchor-id="creating-new-files-in-rstudio-local">Creating new files in RStudio (local)</h3>
 <ol start="6" type="1">
-<li>You can download our first file with in-class exercises <a href="https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd">here</a>. Just hit the Download Raw File button and note where the file is saved on your computer. Use File &gt; Open File in RStudio to open up 01_review164.qmd. Then, use File &gt; Save As to navigate to the SDS264_F24 folder on your computer and save a copy there. (Stay tuned for more on what exactly a “qmd” file is!)</li>
+<li>You can download our first file with in-class exercises <a href="https://github.com/proback/264_fall_2024/blob/main/01_review164.qmd">here</a>. Just hit the Download Raw File button and note where the file is saved on your computer. Use File &gt; Open File in RStudio to open up <code>01_review164.qmd</code>. Then, use File &gt; Save As to navigate to the SDS264_F24 folder on your computer and save a copy there. You can even add your name or a few answers and re-save your file.</li>
 </ol>
+</section>
+<section id="making-sure-the-connection-to-github-is-ready" class="level3">
+<h3 class="anchored" data-anchor-id="making-sure-the-connection-to-github-is-ready">Making sure the connection to GitHub is ready</h3>
+<ol start="7" type="1">
+<li>[If necessary] You may need one of these two steps when using GitHub for the first name in a new R Project, even though you likely did them while installing GitHub.
+<ul>
+<li>In the console, type <code>library(credentials)</code>. Then type <code>set_github_pat()</code>, hit Return, and copy in your personal access token.</li>
+<li>In the Terminal window (this should be the tab next to Console), type the following two lines (be precise with the dashes and spaces!!):</li>
+</ul></li>
+</ol>
+<blockquote class="blockquote">
+<p><code>git config --global user.name "YOUR USER NAME"</code></p>
+</blockquote>
+<blockquote class="blockquote">
+<p><code>git config --global user.email "YOUR EMAIL ASSOCIATED WITH GITHUB"</code></p>
+</blockquote>
 </section>
 <section id="pushing-your-work-to-github-cloud" class="level3">
 <h3 class="anchored" data-anchor-id="pushing-your-work-to-github-cloud">Pushing your work to GitHub (cloud)</h3>
-<ol start="7" type="1">
-<li>We now want to “push” the changes made in “user_name.github.io” to your GitHub repo (the changes have only been made in your local RStudio for now).
+<ol start="8" type="1">
+<li>We now want to “push” the changes made in <code>01_review164.qmd</code> to your GitHub repo (the changes have only been made in your local RStudio for now).
 <ul>
-<li>In the console, type <code>library(credentials)</code></li>
-<li>Then type <code>set_github_pat()</code>, hit Return, and copy in your personal access token. We do this again because we are in a new project. (These first two steps might not be necessary, but it’s good to make sure.)</li>
 <li>under the Git tab in the Environment panel, check the boxes in front of all modified files to “stage” your changes. To select a large number of files, check the top box, scroll down to the bottom of the list, and then shift-click the final box</li>
 <li>click the Commit tab to “commit” your changes (like saving a file locally) along with a message describing the changes you made. GitHub guides you by by showing your old code (red) and new code (green), to make sure you approve of the changes. This first time, all code should be green since we’ve only added new things rather than modifying previously saved files.</li>
 <li>“push” your changes to GitHub (an external website) by clicking the green Up arrow. Refresh your GitHub account to see new files in the user_name.github.io repo!</li>
@@ -278,20 +296,20 @@ window.Quarto = {
 </section>
 <section id="modifying-files-that-have-already-been-pushed-to-github" class="level3">
 <h3 class="anchored" data-anchor-id="modifying-files-that-have-already-been-pushed-to-github">Modifying files that have already been pushed to GitHub</h3>
-<ol start="8" type="1">
+<ol start="9" type="1">
 <li>Make and save a change (anything) to your file <code>01_review164.qmd</code> in RStudio. Now go back under the Git tab and “push” these new changes to GitHub. You’ll have to go through the same process of Stage, Commit, and Push, although this time you’ll see only your newest changes in green when you Commit. Confirm that your changes appear in GitHub.</li>
 </ol>
 </section>
 <section id="pulling-work-from-github" class="level3">
 <h3 class="anchored" data-anchor-id="pulling-work-from-github">Pulling work from GitHub</h3>
 <p>Before you start a new session of working on a project in RStudio, you should always Pull changes from GitHub first. Most of the time there will be nothing new, but if a collaborator made changes since the last time you worked on a file, you want to make sure you’re working with the latest and greatest version. If not, you’ll end up trying to Push changes made to an old version, and GitHub will balk and produce Merge Conflict messages. We’ll see how to handle Merge Conflicts later, but it’s a bit of a pain and best avoided!</p>
-<ol start="9" type="1">
+<ol start="10" type="1">
 <li>Go into <code>01_review164.qmd</code> on GitHub and hit the Edit icon. Add a line anywhere, and then scroll down to hit Commit Changes. <strong>(This is not recommended and for illustrative purposes only! You will likely never edit directly in GitHub, but we’re emulating what might happen if a collaborator makes changes since the last time you worked on a document.)</strong> Now go back to RStudio and, under the Git tab, “Pull” the changes from GitHub into your R project folder. (Use the blue Down arrow). Confirm that your changes now appear in RStudio. Before you start working on the R server, you should always Pull any changes that might have been made on GitHub (especially if you’re working on a team!), since things can get dicey if you try to merge new changes from RStudio with new changes on GitHub.</li>
 </ol>
 </section>
 <section id="a-bit-more-about-r-projects" class="level3">
 <h3 class="anchored" data-anchor-id="a-bit-more-about-r-projects">A bit more about R projects</h3>
-<ol start="10" type="1">
+<ol start="11" type="1">
 <li>To see the power of projects, select File &gt; Close Project and Don’t Save the workspace image. Then, select File &gt; Recent Projects &gt; SDS264_F24; you will get a clean Environment and Console once again, but History shows the commands you ran by hand, active Rmd and qmd files appear in the Source panel, and Files contains the Rmd, qmd, html, and csv files produced by your last session. And you can stage, commit and push the changes and the new file to GitHub!</li>
 </ol>
 

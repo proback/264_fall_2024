@@ -7,7 +7,7 @@ format:
 
 As described in the [quarto documentation](https://quarto.org/docs/computations/r.html): Quarto is a multi-language, next generation version of R Markdown from RStudio, with many new features and capabilities. Like R Markdown, Quarto uses Knitr to execute R code, and is therefore able to render most existing Rmd files without modification.
 
-Data scientists are [pretty excited](https://www.infoworld.com/article/3666743/what-is-quarto-rstudio-quietly-rolls-out-next-generation-r-markdown.html) about the introduction of Quarto, and since it represents the future of R Markdown, we will conduct MSCS 264 using Quarto.  Intriguing Quarto features that have been cited include:
+Data scientists are [pretty excited](https://www.infoworld.com/article/3666743/what-is-quarto-rstudio-quietly-rolls-out-next-generation-r-markdown.html) about the introduction of Quarto, and since it represents the future of R Markdown, we will conduct SDS 264 using Quarto.  Intriguing Quarto features that have been cited include:
 
 - collaborate across coding languages
 - open source 

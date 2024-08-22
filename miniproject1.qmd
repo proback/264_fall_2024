@@ -24,6 +24,8 @@ A few additional details for this mini-project:
 
 4. Be sure you label your plot well *and* provide a description of what insights can be gained from each *static* plot.  For one of your static plots, this should be in the form of alt-text, using the "Four Ingredient Model" in the article from class.
 
+5. Check out this [rubric](https://drive.google.com/file/d/1AL6Gc960i06CY0ZG-1hPyEtJseDrsF6u/view?usp=sharing) for Mini-Project 1.
+
 
 ### Submission and Timeline
 
