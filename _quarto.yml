@@ -38,6 +38,7 @@ website:
       contents:
         - 01_review164.qmd
         - 02_maps.qmd
+        - 03_functions.qmd
 
     - id: projects
       title: "Projects"

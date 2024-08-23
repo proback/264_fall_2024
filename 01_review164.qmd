@@ -130,6 +130,8 @@ State your favorite plot, why you like it better than the other two, and what yo
 5. BEFORE running the code below, sketch the plot that will be produced by R.  AFTER running the code, describe what conclusion(s) can we draw from this plot?  
 
 ```{r}
+#| eval: FALSE
+
 vaccine_data |>
   filter(!is.na(perc_Biden)) |>
   mutate(big_states = fct_lump(state, n = 10)) |>
