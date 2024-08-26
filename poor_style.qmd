@@ -1,0 +1,31 @@
+---
+title: "Poor style"
+format:
+  html: default
+editor_options: 
+  chunk_output_type: console
+---
+
+From SDS 322 many years ago...
+
+```{r}
+# Section 9.7 - power for F-test comparing two variances
+x=seq(0,10,length=1000)
+fnull=df(x,8,11)
+plot(x,fnull,type="l")
+falt=df(x/4,8,11)/4
+lines(x,falt,lty=2)
+c1=qf(.025,8,11)
+c2=qf(.975,8,11)
+lines(c(c1,c1),c(0,df(c1,8,11)),lty=3)
+lines(c(c2,c2),c(0,df(c2/4,8,11)/4),lty=3)
+
+c1=qf(.025,8,11)  # 0.24
+c2=qf(.975,8,11)  # 3.66
+power=1-pf(c2/4,8,11)+pf(c1/4,8,11)
+power
+
+pvalue=2*(1-pf(1.63,8,11))
+pvalue
+```
+

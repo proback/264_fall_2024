@@ -5,7 +5,7 @@ format:
     code-fold: true
 ---
 
-As described in the [quarto documentation](https://quarto.org/docs/computations/r.html): Quarto is a multi-language, next generation version of R Markdown from RStudio, with many new features and capabilities. Like R Markdown, Quarto uses Knitr to execute R code, and is therefore able to render most existing Rmd files without modification.
+As described in the [quarto documentation](https://quarto.org/docs/computations/r.html): Quarto is a new, open-source, scientific, and technical publishing system.  It is a multi-language, next generation version of R Markdown from RStudio, with many new features and capabilities. Like R Markdown, Quarto uses Knitr to execute R code, and is therefore able to render most existing Rmd files without modification.  
 
 Data scientists are [pretty excited](https://www.infoworld.com/article/3666743/what-is-quarto-rstudio-quietly-rolls-out-next-generation-r-markdown.html) about the introduction of Quarto, and since it represents the future of R Markdown, we will conduct SDS 264 using Quarto.  Intriguing Quarto features that have been cited include:
 
@@ -17,6 +17,19 @@ Data scientists are [pretty excited](https://www.infoworld.com/article/3666743/w
 - free publishing through quartopub.com
 - while Rmd will be maintained and updated, cool new features will appear in Quarto
 - there are plans for future simultaneous editing like in google docs
+
+From Posit and the developers of Rstudio and Quarto <https://charlotte.quarto.pub/cascadia/>, Quarto (compared to RMarkdown):
+
+- Offers “batteries included” shared syntax across formats, while R Markdown grew into a large ecosystem with varying syntax
+- Allows you to choose your own editor and your preferred data science language
+- Comes with richer features out of the box
+- Is actively developed
+
+In other words, Quarto unifies and extends R Markdown:
+
+- Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.
+- More accessible defaults as well as better support for accessibility
+- Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.
 
 
 Here's a cool example from the Quarto documentation, showing features like cross-referencing of figures, chunk options using the hash-pipe format, collapsed code, and easy figure legends:

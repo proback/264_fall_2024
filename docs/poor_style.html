@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SDS 264: Data Science 2 - Why Quarto?</title>
+<title>SDS 264: Data Science 2 - Poor style</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -105,7 +105,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-sidebar floating nav-fixed">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -189,67 +189,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
       </div> <!-- /container-fluid -->
     </nav>
-  <nav class="quarto-secondary-nav">
-    <div class="container-fluid d-flex">
-      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
-        <i class="bi bi-layout-text-sidebar-reverse"></i>
-      </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./why_quarto.html">Why Quarto?</a></li></ol></nav>
-        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
-        </a>
-    </div>
-  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="sidebar-menu-container"> 
-    <ul class="list-unstyled mt-1">
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./tech_setup.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Tech Setup</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./why_quarto.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Why Quarto?</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./github_intro.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Intro to GitHub</span></a>
-  </div>
-</li>
-        <li class="sidebar-item">
-  <div class="sidebar-item-container"> 
-  <a href="./github_links.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">GitHub Links</span></a>
-  </div>
-</li>
-    </ul>
-    </div>
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#air-quality" id="toc-air-quality" class="nav-link active" data-scroll-target="#air-quality">Air Quality</a></li>
-  </ul>
-</nav>
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Why Quarto?</h1>
+<h1 class="title">Poor style</h1>
 </div>
 
 
@@ -266,60 +219,40 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<p>As described in the <a href="https://quarto.org/docs/computations/r.html">quarto documentation</a>: Quarto is a new, open-source, scientific, and technical publishing system. It is a multi-language, next generation version of R Markdown from RStudio, with many new features and capabilities. Like R Markdown, Quarto uses Knitr to execute R code, and is therefore able to render most existing Rmd files without modification.</p>
-<p>Data scientists are <a href="https://www.infoworld.com/article/3666743/what-is-quarto-rstudio-quietly-rolls-out-next-generation-r-markdown.html">pretty excited</a> about the introduction of Quarto, and since it represents the future of R Markdown, we will conduct SDS 264 using Quarto. Intriguing Quarto features that have been cited include:</p>
-<ul>
-<li>collaborate across coding languages</li>
-<li>open source</li>
-<li>dozens of export types, including websites, books, and blogs</li>
-<li>built-in YAML assistance (since it’s a notoriously finicky language)</li>
-<li>it’s installed like other software and automatically included in new versions of RStudio</li>
-<li>free publishing through quartopub.com</li>
-<li>while Rmd will be maintained and updated, cool new features will appear in Quarto</li>
-<li>there are plans for future simultaneous editing like in google docs</li>
-</ul>
-<p>From Posit and the developers of Rstudio and Quarto <a href="https://charlotte.quarto.pub/cascadia/" class="uri">https://charlotte.quarto.pub/cascadia/</a>, Quarto (compared to RMarkdown):</p>
-<ul>
-<li>Offers “batteries included” shared syntax across formats, while R Markdown grew into a large ecosystem with varying syntax</li>
-<li>Allows you to choose your own editor and your preferred data science language</li>
-<li>Comes with richer features out of the box</li>
-<li>Is actively developed</li>
-</ul>
-<p>In other words, Quarto unifies and extends R Markdown:</p>
-<ul>
-<li>Consistent implementation of attractive and handy features across outputs: tabsets, code-folding, syntax highlighting, etc.</li>
-<li>More accessible defaults as well as better support for accessibility</li>
-<li>Support for other languages like Python, Julia, Observable, and more via Jupyter engine for executable code chunks.</li>
-</ul>
-<p>Here’s a cool example from the Quarto documentation, showing features like cross-referencing of figures, chunk options using the hash-pipe format, collapsed code, and easy figure legends:</p>
-<section id="air-quality" class="level2">
-<h2 class="anchored" data-anchor-id="air-quality">Air Quality</h2>
-<p><a href="#fig-airquality" class="quarto-xref">Figure&nbsp;1</a> further explores the impact of temperature on ozone level.</p>
+<p>From SDS 322 many years ago…</p>
 <div class="cell">
-<details class="code-fold">
-<summary>Code</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(airquality, <span class="fu">aes</span>(Temp, Ozone)) <span class="sc">+</span> </span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span> </span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_smooth</span>(<span class="at">method =</span> <span class="st">"loess"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-</details>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Section 9.7 - power for F-test comparing two variances</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>x<span class="ot">=</span><span class="fu">seq</span>(<span class="dv">0</span>,<span class="dv">10</span>,<span class="at">length=</span><span class="dv">1000</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>fnull<span class="ot">=</span><span class="fu">df</span>(x,<span class="dv">8</span>,<span class="dv">11</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(x,fnull,<span class="at">type=</span><span class="st">"l"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>falt<span class="ot">=</span><span class="fu">df</span>(x<span class="sc">/</span><span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">11</span>)<span class="sc">/</span><span class="dv">4</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(x,falt,<span class="at">lty=</span><span class="dv">2</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>c1<span class="ot">=</span><span class="fu">qf</span>(.<span class="dv">025</span>,<span class="dv">8</span>,<span class="dv">11</span>)</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>c2<span class="ot">=</span><span class="fu">qf</span>(.<span class="dv">975</span>,<span class="dv">8</span>,<span class="dv">11</span>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(c1,c1),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">df</span>(c1,<span class="dv">8</span>,<span class="dv">11</span>)),<span class="at">lty=</span><span class="dv">3</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">lines</span>(<span class="fu">c</span>(c2,c2),<span class="fu">c</span>(<span class="dv">0</span>,<span class="fu">df</span>(c2<span class="sc">/</span><span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">11</span>)<span class="sc">/</span><span class="dv">4</span>),<span class="at">lty=</span><span class="dv">3</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div id="fig-airquality" class="quarto-figure quarto-figure-center quarto-float anchored">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-airquality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="why_quarto_files/figure-html/fig-airquality-1.png" class="img-fluid figure-img" width="672">
-</div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-airquality-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figure&nbsp;1: Temperature and ozone level.
-</figcaption>
+<div>
+<figure class="figure">
+<p><img src="poor_style_files/figure-html/unnamed-chunk-1-1.png" class="img-fluid figure-img" width="672"></p>
 </figure>
 </div>
 </div>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>c1<span class="ot">=</span><span class="fu">qf</span>(.<span class="dv">025</span>,<span class="dv">8</span>,<span class="dv">11</span>)  <span class="co"># 0.24</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>c2<span class="ot">=</span><span class="fu">qf</span>(.<span class="dv">975</span>,<span class="dv">8</span>,<span class="dv">11</span>)  <span class="co"># 3.66</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>power<span class="ot">=</span><span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(c2<span class="sc">/</span><span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">11</span>)<span class="sc">+</span><span class="fu">pf</span>(c1<span class="sc">/</span><span class="dv">4</span>,<span class="dv">8</span>,<span class="dv">11</span>)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>power</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.5379631</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>pvalue<span class="ot">=</span><span class="dv">2</span><span class="sc">*</span>(<span class="dv">1</span><span class="sc">-</span><span class="fu">pf</span>(<span class="fl">1.63</span>,<span class="dv">8</span>,<span class="dv">11</span>))</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pvalue</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.4443506</code></pre>
+</div>
 </div>
 
 
-</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
