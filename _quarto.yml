@@ -39,6 +39,7 @@ website:
         - 01_review164.qmd
         - 02_maps.qmd
         - 03_functions.qmd
+        - 04_code_quality.qmd
 
     - id: projects
       title: "Projects"
