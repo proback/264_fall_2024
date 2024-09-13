@@ -77,7 +77,6 @@ Luckily, some maps are already created in R in the `maps` package.
 library(maps)
 us_states <- map_data("state")
 head(us_states)
-# Note that points in the same "group" are connected with a line
 
 us_states |>
   ggplot(mapping = aes(x = long, y = lat,
@@ -316,11 +315,11 @@ states
 3. Note that `states` has class `sf` in addition to the usual `tbl` and `df`
 
 
-For maps in `leaflet` that show boundaries and not just points, we need to input a shapefile rather than a series of latitude-longitude combinations like we did for the `maps` package.  In the example we're emulating, they use the `read_sf()` function from the `sf` package to read in data.  While our `us_states` data frame from the `maps` package contained 15537 rows, our shapefile `states` contains only 52 rows - one per state.  Importantly, `states` contains a column called `geometry`, which is a "multipolygon" with all the information necessary to draw a specific state.  Also, while `states` can be treated as a tibble or data frame, it is also an `sf` class object with a specific "geodetic coordinate reference system".  Again, take Spatial Data Analysis for more on shapefiles and simple features!
+For maps in `leaflet` that show boundaries and not just points, we need to input a shapefile rather than a series of latitude-longitude combinations like we did for the `maps` package.  In the example we're emulating, they use the `read_sf()` function from the `sf` package to read in data.  While our `us_states` data frame from the `maps` package contained 15537 rows, our simple features object `states` contains only 52 rows - one per state.  Importantly, `states` contains a column called `geometry`, which is a "multipolygon" with all the information necessary to draw a specific state.  Also, while `states` can be treated as a tibble or data frame, it is also an `sf` class object with a specific "geodetic coordinate reference system".  Again, take Spatial Data Analysis for more on shapefiles and simple features!
 
 Note also that the authors of this example have already merged state population densities with state geometries, but if we wanted to merge in other state characteristics using the `name` column as a key, we could definitely do this!
 
-First we'll start with a static plot using a shapefile and geom_sf():
+First we'll start with a static plot using a simple features object and geom_sf():
 
 ```{r}
 # Create density bins as on the webpage
@@ -400,31 +399,64 @@ Here's some R code and hints to get you going:
 #| message: false
 #| warning: false
 
+# Get info to draw US states for geom_polygon (connect the lat-long points)
+library(maps)
+states_polygon <- as_tibble(map_data("state")) |>
+  select(region, group, order, lat, long)
+
+# See what the state (region) levels look like in states_polygon
+unique(states_polygon$region)
+
+
+# Get info to draw US states for geom_sf and leaflet (simple features object 
+#   with multipolygon geometry column)
+library(sf)
+states_sf <- read_sf("https://rstudio.github.io/leaflet/json/us-states.geojson") |>
+  select(name, geometry)
+
+# See what the state (name) levels look like in states_sf
+unique(states_sf$name)
+
+
+# Load in state-wise data for filling our choropleth maps
+#   (Note that I selected my two variables of interest to simplify)
 library(poliscidata)   # may have to install first
-state_data <- as_tibble(poliscidata::states)
-print(state_data, n = 5, width = Inf)
+polisci_data <- as_tibble(poliscidata::states) |>
+  select(state, carfatal07, cook_index3)
 
-# Want to merge with us_states geographic info from maps package
-us_states <- as_tibble(us_states)
-print(us_states, n = 5, width = Inf)
-
-# Also want to merge with states data that should be class sf
-class(states)
-print(states, n = 5, width = Inf)
+# See what the state (state) levels look like in polisci_data
+unique(polisci_data$state)   # can't see trailing spaces but can see
+                             #   lack of internal spaces
+print(polisci_data)   # can see trailing spaces
 ```
 
 R code hints:
 
-- stringr functions like `str_squish` and `str_to_lower`
+- stringr functions like `str_squish` and `str_to_lower` and `str_replace_all` (be sure to carefully look at your keys!)
 - *_join functions (make sure they preserve classes)
-- filter so that you only have 48 continguous states (and maybe DC)
+- filter so that you only have 48 contiguous states (and maybe DC)
 - for help with colors: https://rstudio.github.io/leaflet/reference/colorNumeric.html
 - be sure labels pop up when scrolling with leaflet
 
 
-Data wrangling:
+```{r}
+# Make sure all keys have the same format before joining:
+#   all lower case, no internal or external spaces
+
+```
 
 ```{r}
+# Now we can merge data sets together for the static and the interactive plots
+
+
+# Merge with states_polygon (static)
+
+# Check that merge worked for 48 contiguous states
+
+
+# Merge with states_sf (static or interactive)
+
+# Check that merge worked for 48 contiguous states
 
 ```
 

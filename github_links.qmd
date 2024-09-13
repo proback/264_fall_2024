@@ -9,6 +9,6 @@ Here are a few additional GitHub links that I've found helpful:
 
 - [GitHub with R projects (Lisa Lendway)](https://www.youtube.com/watch?v=OduNU4vZ7IM)
 
-- [GitHub starter course – basic terminology](https://github.com/education/github-starter-course)
+- [GitHub starter course – basic terminology](https://github.com/classroom-resources/github-starter-course)
 
 - [Happy Git and GitHub for the useR (Jenny Bryan)](https://happygitwithr.com/)
