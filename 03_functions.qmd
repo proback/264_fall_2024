@@ -2,6 +2,8 @@
 title: "Functions and tidy evaluation"
 format:
   html: default
+editor_options: 
+  chunk_output_type: console
 ---
 
 Based on Chapter 25 from *R for Data Science*
@@ -177,14 +179,17 @@ df$c_new <- rescale1(df$c)
 df$d_new <- rescale1(df$d)
 df
 
-df %>% 
+df |>
+  select(1:4) |>
   mutate(a_new = rescale1(a),
          b_new = rescale1(b),
          c_new = rescale1(c),
          d_new = rescale1(d))
 
 # Even better - from Chapter 26
-df |> mutate(across(a:d, rescale1))
+df |> 
+  select(1:4) |>
+  mutate(across(a:d, rescale1, .names = "{.col}_new"))
 ```
 
 
@@ -267,7 +272,7 @@ rescale_w_error <- function(x) {
   if (is.na(sum(x))) {
     stop("`x` cannot have NAs", call. = FALSE)
   } else {
-  (x - min(x)) / (max(x) - min(x))
+    (x - min(x)) / (max(x) - min(x))
   }  
 }
 
@@ -371,7 +376,7 @@ make_plot <- function(dataset, xvar, yvar, pt_size = 0.75)  {
 make_plot(dataset = mpg, xvar = cty, yvar = hwy)
 ```
 
-I often wish it were easier to get my own custom summary statistics for numeric variables in EDA rather than using `mosaic:favstats()`.  Using `group_by()` and `summarise()` from the tidyverse reads clearly but takes so many lines, but if I only had to write the code once...
+I often wish it were easier to get my own custom summary statistics for numeric variables in EDA rather than using `mosaic::favstats()`.  Using `group_by()` and `summarise()` from the tidyverse reads clearly but takes so many lines, but if I only had to write the code once...
 
 ```{r}
 summary6 <- function(data, var) {
@@ -412,7 +417,14 @@ new_function <- function(df, var, condition, sort = TRUE) {
 }
 
 mpg |> new_function(var = manufacturer, 
-                    condition = manufacturer %in% c("audi", "honda", "hyundai", "nissan", "subaru", "toyota", "volkswagen"))
+                    condition = manufacturer %in% c("audi", 
+                                                    "honda", 
+                                                    "hyundai", 
+                                                    "nissan", 
+                                                    "subaru", 
+                                                    "toyota", 
+                                                    "volkswagen")
+                    )
 ```
 
 ### Data-masking vs. tidy-selection (Section 25.3.4)

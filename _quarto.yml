@@ -6,6 +6,7 @@ project:
     - "!DS2_preview_work/"
     - "!SQLcode/"
     - "!spring2024/"
+    - "!quarto_presentations/"
   resources:
     - "Data/*.csv"
     - "Data/"
@@ -40,6 +41,8 @@ website:
         - 02_maps.qmd
         - 03_functions.qmd
         - 04_code_quality.qmd
+        - 05_iteration.qmd
+        - 06_data_types.qmd
 
     - id: projects
       title: "Projects"

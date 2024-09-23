@@ -4,3 +4,7 @@ sidebar: false
 ---
   
 [Signup Sheet](https://docs.google.com/spreadsheets/d/1oENsYJXmCZQkwzvagSiJItajHgUSPuckSdrn_3CaBYI/edit?usp=sharing)
+
+[Cool presentations using Quarto](https://github.com/proback/264_fall_2024/blob/main/quarto_presentations/revealjs-demo.qmd)
+
+[RTD rubric](https://drive.google.com/file/d/1W-IpuJvUS0x94iNdJfEmomo4tziPtvxA/view?usp=sharing)
