@@ -7,4 +7,6 @@ sidebar: false
 
 [Cool presentations using Quarto](https://github.com/proback/264_fall_2024/blob/main/quarto_presentations/revealjs-demo.qmd)
 
+[My example of an RTD presentation with revealjs in quarto](https://github.com/proback/R-Tip-of-the-Day-example/blob/main/rtd_example.qmd)
+
 [RTD rubric](https://drive.google.com/file/d/1W-IpuJvUS0x94iNdJfEmomo4tziPtvxA/view?usp=sharing)
