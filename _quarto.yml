@@ -43,6 +43,9 @@ website:
         - 04_code_quality.qmd
         - 05_iteration.qmd
         - 06_data_types.qmd
+        - 07_apis.qmd
+        - 08_table_scraping.qmd
+        - 09_web_scraping.qmd
 
     - id: projects
       title: "Projects"
