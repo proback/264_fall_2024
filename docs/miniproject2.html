@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>SDS 264: Data Science 2 - Tech Setup</title>
+<title>SDS 264: Data Science 2 - Mini-Project 2: Data Acquisition</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -71,7 +71,7 @@ ul.task-list li input[type="checkbox"] {
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed">
+<body class="nav-sidebar floating nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -183,20 +183,56 @@ ul.task-list li input[type="checkbox"] {
 </div>
       </div> <!-- /container-fluid -->
     </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./miniproject2.html">Mini-Project 2: Data Acquisition</a></li></ol></nav>
+        <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+    </div>
+  </nav>
 </header>
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./miniproject1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Mini-Project 1: Maps</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./miniproject2.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">Mini-Project 2: Data Acquisition</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#submission-and-timeline" id="toc-submission-and-timeline" class="nav-link" data-scroll-target="#submission-and-timeline">Submission and Timeline</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Tech Setup</h1>
+<h1 class="title">Mini-Project 2: Data Acquisition</h1>
 </div>
 
 
@@ -213,45 +249,17 @@ ul.task-list li input[type="checkbox"] {
 </header>
 
 
-<p>Ideally before class on Thurs Sep 5, and definitely before class on Tues Sep 10, you should follow these instructions to set up the software that we’ll be using throughout the semester. <strong>Even if you’ve already downloaded both R and RStudio, you’ll want to re-download to make sure that you have the most current versions.</strong></p>
-<p><br></p>
-<p><strong>Required:</strong> Download R and RStudio</p>
-<ul>
-<li><strong>FIRST:</strong> Download R <a href="https://cran.rstudio.com/">here</a>.
-<ul>
-<li>In the top section, you will see three links “Download R for …”</li>
-<li>Choose the link that corresponds to your computer.</li>
-<li>As of July 24, 2024, the latest version of R is 4.4.1 (“Race for Your Life”).</li>
-</ul></li>
-<li><strong>SECOND:</strong> Download RStudio <a href="https://posit.co/download/rstudio-desktop/#download">here</a>.
-<ul>
-<li>Click the button under step 2 to install the version of RStudio recommended for your computer.</li>
-<li>As of July 24, 2024, the latest version of RStudio is 2024.04.2 (Build 764).</li>
-</ul></li>
-<li><strong>THIRD:</strong> Check that when you go to File &gt; New Project &gt; New Directory, you see “Quarto Website” as an option.</li>
-</ul>
-<p><br></p>
-<p><strong>Suggested:</strong> Watch this <a href="https://www.youtube.com/watch?v=LJiRSPoe8r0">video</a> from Lisa Lendway at Macalester describing key configuration options for RStudio.</p>
-<p><br></p>
-<p><strong>Suggested:</strong> Change the default file download location for your internet browser.</p>
-<ul>
-<li>Generally by default, internet browsers automatically save all files to the <code>Downloads</code> folder on your computer. In that case, you have to grab files from <code>Downloads</code> and move them to a more appropriate storage spot. You can change this option so that your browser asks you where to save each file before downloading it.</li>
-<li>This <a href="https://www.online-tech-tips.com/computer-tips/change-default-download-folder-location-on-any-web-browser/">page</a> has information on how to do this for the most common browsers.</li>
-</ul>
-<p><br></p>
-<p><strong>Required:</strong> Install required <strong>packages</strong>.</p>
-<ul>
-<li>An R <strong>package</strong> is an extra bit of functionality that will help us in our data analysis efforts in a variety of ways. Many contributors create open source packages that can be added to base R to perform certain tasks in new and better ways.</li>
-<li>For now, we’ll just make sure the <code>tidyverse</code> package is installed. Open RStudio and click on the Packages tab in the bottom right pane. Click the Install button and type “tidyverse” (without quotes) in the pop-up box. Click the Install button at the bottom of the pop-up box.</li>
-<li>You will see a lot of text from status messages appearing in the Console as the packages are being installed. Wait until you see the <code>&gt;</code> again.</li>
-<li>Enter the command <code>library(tidyverse)</code> in the Console and hit Enter.<br>
-</li>
-<li>Quit RStudio. You’re done setting up!</li>
-</ul>
-<p><br></p>
-<p><strong>Optional:</strong> For a refresher on RStudio features, watch this <a href="https://www.youtube.com/watch?v=HWnanydsBCs">video</a>. It also shows you how to customize the layout and color scheme of RStudio.</p>
+<section id="overview" class="level3">
+<h3 class="anchored" data-anchor-id="overview">Overview</h3>
+<p>Please see <a href="https://drive.google.com/file/d/1-PS_NAgfk7QP1VPdhnfkXrBGzFb1A-SB/view?usp=sharing">this link</a> for project pairings and instructions.</p>
+<p>Check out this <a href="https://drive.google.com/file/d/10DnNw4md-q1OsL6BcCKX-RSSB0D4kC1h/view?usp=sharing">rubric</a> for Mini-Project 2.</p>
+</section>
+<section id="submission-and-timeline" class="level3">
+<h3 class="anchored" data-anchor-id="submission-and-timeline">Submission and Timeline</h3>
+<p>Mini-Project 2 must be submitted on moodle by <strong>11:00 PM on Fri Oct 18</strong>. You should submit a rendered pdf.</p>
 
 
+</section>
 
 </main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">

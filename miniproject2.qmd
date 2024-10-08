@@ -1,0 +1,17 @@
+---
+title: "Mini-Project 2: Data Acquisition"
+format:
+  html: default
+---
+
+### Overview
+
+Please see [this link](https://drive.google.com/file/d/1-PS_NAgfk7QP1VPdhnfkXrBGzFb1A-SB/view?usp=sharing) for project pairings and instructions.
+
+Check out this [rubric](https://drive.google.com/file/d/10DnNw4md-q1OsL6BcCKX-RSSB0D4kC1h/view?usp=sharing) for Mini-Project 2.
+
+
+### Submission and Timeline
+
+Mini-Project 2 must be submitted on moodle by **11:00 PM on Fri Oct 18**.  You should submit a rendered pdf.
+
