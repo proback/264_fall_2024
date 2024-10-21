@@ -360,7 +360,7 @@ hennepin_httr <- tibble(
 
 ### On Your Own
 
-1. Write a loop to obtain the Hennepin County data from 2017-2021
+1. Write a for loop to obtain the Hennepin County data from 2017-2021
 
 
 2. Write a function to give choices about year, county, and variables

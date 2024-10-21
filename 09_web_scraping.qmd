@@ -251,14 +251,9 @@ scrape_page <- function(url) {
 
 pages <- vector("list", length = 5)
 
-for (i in 1:5) {
-    base_url <- "???"
-    if (i==1) {
-        url <- ???
-    } else {
-        url <- str_c(???)
-    }
-    pages[[i]] <- ???
+for (i in 0:4) {
+  url <- str_c(???)
+  pages[[i + 1]] <- ???
 }
 
 df_articles <- bind_rows(pages)

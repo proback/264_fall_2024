@@ -52,6 +52,7 @@ website:
       contents:
         - miniproject1.qmd
         - miniproject2.qmd
+        - miniproject3.qmd
 
   page-footer:
     left: |

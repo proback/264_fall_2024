@@ -107,7 +107,9 @@ mpls_data2 <- result[[2]]
 ```
 
 
-Even after finding the correct tables, there may still be a lot of work to make it tidy!!!  What is each line of code doing below?
+Even after finding the correct tables, there may still be a lot of work to make it tidy!!!  
+
+**[Pause to Ponder:]** What is each line of code doing below?
 
 ```{r}
 bind_cols(mpls_data1, mpls_data2) |>
