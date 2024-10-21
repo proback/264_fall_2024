@@ -1,5 +1,5 @@
 ---
-title: "Building a personal quarto webpage"
+title: "Mini-Project 3: Building a Personal Quarto Webpage"
 format:
   html: default
 ---
