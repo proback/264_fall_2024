@@ -190,6 +190,18 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./09_web_scraping.html">
  <span class="dropdown-text">Web Scraping in R</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./10_strings_part1.html">
+ <span class="dropdown-text">Strings: Pre-class Video (Part 1)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./11_strings_part2.html">
+ <span class="dropdown-text">Strings: In-class Exercises (Part 2)</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./12_strings_part3.html">
+ <span class="dropdown-text">Strings: Extra Practice (Part 3)</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item dropdown ">
@@ -290,6 +302,24 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./09_web_scraping.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Web Scraping in R</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./10_strings_part1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: Pre-class Video (Part 1)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./11_strings_part2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: In-class Exercises (Part 2)</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./12_strings_part3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Strings: Extra Practice (Part 3)</span></a>
   </div>
 </li>
     </ul>
@@ -473,16 +503,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>title_temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (10)}
- [1] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/kidney-tran ...
- [2] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/mpox-vaccin ...
- [3] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-fda-lea ...
- [4] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/alzheimer-s ...
- [5] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/first-wave- ...
- [6] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-launche ...
- [7] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/researchers ...
- [8] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/scientists- ...
- [9] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/statement-n ...
-[10] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/higher-dose ...</code></pre>
+ [1] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-clinica ...
+ [2] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/kidney-tran ...
+ [3] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/mpox-vaccin ...
+ [4] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-fda-lea ...
+ [5] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/alzheimer-s ...
+ [6] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/first-wave- ...
+ [7] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-launche ...
+ [8] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/researchers ...
+ [9] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/scientists- ...
+[10] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/statement-n ...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Extract content from nodes with html_text(), html_name(), </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    html_attrs(), html_children(), html_table(), etc.</span></span>
@@ -490,16 +520,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>title_vec <span class="ot">&lt;-</span> <span class="fu">html_text</span>(title_temp)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>title_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Kidney transplantation between donors and recipients with HIV is safe"                           
- [2] "Mpox vaccine is safe and generates a robust antibody response in adolescents"                    
- [3] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"          
- [4] "Alzheimer’s disease may damage the brain in two phases"                                          
- [5] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later"           
- [6] "NIH launches large study to tackle type 2 diabetes in young people"                              
- [7] "Researchers fully map neural connections of the fruit fly brain"                                 
- [8] "Scientists discover gene responsible for rare, inherited eye disease"                            
- [9] "Statement by NIH on Research Misconduct Findings"                                                
-[10] "Higher doses of buprenorphine may improve treatment outcomes for people with opioid use disorder"</code></pre>
+<pre><code> [1] "NIH clinical trial will test precision medicine treatments for myeloid cancers "       
+ [2] "Kidney transplantation between donors and recipients with HIV is safe"                 
+ [3] "Mpox vaccine is safe and generates a robust antibody response in adolescents"          
+ [4] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"
+ [5] "Alzheimer’s disease may damage the brain in two phases"                                
+ [6] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later" 
+ [7] "NIH launches large study to tackle type 2 diabetes in young people"                    
+ [8] "Researchers fully map neural connections of the fruit fly brain"                       
+ [9] "Scientists discover gene responsible for rare, inherited eye disease"                  
+[10] "Statement by NIH on Research Misconduct Findings"                                      </code></pre>
 </div>
 </div>
 <p>You can also write this altogether with a pipe:</p>
@@ -516,16 +546,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".teaser-title"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Kidney transplantation between donors and recipients with HIV is safe"                           
- [2] "Mpox vaccine is safe and generates a robust antibody response in adolescents"                    
- [3] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"          
- [4] "Alzheimer’s disease may damage the brain in two phases"                                          
- [5] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later"           
- [6] "NIH launches large study to tackle type 2 diabetes in young people"                              
- [7] "Researchers fully map neural connections of the fruit fly brain"                                 
- [8] "Scientists discover gene responsible for rare, inherited eye disease"                            
- [9] "Statement by NIH on Research Misconduct Findings"                                                
-[10] "Higher doses of buprenorphine may improve treatment outcomes for people with opioid use disorder"</code></pre>
+<pre><code> [1] "NIH clinical trial will test precision medicine treatments for myeloid cancers "       
+ [2] "Kidney transplantation between donors and recipients with HIV is safe"                 
+ [3] "Mpox vaccine is safe and generates a robust antibody response in adolescents"          
+ [4] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"
+ [5] "Alzheimer’s disease may damage the brain in two phases"                                
+ [6] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later" 
+ [7] "NIH launches large study to tackle type 2 diabetes in young people"                    
+ [8] "Researchers fully map neural connections of the fruit fly brain"                       
+ [9] "Scientists discover gene responsible for rare, inherited eye disease"                  
+[10] "Statement by NIH on Research Misconduct Findings"                                      </code></pre>
 </div>
 </div>
 <p>And finally we wrap the 4 steps above into the <code>bow</code> and <code>scrape</code> functions from the <code>polite</code> package:</p>
@@ -537,16 +567,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>nih_title</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "Kidney transplantation between donors and recipients with HIV is safe"                           
- [2] "Mpox vaccine is safe and generates a robust antibody response in adolescents"                    
- [3] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"          
- [4] "Alzheimer’s disease may damage the brain in two phases"                                          
- [5] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later"           
- [6] "NIH launches large study to tackle type 2 diabetes in young people"                              
- [7] "Researchers fully map neural connections of the fruit fly brain"                                 
- [8] "Scientists discover gene responsible for rare, inherited eye disease"                            
- [9] "Statement by NIH on Research Misconduct Findings"                                                
-[10] "Higher doses of buprenorphine may improve treatment outcomes for people with opioid use disorder"</code></pre>
+<pre><code> [1] "NIH clinical trial will test precision medicine treatments for myeloid cancers "       
+ [2] "Kidney transplantation between donors and recipients with HIV is safe"                 
+ [3] "Mpox vaccine is safe and generates a robust antibody response in adolescents"          
+ [4] "NIH and FDA leaders call for innovation in development of smoking cessation treatments"
+ [5] "Alzheimer’s disease may damage the brain in two phases"                                
+ [6] "First wave of COVID-19 increased risk of heart attack, stroke up to three years later" 
+ [7] "NIH launches large study to tackle type 2 diabetes in young people"                    
+ [8] "Researchers fully map neural connections of the fruit fly brain"                       
+ [9] "Scientists discover gene responsible for rare, inherited eye disease"                  
+[10] "Statement by NIH on Research Misconduct Findings"                                      </code></pre>
 </div>
 </div>
 </section>
@@ -559,26 +589,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>nih_pubdate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "October 16, 2024"   "October 16, 2024"   "October 15, 2024"  
- [4] "October 15, 2024"   "October 10, 2024"   "October 9, 2024"   
- [7] "October 2, 2024"    "September 26, 2024" "September 26, 2024"
-[10] "September 25, 2024"</code></pre>
+<pre><code> [1] "October 23, 2024"   "October 16, 2024"   "October 16, 2024"  
+ [4] "October 15, 2024"   "October 15, 2024"   "October 10, 2024"  
+ [7] "October 9, 2024"    "October 2, 2024"    "September 26, 2024"
+[10] "September 26, 2024"</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nih_description <span class="ot">&lt;-</span> <span class="fu">scrape</span>(session) <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".teaser-description"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>nih_description</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "October 16, 2024 —     \n          NIH-funded study provides evidence on transplantation practice currently limited to research settings. "                                                                    
- [2] "October 16, 2024 —     \n          NIH clinical trial addresses knowledge gap on vaccine use in adolescent populations "                                                                                       
- [3] "October 15, 2024 —     \n          Commentary emphasizes that engagement across stakeholders is critical to accelerate smoking cessation and reduce smoking-related disease and death.\r\n\r\n "               
- [4] "October 15, 2024 —     \n          NIH-funded brain mapping study uncovers which cell types may be harmed first. "                                                                                             
- [5] "October 10, 2024 —     \n          NIH-funded study focused on original virus strain, unvaccinated participants during pandemic. "                                                                             
- [6] "October 9, 2024 —     \n          Effort to identify risk factors for youth-onset type 2 diabetes to improve prevention and treatment. "                                                                       
- [7] "October 2, 2024 —     \n          NIH-supported milestone will advance understanding of brain processes in larger animals. "                                                                                   
- [8] "September 26, 2024 —     \n          NIH-supported findings pave the way for genetic testing, clinical trials, and therapy development. "                                                                      
- [9] "September 26, 2024 —     \n          NIH takes very seriously allegations of research misconduct. "                                                                                                            
-[10] "September 25, 2024 —     \n          NIH-funded analysis suggests higher doses of buprenorphine were associated with lower rates of future behavioral health-related emergency department and inpatient care. "</code></pre>
+<pre><code> [1] "October 23, 2024 —     \n          Researchers will seek to accelerate the discovery of more tailored treatments for these aggressive cancers of the blood and bone marrow. "                   
+ [2] "October 16, 2024 —     \n          NIH-funded study provides evidence on transplantation practice currently limited to research settings. "                                                     
+ [3] "October 16, 2024 —     \n          NIH clinical trial addresses knowledge gap on vaccine use in adolescent populations "                                                                        
+ [4] "October 15, 2024 —     \n          Commentary emphasizes that engagement across stakeholders is critical to accelerate smoking cessation and reduce smoking-related disease and death.\r\n\r\n "
+ [5] "October 15, 2024 —     \n          NIH-funded brain mapping study uncovers which cell types may be harmed first. "                                                                              
+ [6] "October 10, 2024 —     \n          NIH-funded study focused on original virus strain, unvaccinated participants during pandemic. "                                                              
+ [7] "October 9, 2024 —     \n          Effort to identify risk factors for youth-onset type 2 diabetes to improve prevention and treatment. "                                                        
+ [8] "October 2, 2024 —     \n          NIH-supported milestone will advance understanding of brain processes in larger animals. "                                                                    
+ [9] "September 26, 2024 —     \n          NIH-supported findings pave the way for genetic testing, clinical trials, and therapy development. "                                                       
+[10] "September 26, 2024 —     \n          NIH takes very seriously allegations of research misconduct. "                                                                                             </code></pre>
 </div>
 </div>
 <p>Combine these extracted variables into a single tibble. Make sure the variables are formatted correctly - e.g.&nbsp;<code>pubdate</code> has <code>date</code> type, <code>description</code> does not contain the <code>pubdate</code>, etc.</p>
@@ -592,16 +622,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 3
    title                                                     pubdate description
    &lt;chr&gt;                                                     &lt;chr&gt;   &lt;chr&gt;      
- 1 Kidney transplantation between donors and recipients wit… Octobe… "October 1…
- 2 Mpox vaccine is safe and generates a robust antibody res… Octobe… "October 1…
- 3 NIH and FDA leaders call for innovation in development o… Octobe… "October 1…
- 4 Alzheimer’s disease may damage the brain in two phases    Octobe… "October 1…
- 5 First wave of COVID-19 increased risk of heart attack, s… Octobe… "October 1…
- 6 NIH launches large study to tackle type 2 diabetes in yo… Octobe… "October 9…
- 7 Researchers fully map neural connections of the fruit fl… Octobe… "October 2…
- 8 Scientists discover gene responsible for rare, inherited… Septem… "September…
- 9 Statement by NIH on Research Misconduct Findings          Septem… "September…
-10 Higher doses of buprenorphine may improve treatment outc… Septem… "September…</code></pre>
+ 1 "NIH clinical trial will test precision medicine treatme… Octobe… "October 2…
+ 2 "Kidney transplantation between donors and recipients wi… Octobe… "October 1…
+ 3 "Mpox vaccine is safe and generates a robust antibody re… Octobe… "October 1…
+ 4 "NIH and FDA leaders call for innovation in development … Octobe… "October 1…
+ 5 "Alzheimer’s disease may damage the brain in two phases"  Octobe… "October 1…
+ 6 "First wave of COVID-19 increased risk of heart attack, … Octobe… "October 1…
+ 7 "NIH launches large study to tackle type 2 diabetes in y… Octobe… "October 9…
+ 8 "Researchers fully map neural connections of the fruit f… Octobe… "October 2…
+ 9 "Scientists discover gene responsible for rare, inherite… Septem… "September…
+10 "Statement by NIH on Research Misconduct Findings"        Septem… "September…</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now clean the data</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nih_top10 <span class="ot">&lt;-</span> nih_top10 <span class="sc">|&gt;</span></span>
@@ -612,16 +642,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 3
    title                                                  pubdate    description
    &lt;chr&gt;                                                  &lt;date&gt;     &lt;chr&gt;      
- 1 Kidney transplantation between donors and recipients … 2024-10-16 NIH-funded…
- 2 Mpox vaccine is safe and generates a robust antibody … 2024-10-16 NIH clinic…
- 3 NIH and FDA leaders call for innovation in developmen… 2024-10-15 Commentary…
- 4 Alzheimer’s disease may damage the brain in two phases 2024-10-15 NIH-funded…
- 5 First wave of COVID-19 increased risk of heart attack… 2024-10-10 NIH-funded…
- 6 NIH launches large study to tackle type 2 diabetes in… 2024-10-09 Effort to …
- 7 Researchers fully map neural connections of the fruit… 2024-10-02 NIH-suppor…
- 8 Scientists discover gene responsible for rare, inheri… 2024-09-26 NIH-suppor…
- 9 Statement by NIH on Research Misconduct Findings       2024-09-26 NIH takes …
-10 Higher doses of buprenorphine may improve treatment o… 2024-09-25 NIH-funded…</code></pre>
+ 1 "NIH clinical trial will test precision medicine trea… 2024-10-23 Researcher…
+ 2 "Kidney transplantation between donors and recipients… 2024-10-16 NIH-funded…
+ 3 "Mpox vaccine is safe and generates a robust antibody… 2024-10-16 NIH clinic…
+ 4 "NIH and FDA leaders call for innovation in developme… 2024-10-15 Commentary…
+ 5 "Alzheimer’s disease may damage the brain in two phas… 2024-10-15 NIH-funded…
+ 6 "First wave of COVID-19 increased risk of heart attac… 2024-10-10 NIH-funded…
+ 7 "NIH launches large study to tackle type 2 diabetes i… 2024-10-09 Effort to …
+ 8 "Researchers fully map neural connections of the frui… 2024-10-02 NIH-suppor…
+ 9 "Scientists discover gene responsible for rare, inher… 2024-09-26 NIH-suppor…
+10 "Statement by NIH on Research Misconduct Findings"     2024-09-26 NIH takes …</code></pre>
 </div>
 </div>
 <p>NOW - continue this process to build a tibble with the most recent 50 NIH news releases, which will require that you iterate over 5 webpages! You should write at least one function, and you will need iteration–use both a <code>for</code> loop and appropriate <code>map_()</code> functions from <code>purrr</code>. Some additional hints:</p>

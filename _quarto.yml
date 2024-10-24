@@ -46,6 +46,9 @@ website:
         - 07_apis.qmd
         - 08_table_scraping.qmd
         - 09_web_scraping.qmd
+        - 10_strings_part1.qmd
+        - 11_strings_part2.qmd
+        - 12_strings_part3.qmd
 
     - id: projects
       title: "Projects"
