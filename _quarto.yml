@@ -49,6 +49,7 @@ website:
         - 10_strings_part1.qmd
         - 11_strings_part2.qmd
         - 12_strings_part3.qmd
+        - 13_text_analysis.qmd
 
     - id: projects
       title: "Projects"
