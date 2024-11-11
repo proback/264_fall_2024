@@ -233,6 +233,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="dropdown-item" href="./miniproject3.html">
  <span class="dropdown-text">Mini-Project 3: Building a Personal Quarto Webpage</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./miniproject4.html">
+ <span class="dropdown-text">Mini-Project 4: Text Analysis</span></a>
+  </li>  
     </ul>
   </li>
   <li class="nav-item">
@@ -510,8 +514,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_view</span>(spot_smaller<span class="sc">$</span>subgenre, <span class="st">"pop"</span>, <span class="at">html =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output-display">
-<div class="str_view html-widget html-fill-item" id="htmlwidget-6d0685ae2a6c2992d555" style="width:960px;height:100%;"></div>
-<script type="application/json" data-for="htmlwidget-6d0685ae2a6c2992d555">{"x":{"html":"<ul>\n  <li><pre>indie <span class='match'>pop<\/span>timism<\/pre><\/li>\n  <li><pre>post-teen <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>latin <span class='match'>pop<\/span><\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
+<div class="str_view html-widget html-fill-item" id="htmlwidget-c4ac1caaac03d5790f62" style="width:960px;height:100%;"></div>
+<script type="application/json" data-for="htmlwidget-c4ac1caaac03d5790f62">{"x":{"html":"<ul>\n  <li><pre>indie <span class='match'>pop<\/span>timism<\/pre><\/li>\n  <li><pre>post-teen <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>hip <span class='match'>pop<\/span><\/pre><\/li>\n  <li><pre>latin <span class='match'>pop<\/span><\/pre><\/li>\n<\/ul>"},"evals":[],"jsHooks":[]}</script>
 </div>
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">str_subset</span>(spot_smaller<span class="sc">$</span>subgenre, <span class="st">"pop"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
@@ -728,7 +732,7 @@ dbl (13): track_popularity, danceability, energy, key, loudness, mode, speec...
 </div>
 <p><strong>Use at least 1 repetition symbol when solving 8-10 below</strong></p>
 <ol start="8" type="1">
-<li><p>Modify the first regular expression above to also pick up “m.A.A.d” (in addition to “BEYONC” and “II”). That is, pick up strings where there might be a period between capital letters.</p></li>
+<li><p>Modify the first regular expression above to also pick up “A.A” (in addition to “BEYONC” and “II”). That is, pick up strings where there might be a period between capital letters.</p></li>
 <li><p>Create some strings that satisfy these regular expressions and explain.</p></li>
 </ol>
 <ul>

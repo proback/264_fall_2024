@@ -208,7 +208,7 @@ str_view(spot_smaller$album_release_date, "\\d{4}-\\d{2}")
 
 **Use at least 1 repetition symbol when solving 8-10 below**
 
-8. Modify the first regular expression above to also pick up "m.A.A.d" (in addition to "BEYONC" and "II").  That is, pick up strings where there might be a period between capital letters.
+8. Modify the first regular expression above to also pick up "A.A" (in addition to "BEYONC" and "II").  That is, pick up strings where there might be a period between capital letters.
 
 
 9. Create some strings that satisfy these regular expressions and explain.
@@ -235,7 +235,6 @@ str_extract(spot_smaller$album_release_date, "\\d{4}-\\d{2}")
 spot_smaller |>
   select(album_release_date) |>
   mutate(year_month = str_extract(album_release_date, "\\d{4}-\\d{2}"))
-
 
 spot_smaller |>
   select(artist) |>
