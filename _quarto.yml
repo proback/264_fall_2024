@@ -62,6 +62,7 @@ website:
         - miniproject2.qmd
         - miniproject3.qmd
         - miniproject4.qmd
+        - finalproject.qmd
 
   page-footer:
     left: |

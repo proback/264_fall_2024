@@ -62,16 +62,16 @@ c) Note how user-input variables for ggplot attributes can be integrated with `.
 
 Remember to hit the Download Raw File button in each case.
 
-- [14a_AER_Shiny.Rmd](https://github.com/proback/264_fall_2024/blob/main/more_shiny/14_AER_Shiny.Rmd)
+- [14a_AER_Shiny.Rmd](https://github.com/proback/264_fall_2024/blob/main/more_shiny/14a_AER_Shiny.Rmd)
 
-- [14b_first_Shiny_flexdash.Rmd](https://github.com/proback/264_fall_2024/blob/main/more_shiny/15_first_Shiny_flexdash.Rmd)
+- [14b_first_Shiny_flexdash.Rmd](https://github.com/proback/264_fall_2024/blob/main/more_shiny/14b_first_Shiny_flexdash.Rmd)
 
 
 We will also use these folders as well.  You can copy the URL for the folder into the textbox at [download-directory.github.io](download-directory.github.io), hit Enter, and you'll have a zipped version of the folder.
 
-- [AER_app](https://github.com/proback/264_fall_2024/blob/main/AER_app)
+- [AER_app](https://github.com/proback/264_fall_2024/blob/main/AERapp)
 
-- [Ames example](https://github.com/proback/264_fall_2024/blob/main/Ames example)
+- [Ames example](https://github.com/proback/264_fall_2024/blob/main/Ames_example)
 
 
 Check out my Shiny app on Ames Housing:
