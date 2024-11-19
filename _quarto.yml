@@ -7,6 +7,9 @@ project:
     - "!SQLcode/"
     - "!spring2024/"
     - "!quarto_presentations/"
+    - "!AERapp/"
+    - "!Ames_example/"
+    - "!more_shiny/"
   resources:
     - "Data/*.csv"
     - "Data/"
@@ -50,6 +53,7 @@ website:
         - 11_strings_part2.qmd
         - 12_strings_part3.qmd
         - 13_text_analysis.qmd
+        - 14_first_shiny_instructions.qmd
 
     - id: projects
       title: "Projects"
