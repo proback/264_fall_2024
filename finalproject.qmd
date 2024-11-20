@@ -42,7 +42,20 @@ Same pairs as for Mini-Project 2
 
 ## Examples of good past projects
 
-See Project folder on the RStudio server.
+Shiny apps that contain GitHub links to source code:
+
+- [Champions League soccer](https://evanatchison.shinyapps.io/Champions_League_Progression/)
+- [National Parks](https://jenna35.shinyapps.io/national_parks_shiny_app/)
+
+Shiny apps with separate GitHub links to source code:
+
+- [Spotify Audio Analysis shiny app](https://abbyhahs.shinyapps.io/Spotify_Audio_Analysis/) and its [source code](https://github.com/abbyhahs/merge_test)
+
+Shiny apps with source code in Project folder on the RStudio server.
+
+- [St. Olaf Class and Lab](https://nfjohnson.shinyapps.io/olaf-schedule-analysis/)
+- [Taylor Swift](https://mwainwright.shinyapps.io/final_project/?_ga=2.237384384.1354278898.1621437205-1446249394.1620745126).  This project used app.R in shiny rather than flexdash.
+
 
 
 ## Stage I:  Proposal

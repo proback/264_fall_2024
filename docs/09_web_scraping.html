@@ -531,16 +531,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>title_temp</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>{xml_nodeset (10)}
- [1] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-develop ...
- [2] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/researchers ...
- [3] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/adopting-pe ...
- [4] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-trial-r ...
- [5] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-study-d ...
- [6] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-funded- ...
- [7] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/genomic-var ...
- [8] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/bovine-h5n1 ...
- [9] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-clinica ...
-[10] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/kidney-tran ...</code></pre>
+ [1] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-led-sci ...
+ [2] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-develop ...
+ [3] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/researchers ...
+ [4] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/adopting-pe ...
+ [5] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-trial-r ...
+ [6] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-study-d ...
+ [7] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-funded- ...
+ [8] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/genomic-var ...
+ [9] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/bovine-h5n1 ...
+[10] &lt;h4 class="teaser-title"&gt;&lt;a href="/news-events/news-releases/nih-clinica ...</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Step 3: Extract content from nodes with html_text(), html_name(), </span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co">#    html_attrs(), html_children(), html_table(), etc.</span></span>
@@ -548,16 +548,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>title_vec <span class="ot">&lt;-</span> <span class="fu">html_text</span>(title_temp)</span>
 <span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a>title_vec</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
- [2] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
- [3] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
- [4] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
- [5] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
- [6] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
- [7] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
- [8] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
- [9] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           
-[10] "Kidney transplantation between donors and recipients with HIV is safe"                                     </code></pre>
+<pre><code> [1] "NIH-led scientific team defines elements of brain-based visual impairment in children"                     
+ [2] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
+ [3] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
+ [4] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
+ [5] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
+ [6] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
+ [7] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
+ [8] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
+ [9] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
+[10] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           </code></pre>
 </div>
 </div>
 <p>You can also write this altogether with a pipe:</p>
@@ -574,16 +574,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".teaser-title"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
- [2] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
- [3] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
- [4] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
- [5] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
- [6] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
- [7] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
- [8] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
- [9] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           
-[10] "Kidney transplantation between donors and recipients with HIV is safe"                                     </code></pre>
+<pre><code> [1] "NIH-led scientific team defines elements of brain-based visual impairment in children"                     
+ [2] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
+ [3] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
+ [4] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
+ [5] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
+ [6] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
+ [7] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
+ [8] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
+ [9] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
+[10] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           </code></pre>
 </div>
 </div>
 <p>And finally we wrap the 4 steps above into the <code>bow</code> and <code>scrape</code> functions from the <code>polite</code> package:</p>
@@ -595,16 +595,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>nih_title</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
- [2] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
- [3] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
- [4] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
- [5] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
- [6] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
- [7] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
- [8] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
- [9] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           
-[10] "Kidney transplantation between donors and recipients with HIV is safe"                                     </code></pre>
+<pre><code> [1] "NIH-led scientific team defines elements of brain-based visual impairment in children"                     
+ [2] "NIH-developed AI algorithm matches potential volunteers to clinical trials"                                
+ [3] "Researchers uncover new role of mutant proteins in some of the deadliest cancers"                          
+ [4] "Adopting pediatric readiness standards in emergency departments could save more than 2,000 lives each year"
+ [5] "NIH trial of rectal microbicide for HIV prevention begins in the United States"                            
+ [6] "NIH study demonstrates long-term benefits of weight-loss surgery in young people"                          
+ [7] "NIH-funded scientists uncover clues to precancer and tumor biology"                                        
+ [8] "Genomic variants that increase risk of kidney disease are found in nearly one-third of West Africans"      
+ [9] "Bovine H5N1 influenza from infected worker transmissible and lethal in animal models"                      
+[10] "NIH clinical trial will test precision medicine treatments for myeloid cancers "                           </code></pre>
 </div>
 </div>
 </section>
@@ -617,26 +617,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>nih_pubdate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "November 18, 2024" "November 12, 2024" "November 1, 2024" 
- [4] "October 31, 2024"  "October 31, 2024"  "October 30, 2024" 
- [7] "October 28, 2024"  "October 28, 2024"  "October 23, 2024" 
-[10] "October 16, 2024" </code></pre>
+<pre><code> [1] "November 19, 2024" "November 18, 2024" "November 12, 2024"
+ [4] "November 1, 2024"  "October 31, 2024"  "October 31, 2024" 
+ [7] "October 30, 2024"  "October 28, 2024"  "October 28, 2024" 
+[10] "October 23, 2024" </code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>nih_description <span class="ot">&lt;-</span> <span class="fu">scrape</span>(session) <span class="sc">|&gt;</span></span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_nodes</span>(<span class="st">".teaser-description"</span>) <span class="sc">|&gt;</span></span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">html_text</span>()</span>
 <span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>nih_description</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code> [1] "November 18, 2024 —     \n          Such an algorithm may save clinicians time and accelerate clinical enrollment and research.\r\n\r\n "                                    
- [2] "November 12, 2024 —     \n          Findings could point to new ways to treat RAS-driven cancers. "                                                                          
- [3] "November 1, 2024 —     \n          NIH-funded study suggests standards would range from no cost to $11.84 per child. "                                                       
- [4] "October 31, 2024 —     \n          Study will assess safety and acceptability of rectal douche for pre-exposure prophylaxis. "                                               
- [5] "October 31, 2024 —     \n          Adolescents see a greater remission of type 2 diabetes compared to adults. "                                                              
- [6] "October 30, 2024 —     \n          A collection of new papers highlight discoveries from the Human Tumor Atlas Network, a Cancer Moonshot℠ initiative. "                     
- [7] "October 28, 2024 —     \n          NIH study suggests potential for earlier health interventions for people with West African ancestry. "                                    
- [8] "October 28, 2024 —     \n          Some antiviral drugs highly effective against bovine H5N1. "                                                                              
- [9] "October 23, 2024 —     \n          Researchers will seek to accelerate the discovery of more tailored treatments for these aggressive cancers of the blood and bone marrow. "
-[10] "October 16, 2024 —     \n          NIH-funded study provides evidence on transplantation practice currently limited to research settings. "                                  </code></pre>
+<pre><code> [1] "November 19, 2024 —     \n          Research needed to establish best diagnostic and management strategies for increasingly common condition. "                              
+ [2] "November 18, 2024 —     \n          Such an algorithm may save clinicians time and accelerate clinical enrollment and research.\r\n\r\n "                                    
+ [3] "November 12, 2024 —     \n          Findings could point to new ways to treat RAS-driven cancers. "                                                                          
+ [4] "November 1, 2024 —     \n          NIH-funded study suggests standards would range from no cost to $11.84 per child. "                                                       
+ [5] "October 31, 2024 —     \n          Study will assess safety and acceptability of rectal douche for pre-exposure prophylaxis. "                                               
+ [6] "October 31, 2024 —     \n          Adolescents see a greater remission of type 2 diabetes compared to adults. "                                                              
+ [7] "October 30, 2024 —     \n          A collection of new papers highlight discoveries from the Human Tumor Atlas Network, a Cancer Moonshot℠ initiative. "                     
+ [8] "October 28, 2024 —     \n          NIH study suggests potential for earlier health interventions for people with West African ancestry. "                                    
+ [9] "October 28, 2024 —     \n          Some antiviral drugs highly effective against bovine H5N1. "                                                                              
+[10] "October 23, 2024 —     \n          Researchers will seek to accelerate the discovery of more tailored treatments for these aggressive cancers of the blood and bone marrow. "</code></pre>
 </div>
 </div>
 <p>Combine these extracted variables into a single tibble. Make sure the variables are formatted correctly - e.g.&nbsp;<code>pubdate</code> has <code>date</code> type, <code>description</code> does not contain the <code>pubdate</code>, etc.</p>
@@ -650,16 +650,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 3
    title                                                     pubdate description
    &lt;chr&gt;                                                     &lt;chr&gt;   &lt;chr&gt;      
- 1 "NIH-developed AI algorithm matches potential volunteers… Novemb… "November …
- 2 "Researchers uncover new role of mutant proteins in some… Novemb… "November …
- 3 "Adopting pediatric readiness standards in emergency dep… Novemb… "November …
- 4 "NIH trial of rectal microbicide for HIV prevention begi… Octobe… "October 3…
- 5 "NIH study demonstrates long-term benefits of weight-los… Octobe… "October 3…
- 6 "NIH-funded scientists uncover clues to precancer and tu… Octobe… "October 3…
- 7 "Genomic variants that increase risk of kidney disease a… Octobe… "October 2…
- 8 "Bovine H5N1 influenza from infected worker transmissibl… Octobe… "October 2…
- 9 "NIH clinical trial will test precision medicine treatme… Octobe… "October 2…
-10 "Kidney transplantation between donors and recipients wi… Octobe… "October 1…</code></pre>
+ 1 "NIH-led scientific team defines elements of brain-based… Novemb… "November …
+ 2 "NIH-developed AI algorithm matches potential volunteers… Novemb… "November …
+ 3 "Researchers uncover new role of mutant proteins in some… Novemb… "November …
+ 4 "Adopting pediatric readiness standards in emergency dep… Novemb… "November …
+ 5 "NIH trial of rectal microbicide for HIV prevention begi… Octobe… "October 3…
+ 6 "NIH study demonstrates long-term benefits of weight-los… Octobe… "October 3…
+ 7 "NIH-funded scientists uncover clues to precancer and tu… Octobe… "October 3…
+ 8 "Genomic variants that increase risk of kidney disease a… Octobe… "October 2…
+ 9 "Bovine H5N1 influenza from infected worker transmissibl… Octobe… "October 2…
+10 "NIH clinical trial will test precision medicine treatme… Octobe… "October 2…</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># now clean the data</span></span>
 <span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>nih_top10 <span class="ot">&lt;-</span> nih_top10 <span class="sc">|&gt;</span></span>
@@ -670,16 +670,16 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <pre><code># A tibble: 10 × 3
    title                                                  pubdate    description
    &lt;chr&gt;                                                  &lt;date&gt;     &lt;chr&gt;      
- 1 "NIH-developed AI algorithm matches potential volunte… 2024-11-18 Such an al…
- 2 "Researchers uncover new role of mutant proteins in s… 2024-11-12 Findings c…
- 3 "Adopting pediatric readiness standards in emergency … 2024-11-01 NIH-funded…
- 4 "NIH trial of rectal microbicide for HIV prevention b… 2024-10-31 Study will…
- 5 "NIH study demonstrates long-term benefits of weight-… 2024-10-31 Adolescent…
- 6 "NIH-funded scientists uncover clues to precancer and… 2024-10-30 A collecti…
- 7 "Genomic variants that increase risk of kidney diseas… 2024-10-28 NIH study …
- 8 "Bovine H5N1 influenza from infected worker transmiss… 2024-10-28 Some antiv…
- 9 "NIH clinical trial will test precision medicine trea… 2024-10-23 Researcher…
-10 "Kidney transplantation between donors and recipients… 2024-10-16 NIH-funded…</code></pre>
+ 1 "NIH-led scientific team defines elements of brain-ba… 2024-11-19 Research n…
+ 2 "NIH-developed AI algorithm matches potential volunte… 2024-11-18 Such an al…
+ 3 "Researchers uncover new role of mutant proteins in s… 2024-11-12 Findings c…
+ 4 "Adopting pediatric readiness standards in emergency … 2024-11-01 NIH-funded…
+ 5 "NIH trial of rectal microbicide for HIV prevention b… 2024-10-31 Study will…
+ 6 "NIH study demonstrates long-term benefits of weight-… 2024-10-31 Adolescent…
+ 7 "NIH-funded scientists uncover clues to precancer and… 2024-10-30 A collecti…
+ 8 "Genomic variants that increase risk of kidney diseas… 2024-10-28 NIH study …
+ 9 "Bovine H5N1 influenza from infected worker transmiss… 2024-10-28 Some antiv…
+10 "NIH clinical trial will test precision medicine trea… 2024-10-23 Researcher…</code></pre>
 </div>
 </div>
 <p>NOW - continue this process to build a tibble with the most recent 50 NIH news releases, which will require that you iterate over 5 webpages! You should write at least one function, and you will need iteration–use both a <code>for</code> loop and appropriate <code>map_()</code> functions from <code>purrr</code>. Some additional hints:</p>
