@@ -30,7 +30,7 @@ library(dbplyr)
 library(DBI)
 ```
 
-Connect to St. Olaf's database server, where the airlines database lives:
+Connect to St. Olaf's database server, where the flight_data database lives:
 
 ```{r}
 library(RMariaDB)
@@ -159,6 +159,9 @@ flights %>%
 
 
 # Section 15.2: Flat-file databases
+
+# objects take up MUCH less space in memory when still lives on the server
+#   vs. collected into R
 
 #flights %>%
 #  object.size() %>%
