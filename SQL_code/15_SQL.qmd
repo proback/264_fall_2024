@@ -47,12 +47,17 @@ Right now there is only one "table" called `flightdata` in the `flight_data` dat
 SHOW TABLES;
 ```
 
+```{sql, connection = con}
+#SELECT * FROM ACFTREF LIMIT 0,10;
+```
+
 You can treat flights like a df or tbl, but it is not, in fact, a data frame.  Note that `dim(flights)` is reported as NA x 111; there are actually 35 million flights between 2019 and 2024 that would take over 10 GB as a csv file!
 
 ```{r}
 flights <- tbl(con, "flightdata")
 dim(flights)
 class(flights)
+airports <- tbl(con, "airports")
 ```
 
 We can analyze flights data like we would any other R data frame, but we can also use `show_query` to see what an SQL query might look like (although if we were to write it from scratch it'd be a bit more readable)
@@ -156,21 +161,22 @@ flights %>%
 #flights %>%
 #  collect() %>%
 #  mutate(dest_code = my_paste(dest, "(", destcityname, ")"))
+```
 
 
-# Section 15.2: Flat-file databases
+### Section 15.2: Flat-file databases
 
-# objects take up MUCH less space in memory when still lives on the server
-#   vs. collected into R
+Objects take up MUCH less space in memory when still lives on the server vs. collected into R
 
-#flights %>%
-#  object.size() %>%
-#  print(units = "Kb") 
+```{r}
+airports %>%
+  object.size() %>%
+  print(units = "Kb") 
 
-#flights %>%
-#  collect() %>%
-#  object.size() %>%
-#  print(units = "Kb")
+airports %>%
+  collect() %>%
+  object.size() %>%
+  print(units = "Kb")
 
 # data sets get big quickly - already 3/4 Gb
 n <- 100 * 1e6
@@ -436,29 +442,43 @@ LIMIT 3,4;
 Note that SELECT contains variables from both datasets (hold off until we expand the tables in our database)
 
 ```{sql, connection = con}
-#SELECT 
-#  origin, dest, 
-#  airports.name AS dest_name,
-#  flight, carrier
-#FROM flights
-#JOIN airports ON flights.dest = airports.faa
-#WHERE year = 2013 AND month = 6 AND day = 26
-#  AND origin = 'BDL'
-#LIMIT 0, 6;
+SELECT 
+  origin, 
+  dest, 
+  `Airport Name` AS dest_name,
+  flight_number_reporting_airline AS flight_num, 
+  Reporting_Airline AS carrier
+FROM flightdata
+JOIN airports ON flightdata.dest = airports.IATA
+WHERE Year = 2019 AND Month = 6 AND DayOfMonth = 26 AND origin = 'BDL'
+LIMIT 0, 6;
 ```
 
-Use table aliases to reduce typing and improve readability
+This will also work - use table aliases to reduce typing and improve readability:
 
 ```{sql, connection = con}
-#SELECT 
-#  origin, dest, 
-#  a.name AS dest_name,
-#  flight, carrier
-#FROM flights AS o
-#JOIN airports AS a ON o.dest = a.faa
-#WHERE year = 2013 AND month = 6 AND day = 26
-#  AND origin = 'BDL'
-#LIMIT 0, 6;
+SELECT 
+  f.origin, 
+  f.dest, 
+  a.`Airport Name` AS dest_name,
+  f.flight_number_reporting_airline AS flight_num, 
+  f.Reporting_Airline AS carrier
+FROM flightdata AS f
+JOIN airports AS a ON f.dest = a.IATA
+WHERE Year = 2019 AND Month = 6 AND DayOfMonth = 26 AND origin = 'BDL'
+LIMIT 0, 6;
+```
+
+```{sql, connection = con}
+SELECT *
+FROM airports
+LIMIT 0, 6;
+```
+
+```{sql, connection = con}
+SELECT *
+FROM flightdata
+LIMIT 0, 6;
 ```
 
 Join in carrier info as well
@@ -533,46 +553,48 @@ LIMIT 0,10;
 
 ### Section 15.4.9: Subqueries
 
-*Hold off until we get more complete set of tables in our database!*
-
 Treat the table from an initial query as a database for the next query (note that these are often inefficient in their use of indices)
 
 ```{sql, connection = con}
-#SELECT faa, name, tz, city
-#FROM airports AS a
-#WHERE tz < -7
-#IMIT 0, 6;
+SELECT IATA, Timezone, City, `Airport Name` AS name 
+FROM airports AS a
+WHERE Timezone < -6
+LIMIT 0, 6;
 ```
 
-Use the query from above (airports in Pacific time zone or further west) as subquery below in determining how many carriers go from Bradley to those airports
+Use the query from above (airports in Mountain time zone or further west) as subquery below in determining how many carriers go from Bradley to those airports
 
 ```{sql, connection = con}
-#SELECT 
-#  dest, a.name AS dest_name, 
-#  SUM(1) AS N, COUNT(distinct carrier) AS numCarriers
-#FROM flights AS o
-#LEFT JOIN airports AS a ON o.origin = a.faa
-#WHERE year = 2013 
-#  AND dest = 'BDL' 
-#  AND origin IN 
-#  (SELECT faa
-#    FROM airports
-#    WHERE tz < -7)
-#GROUP BY origin;
+SELECT 
+  dest, 
+  a.`Airport Name` AS dest_name, 
+  SUM(1) AS N, 
+  COUNT(distinct Reporting_Airline) AS numCarriers
+FROM flightdata AS f
+LEFT JOIN airports AS a ON f.origin = a.IATA
+WHERE Year = 2019 
+  AND dest = 'BDL' 
+  AND origin IN 
+  (SELECT IATA
+    FROM airports
+    WHERE Timezone < -6)
+GROUP BY origin;
 ```
 
 Below is another way to have done the same query
 
 ```{sql, connection = con}
-#SELECT 
-#  dest, a.name AS dest_name, 
-#  SUM(1) AS N, COUNT(distinct carrier) AS numCarriers
-#FROM flights AS o
-#LEFT JOIN airports AS a ON o.origin = a.faa
-#WHERE year = 2013 
-#  AND dest = 'BDL' 
-#  AND tz < -7
-#GROUP BY origin;
+SELECT 
+  dest, 
+  a.`Airport Name` AS dest_name, 
+  SUM(1) AS N, 
+  COUNT(distinct Reporting_Airline) AS numCarriers
+FROM flightdata AS f
+LEFT JOIN airports AS a ON f.origin = a.IATA
+WHERE Year = 2019 
+  AND dest = 'BDL' 
+  AND Timezone < -6
+GROUP BY origin;
 ```
 
 
@@ -690,8 +712,7 @@ carriers_tidy <- carriers_2024 %>%
   )
 delay_chart <- ggplot(
   data = carriers_tidy, 
-  aes(x = reorder(Reporting_Airline, pct, max), y = pct)
-) + 
+  aes(x = reorder(Reporting_Airline, pct, max), y = pct)) + 
   geom_col(aes(fill = delay_type)) +
   scale_fill_manual(
     name = NULL, 

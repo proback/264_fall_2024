@@ -193,11 +193,9 @@ You should be using JOINs in both (1) and (2).
 - note the scale of the x-axis
 - the key labels contain AuthorsShortList, Year, and Instrument, in addition to the number of unique ears (I think Werner's N may be incorrect?)
 
-**Starter Code:**
+**Starter Code for Part 1:**
 
 ```{r}
-#| eval: FALSE
-
 library(tidyverse)
 library(mdsr)
 library(dbplyr)
@@ -222,3 +220,87 @@ Run the following queries in a chunk with {sql, connection = con}:
 - DESCRIBE Measurements;
 - SELECT * FROM PI_Info LIMIT 0,1;
 
+Let's start to explore what this data looks like, starting with the Measurements table for one study:
+
+Using Abur_2014 we can explore counts per subject/ear:
+
+```{sql, connection = con}
+SELECT Identifier, SubjectNumber, Session, Ear, Frequency
+FROM Measurements
+WHERE Identifier = 'Abur_2014' AND Frequency < 8000 AND Frequency > 200
+  AND SubjectNumber = 1;
+```
+
+For Subject 1, there are 248 frequencies per session per ear (in the desired range), the frequencies are always the same, and 7 total sessions.  Thus, it appears any averaging must be across sessions.  We'll confirm some of these values below:
+
+```{sql, connection = con}
+SELECT SubjectNumber, Session, Ear,
+  SUM(1) AS N,
+  AVG(Absorbance) AS mean_absorbance
+FROM Measurements
+WHERE Identifier = 'Abur_2014' AND Frequency < 8000 AND Frequency > 200
+  AND SubjectNumber IN (1, 3)
+GROUP BY SubjectNumber, Session, Ear;
+```
+
+For Subjects 1 and 3, there are 248 frequencies per session per ear.
+
+
+```{sql, connection = con}
+# Note that variables can be used in WHERE but not SELECT
+SELECT SubjectNumber, Ear, Frequency,
+  SUM(1) AS N,
+  AVG(Absorbance) AS mean_absorbance
+FROM Measurements
+WHERE Identifier = 'Abur_2014' AND Frequency = 1500
+GROUP BY SubjectNumber, Ear, Frequency;
+```
+
+There are a variable number of sessions per subject (4-8).
+
+
+```{sql, connection = con}
+SELECT Frequency,
+  SUM(1) AS N,
+  AVG(Absorbance) AS mean_absorbance
+FROM Measurements
+WHERE Identifier = 'Abur_2014' AND Frequency < 8000 AND Frequency > 200
+GROUP BY Frequency;
+```
+
+And it seems to always be the same 248 frequencies!
+
+
+So let's create a data base with mean absorbance for each combination of study, subject, ear, and frequency:
+
+```{sql, connection = con, output.var = "temp"}
+SELECT Identifier, SubjectNumber, Ear, Frequency,
+  SUM(1) AS N,
+  AVG(Absorbance) AS mean_absorbance
+FROM Measurements
+WHERE Identifier IN ('Abur_2014', 'Feeney_2017', 'Groon_2015',
+              'Lewis_2015', 'Liu_2008', 'Rosowski_2012', 'Shahnaz_2006',
+              'Shaver_2013', 'Sun_2016', 'Voss_1994', 'Voss_2010',
+              'Werner_2010') AND Frequency < 8000 AND Frequency > 200
+GROUP BY Identifier, SubjectNumber, Ear, Frequency;
+```
+
+```{r}
+# 155103 x 6 data set
+# head(temp, 300)
+```
+
+
+This creates Figure 1 without the informative legend:
+
+```{r}
+#| warning: FALSE
+#| message: FALSE  
+
+temp |>
+  mutate(logFrequency = log10(Frequency)) |>
+  ggplot(aes(x = logFrequency, y = mean_absorbance, color = Identifier)) +
+    geom_smooth() 
+```
+
+Now use JOIN to create `temp2` which will include the information you need to produce the informative labels: author (short list), year published, sample size, and instrument used for measurements.  Then produce an improved version of the plot above using `temp` (for smooth curves) and `temp2` (for labels).

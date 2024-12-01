@@ -595,7 +595,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>note the scale of the x-axis</li>
 <li>the key labels contain AuthorsShortList, Year, and Instrument, in addition to the number of unique ears (I think Werner’s N may be incorrect?)</li>
 </ul>
-<p><strong>Starter Code:</strong></p>
+<p><strong>Starter Code for Part 1:</strong></p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(mdsr)</span>
@@ -620,6 +620,397 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>DESCRIBE Measurements;</li>
 <li>SELECT * FROM PI_Info LIMIT 0,1;</li>
 </ul>
+<p>Let’s start to explore what this data looks like, starting with the Measurements table for one study:</p>
+<p>Using Abur_2014 we can explore counts per subject/ear:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">Identifier</span>, SubjectNumber, <span class="kw">Session</span>, Ear, Frequency</span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">Identifier</span> <span class="op">=</span> <span class="st">'Abur_2014'</span> <span class="kw">AND</span> Frequency <span class="op">&lt;</span> <span class="dv">8000</span> <span class="kw">AND</span> Frequency <span class="op">&gt;</span> <span class="dv">200</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> SubjectNumber <span class="op">=</span> <span class="dv">1</span>;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Identifier</th>
+<th style="text-align: right;">SubjectNumber</th>
+<th style="text-align: right;">Session</th>
+<th style="text-align: left;">Ear</th>
+<th style="text-align: right;">Frequency</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">210.938</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">234.375</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">257.812</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">281.250</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">304.688</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">328.125</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">351.562</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">375.000</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">398.438</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Abur_2014</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">421.875</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For Subject 1, there are 248 frequencies per session per ear (in the desired range), the frequencies are always the same, and 7 total sessions. Thus, it appears any averaging must be across sessions. We’ll confirm some of these values below:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> SubjectNumber, <span class="kw">Session</span>, Ear,</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="dv">1</span>) <span class="kw">AS</span> N,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">Identifier</span> <span class="op">=</span> <span class="st">'Abur_2014'</span> <span class="kw">AND</span> Frequency <span class="op">&lt;</span> <span class="dv">8000</span> <span class="kw">AND</span> Frequency <span class="op">&gt;</span> <span class="dv">200</span></span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>  <span class="kw">AND</span> SubjectNumber <span class="kw">IN</span> (<span class="dv">1</span>, <span class="dv">3</span>)</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> SubjectNumber, <span class="kw">Session</span>, Ear;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">SubjectNumber</th>
+<th style="text-align: right;">Session</th>
+<th style="text-align: left;">Ear</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">mean_absorbance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5257449</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5743758</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5323120</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">2</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.6114478</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5418992</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.6145605</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.4567001</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5136930</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5258554</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">248</td>
+<td style="text-align: right;">0.5737305</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>For Subjects 1 and 3, there are 248 frequencies per session per ear.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a># Note that variables can be used <span class="kw">in</span> <span class="kw">WHERE</span> but <span class="kw">not</span> <span class="kw">SELECT</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> SubjectNumber, Ear, Frequency,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="dv">1</span>) <span class="kw">AS</span> N,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">Identifier</span> <span class="op">=</span> <span class="st">'Abur_2014'</span> <span class="kw">AND</span> Frequency <span class="op">=</span> <span class="dv">1500</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> SubjectNumber, Ear, Frequency;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">SubjectNumber</th>
+<th style="text-align: left;">Ear</th>
+<th style="text-align: right;">Frequency</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">mean_absorbance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.5646144</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">1</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.6530876</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.5346824</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">3</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.6708667</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.8018977</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">4</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">7</td>
+<td style="text-align: right;">0.7468426</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.6689936</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">6</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">8</td>
+<td style="text-align: right;">0.5893204</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Left</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.5188966</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">7</td>
+<td style="text-align: left;">Right</td>
+<td style="text-align: right;">1500</td>
+<td style="text-align: right;">5</td>
+<td style="text-align: right;">0.5936866</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>There are a variable number of sessions per subject (4-8).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> Frequency,</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="dv">1</span>) <span class="kw">AS</span> N,</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">Identifier</span> <span class="op">=</span> <span class="st">'Abur_2014'</span> <span class="kw">AND</span> Frequency <span class="op">&lt;</span> <span class="dv">8000</span> <span class="kw">AND</span> Frequency <span class="op">&gt;</span> <span class="dv">200</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> Frequency;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<table class="caption-top table table-sm table-striped small">
+<caption>Displaying records 1 - 10</caption>
+<thead>
+<tr class="header">
+<th style="text-align: right;">Frequency</th>
+<th style="text-align: right;">N</th>
+<th style="text-align: right;">mean_absorbance</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">210.938</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.0784746</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">234.375</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.0826420</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">257.812</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.0948482</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">281.250</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1031472</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">304.688</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1137576</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">328.125</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1221205</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">351.562</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1334329</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">375.000</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1447725</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">398.438</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1563874</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">421.875</td>
+<td style="text-align: right;">86</td>
+<td style="text-align: right;">0.1806973</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p>And it seems to always be the same 248 frequencies!</p>
+<p>So let’s create a data base with mean absorbance for each combination of study, subject, ear, and frequency:</p>
+<div class="cell" data-output.var="temp">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode sql code-with-copy"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="kw">SELECT</span> <span class="kw">Identifier</span>, SubjectNumber, Ear, Frequency,</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">SUM</span>(<span class="dv">1</span>) <span class="kw">AS</span> N,</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">AVG</span>(Absorbance) <span class="kw">AS</span> mean_absorbance</span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="kw">FROM</span> Measurements</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="kw">WHERE</span> <span class="kw">Identifier</span> <span class="kw">IN</span> (<span class="st">'Abur_2014'</span>, <span class="st">'Feeney_2017'</span>, <span class="st">'Groon_2015'</span>,</span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a>              <span class="st">'Lewis_2015'</span>, <span class="st">'Liu_2008'</span>, <span class="st">'Rosowski_2012'</span>, <span class="st">'Shahnaz_2006'</span>,</span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>              <span class="st">'Shaver_2013'</span>, <span class="st">'Sun_2016'</span>, <span class="st">'Voss_1994'</span>, <span class="st">'Voss_2010'</span>,</span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a>              <span class="st">'Werner_2010'</span>) <span class="kw">AND</span> Frequency <span class="op">&lt;</span> <span class="dv">8000</span> <span class="kw">AND</span> Frequency <span class="op">&gt;</span> <span class="dv">200</span></span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="kw">Identifier</span>, SubjectNumber, Ear, Frequency;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 155103 x 6 data set</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="co"># head(temp, 300)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>This creates Figure 1 without the informative legend:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>temp <span class="sc">|&gt;</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">logFrequency =</span> <span class="fu">log10</span>(Frequency)) <span class="sc">|&gt;</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">ggplot</span>(<span class="fu">aes</span>(<span class="at">x =</span> logFrequency, <span class="at">y =</span> mean_absorbance, <span class="at">color =</span> Identifier)) <span class="sc">+</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>    <span class="fu">geom_smooth</span>() </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="16_SQL_exercises_files/figure-html/unnamed-chunk-16-1.png" class="img-fluid figure-img" width="672"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>Now use JOIN to create <code>temp2</code> which will include the information you need to produce the informative labels: author (short list), year published, sample size, and instrument used for measurements. Then produce an improved version of the plot above using <code>temp</code> (for smooth curves) and <code>temp2</code> (for labels).</p>
 
 
 </section>
