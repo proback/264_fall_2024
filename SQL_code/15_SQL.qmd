@@ -48,7 +48,11 @@ SHOW TABLES;
 ```
 
 ```{sql, connection = con}
-#SELECT * FROM ACFTREF LIMIT 0,10;
+DESCRIBE airlines;
+```
+
+```{sql, connection = con}
+SELECT * FROM planes LIMIT 0,10;
 ```
 
 You can treat flights like a df or tbl, but it is not, in fact, a data frame.  Note that `dim(flights)` is reported as NA x 111; there are actually 35 million flights between 2019 and 2024 that would take over 10 GB as a csv file!
@@ -445,11 +449,11 @@ Note that SELECT contains variables from both datasets (hold off until we expand
 SELECT 
   origin, 
   dest, 
-  `Airport Name` AS dest_name,
+  name AS dest_name,
   flight_number_reporting_airline AS flight_num, 
   Reporting_Airline AS carrier
 FROM flightdata
-JOIN airports ON flightdata.dest = airports.IATA
+JOIN airports ON flightdata.dest = airports.faa
 WHERE Year = 2019 AND Month = 6 AND DayOfMonth = 26 AND origin = 'BDL'
 LIMIT 0, 6;
 ```
@@ -460,11 +464,11 @@ This will also work - use table aliases to reduce typing and improve readability
 SELECT 
   f.origin, 
   f.dest, 
-  a.`Airport Name` AS dest_name,
+  a.name AS dest_name,
   f.flight_number_reporting_airline AS flight_num, 
   f.Reporting_Airline AS carrier
 FROM flightdata AS f
-JOIN airports AS a ON f.dest = a.IATA
+JOIN airports AS a ON f.dest = a.faa
 WHERE Year = 2019 AND Month = 6 AND DayOfMonth = 26 AND origin = 'BDL'
 LIMIT 0, 6;
 ```

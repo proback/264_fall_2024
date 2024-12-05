@@ -151,7 +151,7 @@ First duplicate the plot above for 2023 data, then check trends across all origi
 - include `connection = ` and `output.var = ` in your sql chunk header (this doesn't seem to work with dbGetQuery()...)
 
 
-3. [SKIP until the planes dataset becomes available] Produce a table of weighted plane age by carrier, where weights are based on number of flights per plane.  [This was #6 in 26_more_joins.Rmd.]
+3. Produce a table of weighted plane age by carrier, where weights are based on number of flights per plane.  [This was #6 in 26_more_joins.Rmd.]
 
 ```{r}
 # Original solution from SDS 164
@@ -169,8 +169,12 @@ First duplicate the output above for 2023, then check trends across all origins.
 
 - use flightdata instead of flights_nyc13
 - remember that flights_nyc13 only contained 2013 and 3 NYC origin airports (EWR, JFK, LGA)
-- you'll have to merge the flights dataset with the planes dataset *when it becomes available*
+- you'll have to merge the flights dataset with the planes dataset
 - you can use DISTINCT inside a COUNT()
+- investigate SQL clauses for calculating a standard deviation
+- you cannot use a derived variable inside a summary clause in SELECT
+
+For bonus points, also merge the airlines dataset and include the name of each carrier and not just the abbreviation!
 
 
 ## On Your Own - Noninvasive Auditory Diagnostic Tools

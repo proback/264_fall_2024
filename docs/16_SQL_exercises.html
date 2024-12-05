@@ -536,7 +536,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>include <code>connection =</code> and <code>output.var =</code> in your sql chunk header (this doesn’t seem to work with dbGetQuery()…)</li>
 </ul>
 <ol start="3" type="1">
-<li>[SKIP until the planes dataset becomes available] Produce a table of weighted plane age by carrier, where weights are based on number of flights per plane. [This was #6 in 26_more_joins.Rmd.]</li>
+<li>Produce a table of weighted plane age by carrier, where weights are based on number of flights per plane. [This was #6 in 26_more_joins.Rmd.]</li>
 </ol>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Original solution from SDS 164</span></span>
@@ -574,9 +574,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>use flightdata instead of flights_nyc13</li>
 <li>remember that flights_nyc13 only contained 2013 and 3 NYC origin airports (EWR, JFK, LGA)</li>
-<li>you’ll have to merge the flights dataset with the planes dataset <em>when it becomes available</em></li>
+<li>you’ll have to merge the flights dataset with the planes dataset</li>
 <li>you can use DISTINCT inside a COUNT()</li>
+<li>investigate SQL clauses for calculating a standard deviation</li>
+<li>you cannot use a derived variable inside a summary clause in SELECT</li>
 </ul>
+<p>For bonus points, also merge the airlines dataset and include the name of each carrier and not just the abbreviation!</p>
 </section>
 <section id="on-your-own---noninvasive-auditory-diagnostic-tools" class="level2">
 <h2 class="anchored" data-anchor-id="on-your-own---noninvasive-auditory-diagnostic-tools">On Your Own - Noninvasive Auditory Diagnostic Tools</h2>
