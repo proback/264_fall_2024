@@ -33,10 +33,12 @@ library(DBI)
 Connect to St. Olaf's database server, where the flight_data database lives:
 
 ```{r}
+my_password <- readLines("~/264_fall_2024/DS2_preview_work/olaf_db_password.txt")
+
 library(RMariaDB)
 con <- dbConnect(
   MariaDB(), host = "mdb.stolaf.edu",
-  user = "ruser", password = "ruserpass", 
+  user = "ruser", password = my_password, 
   dbname = "flight_data"
 )
 ```
@@ -140,7 +142,9 @@ test2
 ```
 
 
-```{r, error = FALSE}
+```{r}
+#| eval: FALSE
+
 # how basic mathematical ideas are translated:
 translate_sql(mean(ArrDelay, na.rm = TRUE),
               con = con)
@@ -443,7 +447,7 @@ LIMIT 3,4;
 
 ### Section 15.4.7: JOIN
 
-Note that SELECT contains variables from both datasets (hold off until we expand the tables in our database)
+Note that SELECT contains variables from both datasets 
 
 ```{sql, connection = con}
 SELECT 
@@ -485,18 +489,26 @@ FROM flightdata
 LIMIT 0, 6;
 ```
 
+```{sql, connection = con}
+SELECT *
+FROM airlines
+LIMIT 0, 6;
+```
+
 Join in carrier info as well
 
 ```{sql, connection = con}
-#SELECT 
-#  dest, a.name AS dest_name,
-#  o.carrier, c.name AS carrier_name
-#FROM flights AS o
-#JOIN airports AS a ON o.dest = a.faa
-#JOIN carriers AS c ON o.carrier = c.carrier
-#WHERE year = 2013 AND month = 6 AND day = 26
-#  AND origin = 'BDL'
-#IMIT 0, 6;
+SELECT 
+  dest, 
+  a.name AS dest_name,
+  o.Reporting_Airline AS carrier_code, 
+  c.name AS carrier_name
+FROM flightdata AS o
+JOIN airports AS a ON o.dest = a.faa
+JOIN airlines AS c ON o.Reporting_Airline = c.carrier
+WHERE Year = 2019 AND Month = 6 AND DayofMonth = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
 ```
 
 Join onto same table more than once to get both airports.  
@@ -504,33 +516,49 @@ Join onto same table more than once to get both airports.
 See book for nice discussion about why it's much more efficient to store things in multiple data sets connected by keys
 
 ```{sql, connection = con}
-#SELECT 
-#  flight,
-#  a2.name AS orig_name,
-#  a1.name AS dest_name,
-#  c.name AS carrier_name
-#FROM flights AS o
-#OIN airports AS a1 ON o.dest = a1.faa
-#JOIN airports AS a2 ON o.origin = a2.faa
-#JOIN carriers AS c ON o.carrier = c.carrier
-#WHERE year = 2013 AND month = 6 AND day = 26
-# AND origin = 'BDL'
-#LIMIT 0, 6;
+SELECT 
+  o.flight_number_reporting_airline AS flight_num,
+  a1.name AS dest_name,
+  a2.name AS origin_name,
+  c.name AS carrier_name
+FROM flightdata AS o
+JOIN airports AS a1 ON o.dest = a1.faa
+JOIN airports AS a2 ON o.origin = a2.faa
+JOIN airlines AS c ON o.Reporting_Airline = c.carrier
+WHERE Year = 2019 AND Month = 6 AND DayofMonth = 26
+  AND origin = 'BDL'
+LIMIT 0, 6;
 ```
 
-The result from a LEFT JOIN is always a superset of the result of a (inner, regular, natural) JOIN - every row in the first data set is returned.  Here we find which flights have airports without info in the airports dataset.
+The result from a LEFT JOIN is always a superset of the result of a (inner, regular, natural) JOIN - every row in the first data set is returned.  Here we find which destinations had no flights on 6/26/19.  
+
+Note that we use CREATE TEMPORARY TABLE to reduce our scope to a single day; if we plan to use all flights on that day in several analyses, it would be much more efficient to first create a temporary table, then run the analyses on that day, and finally drop the temporary table.
 
 ```{sql, connection = con}
-#SELECT 
-#  year, month, day, origin, dest, 
-#  a.name AS dest_name,
-#  flight, carrier
-#FROM flights AS o
-#LEFT JOIN airports AS a ON o.dest = a.faa
-#WHERE year = 2013 AND month = 6 AND day = 26
-#  AND a.name is null
-#LIMIT 0, 6;
+CREATE TEMPORARY TABLE one_day AS
+SELECT *
+FROM flightdata 
+WHERE Year = 2019 AND Month = 6 AND DayofMonth = 26;
 ```
+
+```{sql, connection = con}
+SELECT 
+  f.Year AS year, 
+  f.Month AS month, 
+  f.DayofMonth AS day, 
+  a.faa AS airport_code, 
+  a.name AS airport_name,
+  f.origin AS origin
+FROM airports AS a 
+LEFT JOIN one_day AS f ON a.faa = f.dest
+WHERE f.origin is null
+LIMIT 0, 6;
+```
+
+```{sql, connection = con}
+DROP TABLE one_day;
+```
+
 
 ### Section 15.4.8: UNION
 
@@ -560,9 +588,9 @@ LIMIT 0,10;
 Treat the table from an initial query as a database for the next query (note that these are often inefficient in their use of indices)
 
 ```{sql, connection = con}
-SELECT IATA, Timezone, City, `Airport Name` AS name 
-FROM airports AS a
-WHERE Timezone < -6
+SELECT faa, tz, city, name 
+FROM airports
+WHERE tz < -6
 LIMIT 0, 6;
 ```
 
@@ -571,17 +599,17 @@ Use the query from above (airports in Mountain time zone or further west) as sub
 ```{sql, connection = con}
 SELECT 
   dest, 
-  a.`Airport Name` AS dest_name, 
+  a.name AS dest_name, 
   SUM(1) AS N, 
   COUNT(distinct Reporting_Airline) AS numCarriers
 FROM flightdata AS f
-LEFT JOIN airports AS a ON f.origin = a.IATA
+LEFT JOIN airports AS a ON f.origin = a.faa
 WHERE Year = 2019 
   AND dest = 'BDL' 
   AND origin IN 
-  (SELECT IATA
+  (SELECT faa
     FROM airports
-    WHERE Timezone < -6)
+    WHERE tz < -6)
 GROUP BY origin;
 ```
 
@@ -590,14 +618,14 @@ Below is another way to have done the same query
 ```{sql, connection = con}
 SELECT 
   dest, 
-  a.`Airport Name` AS dest_name, 
+  a.name AS dest_name, 
   SUM(1) AS N, 
   COUNT(distinct Reporting_Airline) AS numCarriers
 FROM flightdata AS f
-LEFT JOIN airports AS a ON f.origin = a.IATA
+LEFT JOIN airports AS a ON f.origin = a.faa
 WHERE Year = 2019 
   AND dest = 'BDL' 
-  AND Timezone < -6
+  AND tz < -6
 GROUP BY origin;
 ```
 

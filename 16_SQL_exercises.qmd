@@ -29,10 +29,12 @@ library(DBI)
 
 # connect to the database which lives on a remote server maintained by
 #   St. Olaf's IT department
+my_password <- readLines("~/264_fall_2024/DS2_preview_work/olaf_db_password.txt")
+
 library(RMariaDB)
 con <- dbConnect(
   MariaDB(), host = "mdb.stolaf.edu",
-  user = "ruser", password = "ruserpass", 
+  user = "ruser", password = my_password, 
   dbname = "flight_data"
 )
 ```
